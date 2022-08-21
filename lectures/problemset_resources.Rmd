@@ -1,6 +1,6 @@
 ---
 title: "Problem Set Resources and Guideline"
-date: "9/27/2019"
+date: ""
 output: pdf_document
 urlcolor: blue
 ---
