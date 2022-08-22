@@ -34,8 +34,8 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", highlight = TRUE)
 - On our class website, navigate to _Class Resources_ > _Syllabus & Class Resources_, and  download the following:
   - Folder Structure Zip File
 - Under _Class Resources_ > _Introduction_  download the following:
-  - introduction.pdf
-  - introduction_ps.Rmd
+  - Introduction PDF
+  - Introduction Problem Set Rmd
 - For now... just keep these files in your downloads folder
 
 # Introductions
@@ -46,7 +46,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", highlight = TRUE)
 1. Pronouns
 1. Academic program (and how far along) 
 1. GA, RA, TA, and/or job?
-1. Do you have any experience with R? If not, do you have experience with any other "statistical" software or coding languages (e.g., Python, SQL, Java)?
+1. Do you have any experience with R? If not, do you have experience with any other "statistical" software (e.g., SPSS, STATA) or coding languages (e.g., Python, SQL, Java)?
 1. Why are you interested in this course?
 
 
@@ -88,9 +88,9 @@ Examples:
     
 
 
-# What is R
+# What is R?
 
-### What is R
+### What is R?
 
 According to the Inter-university consortium for political and social research [(ICPSR)](https://www.icpsr.umich.edu/icpsrweb/content/shared/ICPSR/faqs/what-is-r.html):
 
@@ -143,7 +143,7 @@ R Scripts are simply a text file containing all the same commands that you would
 
 - We will be using R Markdown for some homework assignments.
 - These files names end with `.R`
-- Show R script for lecture Example
+- Create our first R Script!
 
 
 
@@ -218,7 +218,7 @@ plot(gg)
 
 Data management and manipulation is the building blocks of data science!
 
-- "Data Science" implies doing "fancy" things like mapping, network analysis, web-scraping, etc.
+- Data Science implies doing "fancy" things like mapping, network analysis, web-scraping, etc.
 - But if you don't know how to clean data, these "fancy" analyses and visualizations will be impossible to execute
 - "80% of data science is data cleaning"
 - The skills you learn in this data management class are foundational to data science tasks! (and a prerequisite to taking my data science seminar next semester)
@@ -282,21 +282,23 @@ Why am I asking you to create R project and download a specific directory struct
 
 ### Follow these steps to create "R project" and directory structure
 
-1. Download this zip folder: [LINK HERE](https://github.com/ksalazar3/HED696C_RClass/blob/master/HED696C_Rclass.zip)
+1. In your downloads folder, you'll have a zip file: 
     - Unzip the folder: this is a shell of the file directory you should use for this class
     - Move it to your preferred location (e.g, documents, desktop, dropbox, etc)
-2. In RStudio, click on "File" >> "New Project" >> "Existing Directory" >> Navigate to the HED696C_Rclass folder >> Create Directory
-3. Download the following files from the [class website](https://ksalazar3.github.io/HED696C_RClass/resources/) and save the following files in "HED696C_Rclass/modules/module1"
-    - module1.Rmd
-    - module1.pdf
-    - module1.R
+
+2. You should also have one .Rmd and one PDF file in your downloads folder
+
+  - Move the __introduction.pdf__ file into _"HED696C_Rclass/modules/introduction"_
+  - Move the __introduction_ps.Rmd__ file into _"HED696C_Rclass/problemsets/introduction"_
+
+3. In RStudio, click on "File" >> "New Project" >> "Existing Directory" >> Navigate to the HED696C_Rclass folder >> Create Directory    
 
 ### After you follow these steps
 
 - You can add any additional sub-folders you want to the "rclass" folder
     - e.g., "syllabus", "resources"
 - You can add any additional files you want to the sub-directory folders you unzipped
-    - e.g., in "HED696C_Rclass/lectures/lecture1" you might add an additional document of notes you took
+    - e.g., in "HED696C_Rclass/modules/module1" you might add an additional document of notes you took
 
 
 # Directories and filepaths 
@@ -370,8 +372,8 @@ getwd()
     
 ### Intro Problem Set and Knit
 
-- Open the _introduction_ps.Rmd
-- Let's knit to pdf then to html!
+- Open the _introduction_ps.Rmd_
+- Let's knit to pdf!
 
 ### Next Week
 
