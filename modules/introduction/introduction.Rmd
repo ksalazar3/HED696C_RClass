@@ -382,4 +382,4 @@ getwd()
   - Absolute versus relative file paths [Youtube link](https://www.youtube.com/watch?v=ephId3mYu9o)
   - Relative paths and working directory in R [Youtube link](https://www.youtube.com/watch?v=fe6GA200dks)  
 - "Intro Problem Set": practice downloading data, knitting to PDF, and working with directories
-  - 
+  - always submit to D2L!
