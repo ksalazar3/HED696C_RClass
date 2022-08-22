@@ -139,6 +139,7 @@ This course is designated as a hybrid "flex in-person: synchronous + zoom". Thes
 
 Hybrid formats, while accommodating to various needs and preferences, can be challenging. Particularly when we are group/buddy coding. Given our classroom technology, I will pair students for these in-class assignments to other students in the same modality (in-person with in-person, online with online). It may be that in some instances you are the only participant online or in-person. If that is the case, you will be responsible for completing the in-class activities on your own.
 
+After the first few weeks of class there may also be an option to incorporate an asynchronous component to the class where students complete the asynchronous lecture (short video recording, reading and executing code in lecture slides) and attend weekly 1-hour synchronous workshop classes to work in groups to complete lecture code and/or begin assignments. Instructor will discuss this further during our first class session and will poll students' preferences. 
 
 # Course Readings
 
