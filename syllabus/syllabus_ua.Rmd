@@ -273,7 +273,7 @@ _Work and course requirements are subject to change at the discretion of the ins
 ## Week 1, 8/22/2022: Course introduction; Getting started with R
 
 
-## Week 2, 8/29/2022: Objects in R and Missing Data 
+## Week 2, 8/29/2022: Objects in R 
 <!-- - Reading:  -->
 <!--     - Wickham and Grolemund 2018 (W&G) 1; W&G 2; W&G 4; W&G 20.1 - 20.3 -->
 <!-- - Problem set #1 Due -->
@@ -355,7 +355,7 @@ _Work and course requirements are subject to change at the discretion of the ins
 <!-- - Reading (after class): W&G 19 -->
 
 
-## Week 14, 11/21/2022: Accessing object elements
+## Week 14, 11/21/2022: Accessing object elements; Using BibDesk as Citation Manager
 
 <!-- - Problem set due (before class): No -->
 <!-- - Reading (after class): W&G 20.4 - 20.5; 21.1 - 21.3; W&G 19 -->
