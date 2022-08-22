@@ -27,17 +27,16 @@ output:
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>", highlight = TRUE)
 ```
 
-### While you wait for class to begin...
+### Hello! While you wait for class to begin...
 
-- Navigate to our class website: https://ksalazar3.github.io/HED696C_RClass/ 
-- Under _Class Resources_ > _Syllabus & Class Resources_  download the following:
+- Navigate to our class website: https://ksalazar3.github.io/HED696C_RClass/
+  - Link is also provided in the updated syllabus on D2L
+- On our class website, navigate to _Class Resources_ > _Syllabus & Class Resources_, and  download the following:
   - Folder Structure Zip File
 - Under _Class Resources_ > _Introduction_  download the following:
   - introduction.pdf
-  - introduction.Rmd
-  - introduction.R
   - introduction_ps.Rmd
-- For now... just keep all of these files in your downloads folder
+- For now... just keep these files in your downloads folder
 
 # Introductions
 
@@ -47,6 +46,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", highlight = TRUE)
 1. Pronouns
 1. Academic program (and how far along) 
 1. GA, RA, TA, and/or job?
+1. Do you have any experience with R? If not, do you have experience with any other "statistical" software or coding languages (e.g., Python, SQL, Java)?
 1. Why are you interested in this course?
 
 
@@ -382,4 +382,4 @@ getwd()
   - Absolute versus relative file paths [Youtube link](https://www.youtube.com/watch?v=ephId3mYu9o)
   - Relative paths and working directory in R [Youtube link](https://www.youtube.com/watch?v=fe6GA200dks)  
 - "Intro Problem Set": practice downloading data, knitting to PDF, and working with directories
-  - always submit to D2L!
+  - always submit completed assignments to D2L!

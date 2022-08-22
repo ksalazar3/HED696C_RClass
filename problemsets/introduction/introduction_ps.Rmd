@@ -1,8 +1,10 @@
 ---
-title: "Problem Set 1"
+title: "Introduction Problem Set"
 author: "insert your name here"
 date: "insert date here"
 output: pdf_document
+classoption: landscape
+
 ---
 
 ```{r setup, include=FALSE}
@@ -11,93 +13,117 @@ knitr::opts_chunk$set(echo = TRUE)
 
 Welcome to Data Management and Manipulation Using R!
 
-In this problem set, you will load data from a url, or absolute/relative filepath.
+In this problem set, you will practice "knitting," loading data from a url, and loading data from absolute/relative filepaths.
 
 - Note: Change author to your name & date to current date above in the YAML header (we'll learn more about headers later on...)
+- If you're experiencing errors while working on this assignment (or any assignment), start fresh by closing out R (when prompted to "save your workspace" hit "don't save) and re-opening the assignment. 
+- You may also be experiencing errors for this particular assignment because of running R chunks for questions below out of order (run Question 1, then Question 2, then Question 3) 
 
+\vspace{30pt}
 
-### Step 1: Practice "knitting" the lecture files!
+### Step 1: Practice "knitting" the problem set Rmd file!
 
 - Open your RStudio via the Rproject (`HED96C_RClass.Rproj`) we created in class
 - Once in RStudio, in the top menu bar, click on File > Open File...
-- Navigate to your HED696C_RClass folder and open your saved `introduction.Rmd` file (hint it should be located in: modules/introduction folder)
-- Open the introduction.Rmd file in RStudio
-- At the top of the introduction.Rmd file, change my name under "author" to your first and last name
+- Navigate to your HED696C_RClass folder and open your saved `introduction_ps.Rmd` file (hint it should be located in: problemsets/introduction folder)
+- Open the introduction_ps.Rmd file in RStudio
+- At the top of the introduction_ps.Rmd file, insert your name and the date in the first few lines of this .Rmd file where indicated for you
 - Now select the "Knit" tab (icon with blue yarn ball) or use the drop down menu next to the yard ball and select "Knit to PDF"
-- The goal of this step is to make sure you are able to knit lecture slides to a PDF without running into errors. But it is OK if you do! We'll figure them out together!
+- The goal of this step is to make sure you are able to knit to a PDF without running into errors. But it is OK if you do! We'll figure them out together!
 
+\vspace{30pt}
 
 ### Step 2: Practice with Directories! 
 
-**Question 1**: Load .Rdata directly with url  
+**Question 1: Load .Rdata directly with url** 
 
+- In the R Chunk Below....
 - View current/working directory first using the `getwd()` function
-  - If ever you don't know what a "function" does; you can ask R directly using the syntax `?` before the function. See my example below in the R chunk
-- We're going to open a dataset on my "recruiting" project which is stored in an online repository. Here is the link to that dataset: https://github.com/ksalazar3/HED696C_RClass/blob/master/data/recruiting/recruit_ps1_small.Rdata  
-- When the data is stored online/in a repository, we can load R datasets (they file extensions are .Rdata) directly into R using the `load()` and `url() ` functions by using the link! 
-  - There's no need to download the file if we open the data directly from a link!
-- So the syntax will look like this: `load(url("link"))`  
+  - The current working directory when running from an R Chunk will revert to the location of this introduction_ps.Rmd file; which should be in the problemsets folder within the introduction sub-folder
+  - If ever you don't know what a "function" does; you can ask R directly using the syntax `?` before the function. 
+- We're going to open a dataset on my "recruiting" project which is stored in an online repository. 
+  - __Here is the link to that dataset:__
+  - https://github.com/ksalazar3/HED696C_RClass/blob/master/data/recruiting/recruit_ps1_small.Rdata?raw=true
+- When the data is stored online/in a repository, we can load R datasets (their file extensions are .Rdata) directly into R using the `load()` + `url() ` functions, or `load(url())` when combined,  by using the link! 
+- So the "generic" syntax will look like this: 
+  - `load(url("INSERT THE LINK HERE"))`
+- Whereas the filled in syntax for this part of the question will look like this:
+  - `load(url("https://github.com/ksalazar3/HED696C_RClass/blob/master/data/recruiting/recruit_ps1_small.Rdata?raw=true"))`
 
+_Solutions provided; see how I followed the instructions to get the syntax answers in the R Chuck below_
 ```{r}
+getwd()
 ?getwd()
-getwd()
 ?load
-load(url("https://github.com/ksalazar3/HED696C_RClass/raw/master/data/recruiting/recruit_ps1_small.Rdata"))
+load(url("https://github.com/ksalazar3/HED696C_RClass/blob/master/data/recruiting/recruit_ps1_small.Rdata?raw=true"))
 ```
 
 
-**Question 2**: Set your working directory and use absolute filepath to load data  
+\vspace{30pt}
 
-- Download .Rdata using link from above  
-- Save .Rdata file in the recruiting folder (rclass/data/recruiting)  
-- View your current/working directory `getwd()` 
-- Use `setwd()` function to set your working directory to where .Rdata file is saved (rclass/data/recruiting)  
-- When setting working directory, use the absolute filepath  
-- Load the .Rdata file  `load(name.Rdata)`
-- Using the `names(data frame name)` function, report the names in this dataset  (Hint: data frame name is df_recruiting)  
 
+**Question 2: Set your working directory using an absolute filepath; then load the data directly from your computer**  
+
+- Download .Rdata using link from Question 1 above
+- Move the `recruit_ps1_small.Rdata` file (should be in your downloads folder) in the recruiting data folder (HED696C_RClass/data/recruiting)
+- Then, in the R Chunk Below....
+- View your current/working directory `getwd()` first
+  - This will revert to the location of the introduction_ps.Rmd file; which should be in the problemsets folder within the introduction sub-folder
+- Then use the `setwd()` function to set your working directory to where the .Rdata file is saved using the **absolute filepath** 
+  - Hint: This should be pointing to the recruiting folder where the .Rdate file is located, it should not include the name of the Rdata file. 
+  - For example, my absolute file path is "/Users/karinasalazar/Dropbox/HED696C_RClass/data/recruiting"
+  - So MY solution for this part of the question would be
+     `setwd("/Users/karinasalazar/Dropbox/HED696C_RClass/data/recruiting")`
+  - After setting your working directory you can use `getwd()` again to see how they changed!
+- After setting the your working directory using the absolute filepath, load the .Rdata file by using the following generic syntax `load(INSERT NAME OF DATAFILE HERE.Rdata)`
+- Using the `names(data frame name)` function, show the column names in this dataset  (Hint: data frame name for the `recruit_ps1_small.Rdata` is called df_recruiting)  
+
+
+_Write your solutions in the R Chunk below_
 ```{r}
-getwd() 
-setwd("/Users/karinasalazar/Desktop/rclass/data/recruiting") #absolute file path to data
-getwd()  #if you run lines entire chunk so you can see how the working directory changes
-list.files() #list.files displays the files in the folder
-load("recruit_ps1_small.Rdata")
-names(df_recruiting)
+
 ```
 
-**Question 3**: Set your working directory and use relative filepath to load data  
+\vspace{30pt}
 
-- View your current/working directory `getwd()` 
-- Use `setwd()` function to set your working directory to where .Rdata file is saved (rclass/data/recruiting)  
-- When setting working directory, use the relative filepath  
-- Load the .Rdata file  `load()`
-- Report the names in this dataset (Hint: data frome name is df_recruiting)  
 
+**Question 3**: Set your working directory using a relative filepath; then load the data directly from your computer** 
+
+- In the R Chunk below... 
+- View your current/working directory `getwd()`
+  - This will revert to the location of the introduction_ps.Rmd file; which should be in the problemsets folder within the introduction sub-folder
+- Then use the `setwd()` function to set your working directory to where the .Rdata file is saved using the **relative filepath** 
+  - Hint: you are currently in the problemsets/introduction folder; so you will need to move "up" or "back" before you can get to the data/recruiting folder
+  - For example, if my current working directory is:     "/Users/karinasalazar/Dropbox/HED696C_RClass/problemsets/introduction"
+  - So my solution for this part of the question would be
+     `setwd("../../data/recruiting")`
+- After setting the your working directory using the absolute filepath, load the .Rdata file by using the following generic syntax `load(INSERT NAME OF DATAFILE HERE.Rdata)`
+- Show the column names in this dataset (Hint: data frome name is df_recruiting)  
+
+_Write your solutions in the R Chunk below_
 ```{r}
-getwd() 
-# Working directory is in the lecture1 folder, need to get to recruiting folder using relative file path
-setwd("../../data/recruiting")
-getwd() #View current directory after setting the directory
-list.files() #listing files in the recruiting folder
-# Lets load recruit_ps1_small.Rdata 
-load("recruit_ps1_small.Rdata")
-# Use names function to view the names in the data set (data frame)
-names(df_recruiting)
-# Run the entire code chunck 
+
 ```
 
-**Question 4**: Load dataset using relative filepath without first changing working directory  
 
-- View your current/working directory `getwd()`  
-- Load data without setting directory `load(filepath/data.Rdata)`
 
+\vspace{30pt}
+
+
+**Question 4**: Without first changing the working directory, load the dataset using relative filepath 
+
+- View your current/working directory `getwd()`
+- Load data without setting directory `load("relativefilepath/recruit_ps1_small.Rdata")`
+- Hint: this will look like a combination of the two steps in Question 3
+
+
+_Write your solutions in the R Chunk below_
 ```{r}
-getwd()
-load("../../data/recruiting/recruit_ps1_small.Rdata") #Set file path and load data at once
-names(df_recruiting)
+
 ```
+
+\vspace{30pt}
 
 **Knit to pdf** select the "Knit" tab (icon with blue yarn ball) or scroll down and "Knit to PDF"  
-
-- Submit both .Rmd and pdf   
-- Use this naming convention "lastname_firstname_ps#"
+- Submit both .Rmd and pdf
+- Use this naming convention "lastname_introduction_ps.Rmd"
