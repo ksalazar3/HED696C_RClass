@@ -18,7 +18,7 @@ email: "ksalazar@email.arizona.edu"
 officehours: Wed 2:00-4:00pm[; via Calendly](https://calendly.com/ksalazar_az/fall-2022-office-hours)
 office: "COE 313"
 
-web: "TBD"
+web: "ksalazar3.github.io/HED696C_RClass"
 discuss: "d2l.arizona.edu"
 classroom: "COE 311"
 classhours: "M 4:15pm - 6:45pm"
@@ -270,7 +270,7 @@ Students in the course are likely to have varying levels of experience with R. B
 _Work and course requirements are subject to change at the discretion of the instructor with proper notice to the students._
 
 
-## Week 1, 8/22/2022: Course introduction; objects in R
+## Week 1, 8/22/2022: Course introduction; Getting started with R
 
 
 ## Week 2, 8/29/2022: Objects in R and Missing Data 

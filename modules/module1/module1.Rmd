@@ -1,6 +1,6 @@
 ---
 title: Managing and Manipulating Data Using R # potentially push to header
-subtitle:  Lecture 1.1
+subtitle:  Introduction & Module 1
 author: Karina Salazar
 date: 
 classoption: dvipsnames  # for colors
@@ -26,18 +26,15 @@ output:
 ```{r, echo=FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>", highlight = TRUE)
 ```
-# Student introductions
+# Introductions
 
 ### Student introductions
 
-1. Preferred name
-1. Preferred pronouns
+1. Name
+1. Pronouns
 1. Academic program (and how far along) 
 1. GA, RA, TA, and/or job?
 1. Why are you interested in this course?
-
-
-# About your instructor
 
 
 ### Karina Salazar, instructor
@@ -121,16 +118,19 @@ library(tidyverse)
 ![](pane_layout.png)
 
 ### R Markdown Documents
-[R Markdown](https://rmarkdown.rstudio.com/) produces dynamic output formats in html, pdf, MS Word, dashboards, Beamer presentations, etc.
+[R Markdown](https://rmarkdown.rstudio.com/) produces dynamic output formats in html, pdf, MS Word, dashboards, Beamer (i.e., power point) presentations, etc.
 
-- We will be using R Markdown for lectures and homeworks.
+- We will be using R Markdown for lectures and homework assignments
 - These files names end with `.Rmd`
+- Show ABOR Literature Review Example
+
 
 ### R Scripts
 R Scripts are simply a text file containing all the same commands that you would enter on the command line of R. The "text" you can include in these files are in the form of comments.
 
 - We will be using R Markdown for some homework assignments.
 - These files names end with `.R`
+- Show R script for lecture Example
 
 
 
@@ -193,31 +193,30 @@ plot(gg)
 ### What is data management?
 
 - All the stuff you have to do to create analysis datasets that are ready to analyze:
-    - collect data
-    - read/import data into statistical programming language
-    - clean data
-    - integrate data from multiple sources (e.g, join/merge, append)
-    - change organizational structure of data so it is suitable for analysis
-    - create "analysis variables" from "input variables"
+    - Collect data
+    - Read/import data into statistical programming language
+    - Clean data
+    - Integrate data from multiple sources (e.g, join/merge, append)
+    - Change organizational structure of data so it is suitable for analysis
+    - Create "analysis variables" from "input variables"
     - Make sure that you have created analysis variables correctly
 
 ### Why I don't call this class "R for data science"
 
-Learn to walk before you can run!
+Data management and manipulation is the building blocks of data science!
 
-- "data science" implies doing "fancy" things like mapping, network analysis, web-scraping, etc.
-- But if you don't know how to clean data, these "fancy" analyses and visualizations will be useless
+- "Data Science" implies doing "fancy" things like mapping, network analysis, web-scraping, etc.
+- But if you don't know how to clean data, these "fancy" analyses and visualizations will be impossible to execute
 - "80% of data science is data cleaning"
-- The skills you learn in this data management class are foundational to data science tasks! (and a prerequisite to taking data science seminar)
+- The skills you learn in this data management class are foundational to data science tasks! (and a prerequisite to taking my data science seminar next semester)
 
 ### Who is this class for?
 
 This class is for anyone who wants to work with data, that is people who want to be:
 
-- researchers working with survey data and doing traditional statistical analyses
-- researchers who want to do "data science" oriented research involving mapping, NLP, connecting to APIs
-- analysts working at think tanks or non-profits
-- "Data scientists"
+- Researchers working with survey data and doing traditional statistical analyses
+- Researchers who want to do "data science" oriented research involving mapping, NLP, connecting to APIs
+- Analysts working at think tanks or non-profits that work with large federal or state datasets
 
 # Course logistics
 
@@ -225,41 +224,66 @@ This class is for anyone who wants to work with data, that is people who want to
 
 - follow the syllabus
 
+
+### Modality Poll
+
+- The first few weeks of the course:
+  - Focus on getting everyone comfortable with R
+  - We will likely take up the full class time 
+    - Troubleshoot errors in-class, together
+    - Covering material in "traditional" lecture style
+    
+    
+- Starting week 4 (after Labor Day), the class becomes easier to incorporate an asynchronous component
+  - __Asynchronous BEFORE WEEKLY WORKSHOP CLASS__
+    - Short readings from textbooks
+    - Watch ~30 min lecture overview recording by instructor
+    - Read/Execute Code in lecture "slides"
+  - __Synchronous 1-HOUR WEEKLY WORKSHOP CLASS__
+    - Instructor will break class up into 2-3 small groups (probably one in-person and one on-Zoom)
+    - Groups will work through class materials or the weekly problem set together
+    - Instructor will move from group to group helping and answering questions
+    - Students will need to complete and submit the problem set prior to starting the asynchronous material for next class...
+    
+    
+- Take Zoom Poll
+  - Would you like to move to an asynchronous option?
+    
+# 10 Min Break    
+
 # Create "R project" and directory structure
 
 ### What is an R project? Why are you doing this?
 
 What is an "R project"?
 
-- helps you keep all files for a project in one place
+- Helps you keep all files for a project in one place
 - When you open an R project, the file-path of your current working directory is automatically set to the file-path of your R-project
 
 Why am I asking you to create R project and download a specific directory structure?
 
-- I want you to be able to run the .Rmd files for each lecture on your own computer
-- Sometimes these .Rmd files point to certain sub-folders
-- If you create R project and create directory structure I recommend, you will be able to run .Rmd files from your own computer without making any changes to file-paths!
+- I want you to be able to run the .Rmd and .R files for each lecture on your own computer
+- Sometimes these .Rmd and .R files point to certain sub-folders
+- If you create R project and create directory structure I recommend, you will be able to run .Rmd and .R files from your own computer without making any changes to file-paths!
+- This process allows us all to work off our individual computers but to "start" in the same working directory (R Project) and be able to navigate to other "shared" folders (same folder structure) 
 
 ### Follow these steps to create "R project" and directory structure
 
-1. Download this zip folder: [LINK HERE](https://github.com/ozanj/rclass/raw/master/rclass.zip)
+1. Download this zip folder: [LINK HERE](https://github.com/ksalazar3/HED696C_RClass/blob/master/HED696C_Rclass.zip)
     - Unzip the folder: this is a shell of the file directory you should use for this class
-    - Change the name to "rclass"
     - Move it to your preferred location (e.g, documents, desktop, dropbox, etc)
-2. In RStudio, click on "File" >> "New Project" >> "Existing Directory" >> Select the rclass folder >> Create Directory
-3. Save the following files in "rclass/lectures/lecture1"
-    - lecture1.1_ua.Rmd
-    - lecture1.1_ua.pdf
-    - lecture1.2_ua.Rmd
-    - lecture1.2_ua.Pdf
-    - lecture1.2_ua.R
+2. In RStudio, click on "File" >> "New Project" >> "Existing Directory" >> Navigate to the HED696C_Rclass folder >> Create Directory
+3. Download the following files from the [class website](https://ksalazar3.github.io/HED696C_RClass/resources/) and save the following files in "HED696C_Rclass/modules/module1"
+    - module1.Rmd
+    - module1.pdf
+    - module1.R
 
 ### After you follow these steps
 
-- you can add any additional sub-folders you want to the "rclass" folder
+- You can add any additional sub-folders you want to the "rclass" folder
     - e.g., "syllabus", "resources"
 - You can add any additional files you want to the sub-directory folders you unzipped
-    - e.g., in "rclass/lectures/lecture1" you might add an additional document of notes you took
+    - e.g., in "HED696C_Rclass/lectures/lecture1" you might add an additional document of notes you took
 
 
 # Directories and filepaths 
@@ -268,8 +292,8 @@ Why am I asking you to create R project and download a specific directory struct
 
 __(Current) Working directory__
 
-- the folder/directory in which you are currently working
-- this is where R looks for files
+- The folder/directory in which you are currently working
+- This is where R "automatically" looks for files
 - Files located in your current working directory can be accessed without specifying a filepath because R automatically looks in this folder
 
 Function `getwd()` shows current working directory
@@ -301,7 +325,7 @@ getwd()
 
 ### Absolute vs. relative filepath  
 **Absolute file path**:  The absolute file path is the complete list of directories needed to locate a file or folder.  
-`setwd("Users/Karina/rclass/lectures/lecture2")`
+`setwd("Users/Karina/rclass/modules/module2")`
 
 
 **Relative file path**:  The relative file path is the path relative to your current location/directory. Assuming your current working directory is in the "lecture2" folder and you want to change your directory to the data folder, your relative file path would look something like this:  
@@ -316,3 +340,35 @@ getwd()
 | ../../    | moves up two levels   |
 
 
+### Install TinyTex
+
+- Why am I asking you to do this?
+  - You will need to install LaTeX (lah-tech or lay-tech) on your computer to create pdf documents in R Markdown files (.Rmd)
+  - You do not need to know how to use LaTeX. LaTeX is used in the background to compile pdf documents for you.
+  - [Here](https://medium.com/@sorenlind/create-pdf-reports-using-r-r-markdown-latex-and-knitr-on-macos-high-sierra-e7b5705c9fd) is a helpful article on creating PDf reports using R, R Markdown, LaTeX, and knitr.
+  - I **strongly recommend** installing **tinytex** in RStudio because it is smaller in size and it only installs LaTeX packages you need. **However, if you have MikTeX/MacTeX already installed** on your computer or you plan to use LaTeX in other courses I recommend you update to the most current version of MikTeX/MacTeX.  
+  - __Please note that you only need to install one!__ You may run into some issues if you try to install tinytex and you already have MikTeX/MacTeX installed so please stick to only one.  
+
+### Install TinyTex
+
+- Instructions for installing tinytex 
+  - [Here](https://yihui.name/tinytex/) is a helpful link to install tinytex  
+    
+    1. Open up RStudio  
+    2. In the "console" paste the following and hit return(enter): __install.packages('tinytex')__  
+    3. Once the package is installed, paste the following code in the "console" and hit return(enter): __tinytex::install_tinytex()__  
+    
+### Download the Intro Problem Set and Knit
+
+
+
+### Next Week
+
+- Reading: 
+  - Wickham, H., & Grolemund, G. (2018). _R for Data Science_. http://r4ds.had.co.nz/
+  -  1 Introduction, 2 Explore Introduction, 4 Workflow: basics, 20.1-20.3 Vectors
+- Watch videos on Working with directories and filepaths (only if you need the extra help):
+  - Absolute versus relative file paths [Youtube link](https://www.youtube.com/watch?v=ephId3mYu9o)
+  - Relative paths and working directory in R [Youtube link](https://www.youtube.com/watch?v=fe6GA200dks)  
+- "Intro Problem Set": practice downloading data, knitting to PDF, and working with directories
+  - 
