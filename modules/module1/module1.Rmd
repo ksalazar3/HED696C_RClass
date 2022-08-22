@@ -26,6 +26,19 @@ output:
 ```{r, echo=FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>", highlight = TRUE)
 ```
+
+### While you wait for class to begin...
+
+- Navigate to our class website: https://ksalazar3.github.io/HED696C_RClass/ 
+- Under _Class Resources_ > _Syllabus & Class Resources_  download the following:
+  - Folder Structure Zip File
+- Under _Class Resources_ > _Introduction_  download the following:
+  - introduction.pdf
+  - introduction.Rmd
+  - introduction.R
+  - introduction_ps.Rmd
+- For now... just keep all of these files in your downloads folder
+
 # Introductions
 
 ### Student introductions
@@ -346,10 +359,7 @@ getwd()
   - You will need to install LaTeX (lah-tech or lay-tech) on your computer to create pdf documents in R Markdown files (.Rmd)
   - You do not need to know how to use LaTeX. LaTeX is used in the background to compile pdf documents for you.
   - [Here](https://medium.com/@sorenlind/create-pdf-reports-using-r-r-markdown-latex-and-knitr-on-macos-high-sierra-e7b5705c9fd) is a helpful article on creating PDf reports using R, R Markdown, LaTeX, and knitr.
-  - I **strongly recommend** installing **tinytex** in RStudio because it is smaller in size and it only installs LaTeX packages you need. **However, if you have MikTeX/MacTeX already installed** on your computer or you plan to use LaTeX in other courses I recommend you update to the most current version of MikTeX/MacTeX.  
-  - __Please note that you only need to install one!__ You may run into some issues if you try to install tinytex and you already have MikTeX/MacTeX installed so please stick to only one.  
 
-### Install TinyTex
 
 - Instructions for installing tinytex 
   - [Here](https://yihui.name/tinytex/) is a helpful link to install tinytex  
@@ -358,9 +368,10 @@ getwd()
     2. In the "console" paste the following and hit return(enter): __install.packages('tinytex')__  
     3. Once the package is installed, paste the following code in the "console" and hit return(enter): __tinytex::install_tinytex()__  
     
-### Download the Intro Problem Set and Knit
+### Intro Problem Set and Knit
 
-
+- Open the _introduction_ps.Rmd
+- Let's knit to pdf then to html!
 
 ### Next Week
 
