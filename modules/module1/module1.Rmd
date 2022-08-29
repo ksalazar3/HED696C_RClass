@@ -27,7 +27,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", highlight = TRUE)
 
 ### As you wait for class to begin... {-}
 
-- Download the module1.Rmd file from the class website [https://ksalazar3.github.io/HED696C_RClass/](https://ksalazar3.github.io/HED696C_RClass/)
+- Download the module1.Rmd lecture file from the class website [https://ksalazar3.github.io/HED696C_RClass/](https://ksalazar3.github.io/HED696C_RClass/)
 - Move the module1.Rmd file to "HED696C_RClass/modules/module1"
 - Open RStudio via the `HED696C_Rclass.rproj`
 - Once in R Studio go to File > Open File > navigate to and open the module1.Rmd
@@ -705,3 +705,17 @@ Takeaways
     - The individual elements -- columns/variables -- within a dataset are just vectors
 - These structures and data types are foundational for all "data science" applications
     - e.g., mapping, webscraping, network analysis, etc.
+
+
+### Next Class Session {-}
+
+- No class next Monday 9/5/2022, Labor Day!
+- Module 1 Problem Set due on 9/12/2022
+  - Rmd file is on course website; you'll need to download it and move it to the "HED696C_RClass/problemsets/module1" folder
+  - Practice with knitting and investigating different objects
+- Reading for 9/12/2022
+  - Wickham & Grolemund _R is for Data Science_
+    - Sections 5.1-5.4
+  - Xie, Allaire, & Grolemund _R Markdown: The Definitive Guide_
+    - Only section 3.1
+  - Spend 15 min reviewing this [RMarkdown Reference Guide](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf)
