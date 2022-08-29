@@ -55,20 +55,20 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", highlight = TRUE)
 My start in data management/statistical analysis
 
 - SPSS 
-    - evaluated retention programs within institutional research and assessment offices 
-    - student-level data on math remediation courses 
+    - Evaluated retention programs within institutional research and assessment offices 
+    - Student-level data on math remediation courses 
     - College Academy for Parents, Think Tank, Assessment Institute
 - Stata 
-    - used loops and user-defined functions to work with national datasets (IPEDS, Survey of Earned Doctorates)
+    - Used loops and user-defined functions to work with national datasets (IPEDS, Survey of Earned Doctorates)
 
 Got sick of the limitations of survey data and/or available data
 
 - No survey asked questions on what I was interested in
-    - universities pledge commitment to access, but enrollments don't tell the whole story
-    - who do they actually recruit?
+    - Universities pledge commitment to access, but enrollments don't tell the whole story
+    - Who do they actually recruit?
 - We realized "data science" could create data from publicly available data sources
     - Twitter
-    - travel schedules on admissions websites
+    - Travel schedules on admissions websites
 
 ### Recruiting research program and "data science"
 
