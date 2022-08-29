@@ -1,0 +1,120 @@
+---
+title: "Module 1 Problem Set"
+author: "insert your name here"
+date: "insert date here"
+output: pdf_document
+classoption: landscape
+
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Welcome to Data Management and Manipulation Using R!
+
+In this problem set, you will practice "knitting," creating objects (i.e., atomic vectors and lists), and investigating those objects.
+
+- Note: Change author to your name & date to current date above in the YAML header (we'll learn more about headers later on...)
+- Save this Rmd file to your "HED696C_RClass/problemsets/module1" folder using the naming convention "lastname_module1_ps.Rmd"
+- If you're experiencing errors while working on this assignment (or any assignment), start fresh by closing out R (when prompted to "save your workspace" hit "don't save") and re-open the assignment. 
+
+\vspace{30pt}
+
+### Step 1: Practice "knitting" the problem set Rmd file!
+
+- Open your RStudio via the Rproject (`HED96C_RClass.Rproj`) we created in class
+- Once in RStudio, in the top menu bar, click on File > Open File...
+- Navigate to your HED696C_RClass folder and open your saved `module1_ps.Rmd` file (hint it should be located in: problemsets/module1 folder)
+- Open the module1_ps.Rmd file in RStudio
+- At the top of the module1_ps.Rmd file, insert your name and the date in the first few lines of this .Rmd file where indicated for you
+- Now select the "Knit" tab (icon with blue yarn ball) or use the drop down menu next to the yard ball and select "Knit to PDF"
+
+
+\vspace{30pt}
+
+### Step 2: Objects in R
+
+**Question 1: What are the two types of vectors in R? How are they different from one another?** 
+
+- ANSWER: TYPE YOUR ANSWER HERE
+
+
+\vspace{30pt}
+
+
+**Question 2: How are the two vectors below similar and different?**  
+
+- I have already created two vectors in the R chunk below: `x1` and `x2`
+- Run diagnostics of these vectors in the R chunk below using the following functions:
+  - `length()`
+  - `typeof()`
+  - `str()`
+- ANSWER: TYPE YOUR ANSWER HERE
+
+```{r}
+#object 1
+x1 <- c(TRUE, FALSE, FALSE, TRUE)
+
+length(x1)
+typeof(x1)
+str(x1)
+
+#object 2
+x2 <- c(animal="dog", food="kibble", habitat="home", type="domestic")
+
+length(x2)
+typeof(x2)
+str(x2)
+```
+
+\vspace{30pt}
+
+
+**Question 3**: How are the two objects below similar and different?**  
+
+- I have already created two objects in the R chunk below: `x3` and `x4`
+- Run diagnostics of these objects in the R chunk below
+- ANSWER: TYPE YOUR ANSWER HERE
+
+
+```{r}
+#object 1
+x3 <- list(var1=c(1,2), var2=c("public", "private"), var3=c("AZ", "CA"))
+length(x3)
+typeof(x3)
+str(x3)
+
+#object 2
+x4 <- c(1,2,"public", "private", "AZ", "CA")
+length(x4)
+typeof(x4)
+str(x4)
+
+```
+
+
+\vspace{30pt}
+
+
+
+**Question 4**: Access the "var2" element in the `x3` object below. What's the length and type of the var2 element in `x3`? Does the var2 element have a hierarchical structure? 
+
+- I have already re-created the `x3` object in the R chunk below
+- Run diagnostics of the "var2" element in the `x3` object in the R chunk below
+- ANSWER: TYPE YOUR ANSWER HERE
+
+```{r}
+#object 1
+x3 <- list(var1=c(1,2), var2=c("public", "private"), var3=c("AZ", "CA"))
+
+length(x3$var2)
+typeof(x3$var2)
+str(x3$var2)
+```
+
+\vspace{30pt}
+
+**Knit to pdf** select the "Knit" tab (icon with blue yarn ball) or scroll down and "Knit to PDF"  
+- Submit both .Rmd and pdf
+- Use this naming convention "lastname_module1_ps.Rmd"
