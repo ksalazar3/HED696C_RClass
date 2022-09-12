@@ -58,6 +58,7 @@ df_school_all %>% count(total_visits)
         
 ```{r}
 #type of df_school_all 
+typeof(df_school_all)
 
 #length of df_school_all 
 
@@ -119,9 +120,10 @@ df_school_all %>% count(total_visits)
 # Step 3: Filter, select, arrange questions
 
 The data frame `df_school_all` has one observation for each high school (public and private). 
-
-- The variables that begin with `visits_by_...` identify how many off-campus recruiting visits the high school received from a particular public university. For example, UC Berkeley has the ID `110635` so the variable `visits_by_110635` identifies how many visits the high school received from UC Berkeley. 
-- The variable `total_visits` identifies the number of visits the high school received from all (16) public research universities in this data collection sample.
+  
+  - The variables that begin with `visits_by_...` identify how many off-campus recruiting visits the high school received from a particular public university. For example, UC Berkeley has the ID `110635` so the variable `visits_by_110635` identifies how many visits the high school received from UC Berkeley. 
+  
+  - The variable `total_visits` identifies the number of visits the high school received from all (16) public research universities in this data collection sample.
 
 For the questions below, imagine that you have been asked by a major news outlet to identify which high schools receive the most total number of off-campus recruiting visits from public universities. 
 

@@ -81,7 +81,11 @@ load(url("https://github.com/ksalazar3/HED696C_RClass/blob/master/data/recruitin
 
 _Write your solutions in the R Chunk below_
 ```{r}
-
+getwd()
+setwd("/Users/karinasalazar/Dropbox/HED696C_RClass/data/recruiting")
+list.files()
+load("recruit_ps1_small.Rdata")
+names(df_recruiting)
 ```
 
 \vspace{30pt}
@@ -102,7 +106,11 @@ _Write your solutions in the R Chunk below_
 
 _Write your solutions in the R Chunk below_
 ```{r}
-
+getwd()
+setwd("../../data/recruiting")
+list.files()
+load("recruit_ps1_small.Rdata")
+names(df_recruiting)
 ```
 
 

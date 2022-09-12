@@ -12,7 +12,7 @@
 <meta name="author" content="INSERT YOUR NAME HERE" />
 
 
-<title>Lecture 2 Problem Set</title>
+<title>Module 2 Problem Set</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -362,9 +362,9 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">Lecture 2 Problem Set</h1>
+<h1 class="title toc-ignore">Module 2 Problem Set</h1>
 <h4 class="author">INSERT YOUR NAME HERE</h4>
-<h4 class="date">10/4/2019</h4>
+<h4 class="date">INSERY DATE HERE</h4>
 
 </div>
 
@@ -373,7 +373,7 @@ pre code {
 patterns.</p>
 <div id="step-1-make-changes-to-yaml-header" class="section level1">
 <h1>Step 1: Make changes to YAML header</h1>
-<p>Recommend reading R Markdown: The Definative Guide section 3.1 (<a href="https://bookdown.org/yihui/rmarkdown/html-document.html">LINK
+<p>Recommend reading R Markdown: The Definitive Guide section 3.1 (<a href="https://bookdown.org/yihui/rmarkdown/html-document.html">LINK
 HERE</a>) before answering these questions</p>
 <ol style="list-style-type: decimal">
 <li>Add a table of contents to YAML header</li>
@@ -381,9 +381,11 @@ HERE</a>) before answering these questions</p>
 <li>table of contents should “float”</li>
 <li>add section numbering to headers</li>
 </ol>
+</div>
+<div id="step-2-load-tidyverse-and-data" class="section level1">
+<h1>Step 2: Load Tidyverse and Data</h1>
 <p>Load tidyverse package [code already provided]</p>
-<pre class="r"><code>#install.packages(&quot;tidyverse&quot;) #install if you do not have tidyverse installed
-library(tidyverse)
+<pre class="r"><code>library(tidyverse)
 #&gt; ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.2 ──
 #&gt; ✔ ggplot2 3.3.6     ✔ purrr   0.3.4
 #&gt; ✔ tibble  3.1.8     ✔ dplyr   1.0.9
@@ -392,34 +394,52 @@ library(tidyverse)
 #&gt; ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
 #&gt; ✖ dplyr::filter() masks stats::filter()
 #&gt; ✖ dplyr::lag()    masks stats::lag()</code></pre>
-<p>Load data frame object and use <code>count()</code> to tabulate the
-total number of visits each school received [code already provided]</p>
-<pre class="r"><code>rm(list = ls()) # remove all objects
+<p>Load data frame object <code>df_school_all</code>; it is similar to
+the dataframe <code>df_school</code> used in lecture but has more
+varibles</p>
+<ul>
+<li>Use <code>names()</code> to see all the variables contained within
+<code>df_school_all</code> [code already provided]</li>
+<li>Use <code>table()</code> to tabulate the total number of visits each
+school received [code already provided]</li>
+</ul>
+<pre class="r"><code>rm(list = ls()) # remove all objects before loading new dataset
 getwd()
-#&gt; [1] &quot;/Users/karinasalazar/Dropbox/HED696C_RClass/modules/module2&quot;
+#&gt; [1] &quot;/Users/karinasalazar/Dropbox/HED696C_RClass/problemsets/module2&quot;
 
-load(url(&quot;https://github.com/ozanj/rclass/raw/master/data/recruiting/recruit_school_allvars.RData&quot;))
+load(url(&quot;https://github.com/ksalazar3/HED696C_RClass/raw/master/data/recruiting/recruit_school_allvars.RData&quot;))
 #glimpse(df_school_all)
 
-df_school_all %&gt;% count(total_visits)
-#&gt; # A tibble: 25 × 2
-#&gt;    total_visits     n
-#&gt;           &lt;int&gt; &lt;int&gt;
-#&gt;  1            0 15405
-#&gt;  2            1  2718
-#&gt;  3            2  1324
-#&gt;  4            3   671
-#&gt;  5            4   395
-#&gt;  6            5   263
-#&gt;  7            6   152
-#&gt;  8            7   107
-#&gt;  9            8    89
-#&gt; 10            9    57
-#&gt; # … with 15 more rows
-#&gt; # ℹ Use `print(n = ...)` to see more rows</code></pre>
+names(df_school_all)
+#&gt;  [1] &quot;state_code&quot;         &quot;school_type&quot;        &quot;ncessch&quot;           
+#&gt;  [4] &quot;name&quot;               &quot;address&quot;            &quot;city&quot;              
+#&gt;  [7] &quot;zip_code&quot;           &quot;pct_white&quot;          &quot;pct_black&quot;         
+#&gt; [10] &quot;pct_hispanic&quot;       &quot;pct_asian&quot;          &quot;pct_amerindian&quot;    
+#&gt; [13] &quot;pct_other&quot;          &quot;num_fr_lunch&quot;       &quot;total_students&quot;    
+#&gt; [16] &quot;num_took_math&quot;      &quot;num_prof_math&quot;      &quot;num_took_rla&quot;      
+#&gt; [19] &quot;num_prof_rla&quot;       &quot;avgmedian_inc_2564&quot; &quot;latitude&quot;          
+#&gt; [22] &quot;longitude&quot;          &quot;visits_by_196097&quot;   &quot;visits_by_186380&quot;  
+#&gt; [25] &quot;visits_by_215293&quot;   &quot;visits_by_201885&quot;   &quot;visits_by_181464&quot;  
+#&gt; [28] &quot;visits_by_139959&quot;   &quot;visits_by_218663&quot;   &quot;visits_by_100751&quot;  
+#&gt; [31] &quot;visits_by_199193&quot;   &quot;visits_by_110635&quot;   &quot;visits_by_110653&quot;  
+#&gt; [34] &quot;visits_by_126614&quot;   &quot;visits_by_155317&quot;   &quot;visits_by_106397&quot;  
+#&gt; [37] &quot;visits_by_149222&quot;   &quot;visits_by_166629&quot;   &quot;total_visits&quot;      
+#&gt; [40] &quot;inst_196097&quot;        &quot;inst_186380&quot;        &quot;inst_215293&quot;       
+#&gt; [43] &quot;inst_201885&quot;        &quot;inst_181464&quot;        &quot;inst_139959&quot;       
+#&gt; [46] &quot;inst_218663&quot;        &quot;inst_100751&quot;        &quot;inst_199193&quot;       
+#&gt; [49] &quot;inst_110635&quot;        &quot;inst_110653&quot;        &quot;inst_126614&quot;       
+#&gt; [52] &quot;inst_155317&quot;        &quot;inst_106397&quot;        &quot;inst_149222&quot;       
+#&gt; [55] &quot;inst_166629&quot;
+
+table(df_school_all$total_visits)
+#&gt; 
+#&gt;     0     1     2     3     4     5     6     7     8     9    10    11    12 
+#&gt; 15405  2718  1324   671   395   263   152   107    89    57    31    25    19 
+#&gt;    13    14    15    16    17    18    19    20    21    22    23    26 
+#&gt;    16     8     7     3     1     2     1     1     1     1     3     1</code></pre>
 </div>
-<div id="step-2-investigating-objects" class="section level1">
-<h1>Step 2: Investigating objects</h1>
+<div id="step-3-investigating-objects" class="section level1">
+<h1>Step 3: Investigating objects</h1>
 <ol style="list-style-type: decimal">
 <li>Answer the following questions about the object
 <code>df_school_all</code> by running the appropriate R commands within
@@ -437,7 +457,7 @@ does this specific value of length refer to?
 <ul>
 <li><strong>YOUR ANSWER HERE</strong></li>
 </ul></li>
-<li>how many “rows” are in the object <code>df_school_all</code>? what
+<li>How many “rows” are in the object <code>df_school_all</code>? what
 does each row represent?
 <ul>
 <li><strong>YOUR ANSWER HERE</strong></li>
@@ -456,69 +476,56 @@ typeof(df_school_all)
 describe the contents of <code>df_school_all</code> and then answer the
 following questions in text above the code chunk.
 <ul>
-<li><p>What does each element of the object <code>df_school_all</code>
-represent? (hint Lecture 1.2)</p></li>
-<li><p>Are the individual elements within <code>df_school_all</code>
-lists or vectors?</p></li>
-<li><p>Are the individual elements within <code>df_school_all</code>
-named or un-named? what do these element names refer to? (hint use
-<code>names()</code>)</p></li>
+<li>What does each element of the object <code>df_school_all</code>
+represent?
+<ul>
+<li><strong>YOUR ANSWER HERE</strong></li>
+</ul></li>
+<li>Are the individual elements within <code>df_school_all</code> lists
+or vectors?
+<ul>
+<li><strong>YOUR ANSWER HERE</strong></li>
+</ul></li>
+<li>Are the individual elements within <code>df_school_all</code> named
+or un-named? what do these element names refer to? (hint use
+<code>names()</code>)
+<ul>
+<li><strong>YOUR ANSWER HERE</strong></li>
+</ul></li>
 </ul></li>
 </ol>
 <ol start="3" style="list-style-type: decimal">
-<li><p>These questions refer to the variable <code>school_type</code>
+<li>These questions refer to the variable <code>school_type</code>
 within the object <code>df_school_all</code>. Run the appropriate R
 commands in the chunk below and write substantive responses below each
-question.</p>
+question.
 <ul>
-<li><p>What is the data “type” of <code>school_type</code>?</p>
-<pre><code>- __ANSWER__:</code></pre></li>
-<li><p>What is the “length” of <code>school_type</code>? What does this
-specific value of length refer to?</p>
-<pre><code>- __ANSWER__:</code></pre></li>
+<li>What is the data “type” of <code>school_type</code>?
+<ul>
+<li><strong>YOUR ANSWER HERE</strong></li>
 </ul></li>
-<li><p>In these questions, apply the <code>table()</code> function to
-the variable <code>school_type</code> within the object
-<code>df_school_all</code>. Run the appropriate R code within the chunk
-below and write substantive responses below each question.</p>
+<li>What is the “length” of <code>school_type</code>? What does this
+specific value of length refer to?
 <ul>
-<li><p>In your own words, what does the <code>table()</code> function
-do?</p></li>
-<li><p>What does the <code>useNA</code> argument of the
-<code>table()</code> function control?</p></li>
-<li><p>What is the default value of the <code>useNA</code> argument and
-what does this default value mean?</p></li>
-<li><p>What happens when you assign the value <code>&quot;ifany&quot;</code> to
-the <code>useNA</code> argument?</p></li>
-<li><p>What happens when you assign the value <code>&quot;always&quot;</code> to
-the <code>useNA</code> argument?</p></li>
-<li><p>In the below R code chunk, use the <code>table()</code> function
-to count the number of observations for each value
-<code>school_type</code> three different ways:</p>
-<ul>
-<li>First, without specifying any value for <code>useNA</code></li>
-<li>Second, by assigning the value <code>&quot;ifany&quot;</code> to the
-<code>useNA</code> argument</li>
-<li>Third, by assigning the value <code>&quot;always&quot;</code> to the
-<code>useNA</code> argument</li>
+<li><strong>YOUR ANSWER HERE</strong></li>
 </ul></li>
 </ul></li>
 </ol>
 </div>
-<div id="step-3-filter-select-arrange-questions" class="section level1">
-<h1>Step 3: Filter, select, arrange questions</h1>
+<div id="step-4-filter-select-arrange-questions" class="section level1">
+<h1>Step 4: Filter, select, arrange questions</h1>
 <p>The data frame <code>df_school_all</code> has one observation for
 each high school (public and private).</p>
 <ul>
-<li><p>The variables that begin with <code>visits_by_...</code> identify
+<li>The variables that begin with <code>visits_by_...</code> identify
 how many off-campus recruiting visits the high school received from a
 particular public university. For example, UC Berkeley has the ID
 <code>110635</code> so the variable <code>visits_by_110635</code>
 identifies how many visits the high school received from UC
-Berkeley.</p></li>
-<li><p>The variable <code>total_visits</code> identifies the number of
+Berkeley.</li>
+<li>The variable <code>total_visits</code> identifies the number of
 visits the high school received from all (16) public research
-universities in this data collection sample.</p></li>
+universities in this data collection sample.</li>
 </ul>
 <p>For the questions below, imagine that you have been asked by a major
 news outlet to identify which high schools receive the most total number
@@ -529,9 +536,9 @@ you can answer in several steps (e.g., first create new data frame, then
 print selected variables)</li>
 <li>For questions that ask you to print the “top 10” observations, you
 can simply print the object and rely on the fact that the default option
-[for “tibble” data frames] is to print 10 observations OR you can wrap
-the command in the <code>head()</code> function and explicitly tell R to
-print 10 observations</li>
+is to print 10 observations OR you can wrap the command in the
+<code>head()</code> function and explicitly tell R to print 10
+observations</li>
 <li>Before conducting analyses, we’ll rename the variable
 <code>avgmedian_inc_2564</code> to give it a shorter name.</li>
 </ul>
@@ -542,41 +549,40 @@ print 10 observations</li>
 <li><p>The news outlet is interested in comparing the in-state and
 out-of-state high school visits for <a href="https://nces.ed.gov/globallocator/col_info_popup.asp?ID=100751">The
 University of Alabama</a> (IPEDS ID = 100751) variable
-<code>visits_by_100751</code>. Count the number of in-state public high
-schools that received at least one vist from The University of
-Alabama.</p>
+<code>visits_by_100751</code>. Compare the number of in-state public
+high schools to the number that received at least one visit from The
+University of Alabama.__</p>
 <ul>
 <li>Note: You will need to use <code>filter</code> and the
-<code>count</code> function<br />
-</li>
-<li>Use commas to separate varibles for this questions
+<code>count</code> function. The associated variables needed to filter
+by: <code>state_code</code>, <code>school_type</code>, and
+<code>visits_by_100751</code></li>
+<li>Use commas to separate variables for this questions
 (e.g. filter(dataframe, variable == something, variable ==
 something))</li>
 <li>You can do this in one step by wrapping the <code>count</code>
 function around the <code>filter</code> function ; or you can do this in
 two steps by creating a new data frame first</li>
 </ul></li>
-<li><p>How many public in-state high schools visited by The University
-of Alabama enroll at least 50% Latinx students <strong>or</strong> 50%
-Black students?</p>
+</ol>
+<ol start="3" style="list-style-type: decimal">
+<li>How many public in-state high schools visited by The University of
+Alabama enroll at least 50% Latinx students <strong>or</strong> 50%
+Black students?
 <ul>
 <li>hint: use the variables <code>pct_hispanic</code> and
 <code>pct_black</code>.</li>
 </ul></li>
-<li><p>Now count the out-of-state public high schools that received at
+<li>Now count the out-of-state public high schools that received at
 least one visit by the university of Alabama without using commas to
-seprate conditions in your filter.</p>
+separate conditions in your filter.
 <ul>
 <li>hint: <code>&amp;</code> or <code>%in%</code></li>
 </ul></li>
-<li><p>How many public out-of-state high schools visited by The
-University of Alabama enroll at least 50% Latinx students
-<strong>or</strong> 50% Black students?</p></li>
 </ol>
-<p>Once finished, knit to (HTML) and upload both .Rmd and HTML files to
-ps_submit_2 on Piazza</p>
+<p>Once finished, knit to (HTML) and upload both .Rmd and HTML files</p>
 <p><em>Remember to use this naming convention
-“lastname_firstname_ps2”</em></p>
+“lastname_module2_ps”</em></p>
 </div>
 
 
