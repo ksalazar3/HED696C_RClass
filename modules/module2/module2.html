@@ -1525,6 +1525,19 @@ tidyverse</h3>
 
 <div id="introduction" class="section level1" number="1">
 <h1><span class="header-section-number">1</span> Introduction</h1>
+<div id="as-you-wait-for-class-to-begin" class="section level3 unnumbered">
+<h3 class="unnumbered">As you wait for class to begin…</h3>
+<ul>
+<li>Download the module2 Rmd and R script lecture files from the class
+website <a href="https://ksalazar3.github.io/HED696C_RClass/">https://ksalazar3.github.io/HED696C_RClass/</a></li>
+<li>Move the files to “HED696C_RClass/modules/module2”</li>
+<li>Open RStudio via the <code>HED696C_Rclass.rproj</code></li>
+<li>Once in R Studio go to File &gt; Open File &gt; navigate to and open
+the module2.Rmd</li>
+<li>Try knitting the module1.Rmd file (it will open an HTML
+document)</li>
+</ul>
+</div>
 <div id="what-we-will-do-today" class="section level3 unnumbered">
 <h3 class="unnumbered">What we will do today…</h3>
 <ul>
@@ -1892,84 +1905,6 @@ file</li>
 <li>over time, help files will feel less cryptic and will start to feel
 helpful</li>
 </ul>
-<!-- ### Function arguments, the dot-dot-dot (`...`) argument -->
-<!-- \medskip On help file for many functions, you will see an argument called `...`, referred to as the "dot-dot-dot" argument -->
-<!-- ```{r, eval=FALSE} -->
-<!-- ?sum -->
-<!-- ?seq -->
-<!-- ``` -->
-<!-- "Dot-dot-dot" arguments have several uses. What you should know for now: -->
-<!-- - `...` refers to arguments that are "un-named"; but user can specify values -->
-<!--     - e.g., default syntax for `sum()`: `sum(..., na.rm = FALSE)` -->
-<!--         - argument `na.rm` is "named" (name is `na.rm`); argument `...` un-named -->
-<!-- - `...` used to allow a function to take an arbitrary number of arguments: -->
-<!-- ```{r} -->
-<!-- sum(c(10,5,NA),na.rm=TRUE) -->
-<!-- #Here the sum function takes 3 un-named arguments -->
-<!-- sum(10,5,NA,na.rm=TRUE) -->
-<!-- #Here the sum function takes 5 un-named arguments -->
-<!-- sum(10,5,10,20,NA,na.rm=TRUE) -->
-<!-- ``` -->
-<!-- ## Directories and filepaths  -->
-<!-- ### Working directory -->
-<!-- __(Current) Working directory__ -->
-<!-- - the folder/directory in which you are currently working -->
-<!-- - this is where R looks for files -->
-<!-- - Files located in your current working directory can be accessed without specifying a filepath because R automatically looks in this folder -->
-<!-- Function `getwd()` shows current working directory -->
-<!-- ```{r} -->
-<!-- getwd() -->
-<!-- ``` -->
-<!-- Command `list.files()` lists all files located in working directory -->
-<!-- ```{r} -->
-<!-- getwd() -->
-<!-- list.files() -->
-<!-- ``` -->
-<!-- ### Working directory, "Code chunks" vs. "console" and "R scripts" -->
-<!-- When you run __code chunks__ in RMarkdown files (.Rmd), the working directory is set to the filepath where the .Rmd file is stored -->
-<!-- ```{r} -->
-<!-- getwd() -->
-<!-- list.files() -->
-<!-- ``` -->
-<!-- When you run code from the __R Console__ or an __R Script__, the working directory is.... -->
-<!-- Command `getwd()` shows current working directory -->
-<!-- ```{r} -->
-<!-- getwd() -->
-<!-- ``` -->
-<!-- ### Absolute vs. relative filepath   -->
-<!-- **Absolute file path**:  The absolute file path is the complete list of directories needed to locate a file or folder.   -->
-<!-- `setwd("/Users/pm/Desktop/rclass/lectures/lecture2")` -->
-<!-- **Relative file path**:  The relative file path is the path relative to your current location/directory. Assuming your current working directory is in the "lecture2" folder and you want to change your directory to the data folder, your relative file path would look something like this:   -->
-<!-- `setwd("../../data")`   -->
-<!--             File path shortcuts -->
-<!-- | **Key** | **Description** | -->
-<!-- | ------ | -------- | -->
-<!-- | ~    | tilde is a shortcut for user's home directory (mine is my name pm)   | -->
-<!-- | ../    | moves up a level   | -->
-<!-- | ../../    | moves up two level   | -->
-<!-- ### Exercise   -->
-<!-- 1. Let's create a folder on our desktop and name it red   -->
-<!-- 2. Inside the red folder, create two subfolders named orange and yellow   -->
-<!-- 3. Inside the yellow folder create another subfolder named green   -->
-<!-- Make sure to name these folders in lowercase.   -->
-<!-- You should have 1 folder on your desktop called red. Inside the red folder you have two folders called orange and yellow. Inside the yellow folder you have a folder called green.   -->
-<!-- Here is a visual of how it should look...   -->
-<!-- ### File path visual   -->
-<!-- ![](fp1.JPG) -->
-<!-- ![](fp2.JPG)   -->
-<!-- ### Exercise continued   -->
-<!-- Let's say we want to get to the green folder using the absolute file path.   -->
-<!-- 1. View your current working directory `getwd()`   -->
-<!-- 2. Set your working directory to the green folder using the absolute file path   -->
-<!-- 3. Now set your working directory to the orange folder using the relative file path  (hint: ../)   -->
-<!-- ### Solution -->
-<!-- ```{r, eval=FALSE} -->
-<!-- getwd() -->
-<!-- setwd("~/Desktop/red/yellow/green") -->
-<!-- getwd()  -->
-<!-- setwd("../../orange") -->
-<!-- getwd() -->
-<!-- ``` -->
 </div>
 </div>
 </div>
@@ -2018,15 +1953,15 @@ list.files()
 #&gt;  [5] &quot;lecture2_ucla.Rmd&quot;              &quot;lecture2.1_ucla.pdf&quot;           
 #&gt;  [7] &quot;lecture2.1_ucla.Rmd&quot;            &quot;lecture2.html&quot;                 
 #&gt;  [9] &quot;lecture2.md&quot;                    &quot;lecture2.pdf&quot;                  
-#&gt; [11] &quot;lecture2.tex&quot;                   &quot;module2.html&quot;                  
-#&gt; [13] &quot;module2.md&quot;                     &quot;module2.R&quot;                     
-#&gt; [15] &quot;module2.Rmd&quot;                    &quot;problemset2_solutions.html&quot;    
-#&gt; [17] &quot;problemset2_solutions.html.zip&quot; &quot;problemset2_solutions.Rmd&quot;     
-#&gt; [19] &quot;problemset2_ua.html&quot;            &quot;problemset2_ua.Rmd&quot;            
-#&gt; [21] &quot;problemset2.html&quot;               &quot;problemset2.Rmd&quot;               
-#&gt; [23] &quot;sample_simple_rmarkdown.txt&quot;    &quot;sample.html&quot;                   
-#&gt; [25] &quot;sample.Rmd&quot;                     &quot;text&quot;                          
-#&gt; [27] &quot;transform-logical.png&quot;</code></pre>
+#&gt; [11] &quot;lecture2.tex&quot;                   &quot;module2_solutions.R&quot;           
+#&gt; [13] &quot;module2.html&quot;                   &quot;module2.md&quot;                    
+#&gt; [15] &quot;module2.R&quot;                      &quot;module2.Rmd&quot;                   
+#&gt; [17] &quot;problemset2_solutions.html&quot;     &quot;problemset2_solutions.html.zip&quot;
+#&gt; [19] &quot;problemset2_solutions.Rmd&quot;      &quot;problemset2_ua.html&quot;           
+#&gt; [21] &quot;problemset2_ua.Rmd&quot;             &quot;problemset2.html&quot;              
+#&gt; [23] &quot;problemset2.Rmd&quot;                &quot;sample_simple_rmarkdown.txt&quot;   
+#&gt; [25] &quot;sample.html&quot;                    &quot;sample.Rmd&quot;                    
+#&gt; [27] &quot;text&quot;                           &quot;transform-logical.png&quot;</code></pre>
 <p><strong>Objects currently open in your R session</strong></p>
 <p><code>ls()</code> function lists objects currently open in R</p>
 <pre class="r"><code>x &lt;- &quot;hello!&quot;
@@ -2371,32 +2306,12 @@ first 5 rows and 3 columns of data frame</li>
 <li>Use head() to print first 4 observations</li>
 <li>Use <code>obj_name$var_name[1:10]</code> to print the first 10
 observations of the variable <code>name</code></li>
-<li>Use combine() to print the first 3 observations of variables
-“school_type” &amp; “name”</li>
+<li>Use c() to print the first 3 observations of variables “school_type”
+&amp; “name”</li>
 <li>Use <code>table()</code> to print the number of missing observations
 (<code>NA</code>) for the variable <code>school_type</code></li>
 </ol>
 <p><strong>After you’re done, take a 10 min break</strong></p>
-<!-- ### Solution -->
-<!-- 1. Use `obj_name[<rows>,<cols>]` to print the first 5 rows and 3 columns of data frame -->
-<!-- ```{r} -->
-<!-- df_school[1:5,1:3] -->
-<!-- ``` -->
-<!-- ### Solution -->
-<!-- 2. Use head() to print first 4 observations -->
-<!-- ```{r} -->
-<!-- head(df_school, n=4) -->
-<!-- ``` -->
-<!-- ### Solution -->
-<!-- 3. Use `obj_name$var_name[1:10]` to print the first 10 observations of a variable -->
-<!-- ```{r} -->
-<!-- df_school$name[1:10] -->
-<!-- ``` -->
-<!-- ### Solution -->
-<!-- 4. Use combine() to print the first 3 observations of variables "school_type" & "name" -->
-<!-- ```{r} -->
-<!-- c(df_school$school_type[1:3],df_school$name[1:3]) -->
-<!-- ``` -->
 </div>
 </div>
 <div id="investigating-data-patterns-with-tidyverse" class="section level1" number="5">
@@ -2559,13 +2474,6 @@ select(df_event,instnm,starts_with(&quot;event&quot;))
 #&gt; #   ²​event_state, ³​event_inst, ⁴​event_name, ⁵​event_location_name,
 #&gt; #   ⁶​event_datetime_start
 #&gt; # ℹ Use `print(n = ...)` to see more rows</code></pre>
-<!-- ### Exercise -->
-<!-- The data frame `df_school` has one observation for each high school and indicators for whether the high school received a recruiting visit. -->
-<!-- ```{r results="hide"} -->
-<!-- names(df_school) -->
-<!-- ``` -->
-<!-- 1. Use `select()` to familiarize yourself with variables in the data frame -->
-<!-- 1. Practice using the `contains()` and `ends_with()` helper functions to to choose variables -->
 </div>
 <div id="rename-variables" class="section level3 unnumbered">
 <h3 class="unnumbered">Rename variables</h3>
@@ -2853,47 +2761,6 @@ filter values</p>
 #&gt; 1  1100
 #below code would return an error because variables are character
 #count(filter(df_event, event_type == public hs, event_state ==CA))</code></pre>
-<!-- ### Exercises -->
-<!-- Use the data from df_event, which has one observation for each off-campus recruiting event a university attends -->
-<!-- 1. Count the number of events attended by the University of Pittsburgh (Pitt) `univ_id == 215293`   -->
-<!-- 1. Count the number of recruiting events by Pitt at public or private high schools   -->
-<!-- 1. Count the number of recruiting events by Pitt at public or private high schools located in the state of PA   -->
-<!-- 1. Count the number of recruiting events by Pitt at public high schools not located in PA where median income is less than 100,000   -->
-<!-- 1. Count the number of recruiting events by Pitt at public high schools not located in PA where median income is greater than or  equal to 100,000   -->
-<!-- 1. Count the number of out-of-state recruiting events by Pitt at private high schools or public high schools with median income of at least 100,000   -->
-<!-- ### Solution   -->
-<!-- 1. Count the number of events attended by the University of Pittsburgh (Pitt) `univ_id == 215293` -->
-<!-- ```{r} -->
-<!-- count(filter(df_event, univ_id == 215293)) -->
-<!-- ``` -->
-<!-- 2. Count the number of recruiting events by Pitt at public or private high schools  -->
-<!-- ```{r } -->
-<!-- count(filter(df_event, univ_id == 215293, event_type == "private hs" | -->
-<!--                event_type == "public hs")) -->
-<!-- ``` -->
-<!-- ### Solution -->
-<!-- 3. Count the number of recruiting events by Pitt at public or private high schools located in the state of PA -->
-<!-- ```{r} -->
-<!-- count(filter(df_event, univ_id == 215293, event_type == "private hs" | -->
-<!--                event_type == "public hs", event_state == "PA")) -->
-<!-- ``` -->
-<!-- 4. Count the number of recruiting events by Pitt at public high schools not located in PA where median income is less than 100,000 -->
-<!-- ```{r} -->
-<!-- count(filter(df_event, univ_id == 215293, event_type == "public hs", -->
-<!--              event_state != "PA", med_inc < 100000)) -->
-<!-- ``` -->
-<!-- ### Solution -->
-<!-- 5. Count the number of recruiting events by Pitt at public high schools not located in PA where median income is greater than or  equal to 100,000 -->
-<!-- ```{r} -->
-<!-- count(filter(df_event, univ_id == 215293, event_type == "public hs", -->
-<!--              event_state != "PA", med_inc >= 100000)) -->
-<!-- ``` -->
-<!-- 6. Count the number of out-of-state recruiting events by Pitt at private high schools or public high schools with median income of at least 100,000 -->
-<!-- ```{r} -->
-<!-- count(filter(df_event, univ_id == 215293, event_state != "PA",  -->
-<!--              (event_type == "public hs" & med_inc >= 100000) | -->
-<!--                event_type == "private hs")) -->
-<!-- ``` -->
 </div>
 <div id="filtering-and-missing-values" class="section level3 unnumbered">
 <h3 class="unnumbered">Filtering and missing values</h3>
@@ -2994,28 +2861,6 @@ select(arrange(df_event, univ_id, desc(event_date), desc(school_id)),
 #&gt; 10 Bama   2017-12-13 public hs  063386005296
 #&gt; # … with 18,670 more rows
 #&gt; # ℹ Use `print(n = ...)` to see more rows</code></pre>
-<!-- ### Exercise, arranging   -->
-<!-- Use the data from df_event, which has one observation for each off-campus recruiting event a university attends -->
-<!-- 1. Sort ascending by "univ_id" and descending by "event_date"   -->
-<!-- 1. Select four variables in total and sort ascending by "univ_id" and descending by "event_date"   -->
-<!-- 1. Now using the same variables from above, sort by `is.na` to put missing values in "school_id" first   -->
-<!-- ### Solution  -->
-<!-- 1. Sort ascending by "univ_id" and descending by "event_date"   -->
-<!-- ```{r} -->
-<!-- arrange(df_event, univ_id, desc(event_date)) -->
-<!-- ``` -->
-<!-- ### Solution -->
-<!-- 2. Select four variables in total and sort ascending by "univ_id" and descending by "event_date"   -->
-<!-- ```{r} -->
-<!-- select(arrange(df_event, univ_id, desc(event_date)), univ_id, event_date,  -->
-<!--        instnm, event_type) -->
-<!-- ``` -->
-<!-- ### Solution -->
-<!-- 3. Select the variables "univ_id", "event_date", and "school_id" and sort  by `is.na` to put missing values in "school_id" first.  -->
-<!-- ```{r} -->
-<!-- select(arrange(df_event, univ_id, desc(event_date), desc(is.na(school_id))),  -->
-<!--        univ_id, event_date, school_id) -->
-<!-- ``` -->
 </div>
 </div>
 <div id="student-exercise-1" class="section level2 unnumbered">
@@ -3026,9 +2871,9 @@ frame</p>
 <li>Use <code>select</code> to create (you must use the assignment
 operator) a new object called <code>df_school_v2</code> that only
 includes the following variables from <code>df_school</code>:
-<code>ncessch</code>, <code>school_type</code>,
-<code>school_name</code>, <code>pct_white</code>,
-<code>avgmedian_inc_2564</code>, and <code>visits_by_110635</code></li>
+<code>ncessch</code>, <code>school_type</code>, <code>name</code>,
+<code>pct_white</code>, <code>avgmedian_inc_2564</code>, and
+<code>visits_by_110635</code></li>
 <li>Use <code>filter</code> to create (you must use the assignment
 operator) a new object called <code>df_school_berkeley</code> that only
 includes public high schools (hint: <code>school_type</code>) visited
@@ -3039,9 +2884,32 @@ operator) the object called <code>df_school_berkeley</code> in a
 descending order for the percent of enrolled students that identify as
 White (hint:<code>pct_white</code>)</li>
 <li>Use <code>head</code> to print the top 5 public high schools visited
-by UC Berkeley with the largers percent of enrolled students that
+by UC Berkeley with the largest percent of enrolled students that
 identify as White</li>
 </ol>
+<div id="next-class-session" class="section level3 unnumbered">
+<h3 class="unnumbered">Next Class Session</h3>
+<ul>
+<li>Module 2 Problem Set due on 9/19/2022
+<ul>
+<li>Rmd file is on course website; you’ll need to download it and move
+it to the “HED696C_RClass/problemsets/module2” folder</li>
+<li>Knit the file to HTML before you begin!</li>
+</ul></li>
+<li>Reading for 9/19/2022
+<ul>
+<li><a href="https://adv-r.hadley.nz/">Wickham, Advanced R</a>
+<ul>
+<li>Sections 4.1-4.4</li>
+</ul></li>
+<li><a href="https://arizona-primo.hosted.exlibrisgroup.com/permalink/f/1h28lag/TN_cdi_safari_books_v2_9780134288819">Teach
+youself R in 24 Hours</a>
+<ul>
+<li>Hour 11, section on “Sorting” [about 3 pages]</li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
 </div>
 </div>
 
