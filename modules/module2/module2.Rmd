@@ -582,9 +582,9 @@ use `is.na()` function to determine if a value is missing
 - `is.na()` returns a logical vector
 ```{r}
 is.na(5)
-is.na(NA)
+is.na(NA) 
 is.na("NA")
-typeof(is.na("NA")) # example of a logical vector
+typeof(is.na(NA)) # example of a logical vector
 
 nvector <- c(10,5,NA)
 is.na(nvector)

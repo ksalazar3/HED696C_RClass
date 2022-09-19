@@ -1,0 +1,170 @@
+---
+title: "Module 2 Problem Set"
+author: "INSERT YOUR NAME HERE"
+date: "INSERY DATE HERE"
+output: 
+  html_document:
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    number_sections: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", highlight = TRUE)
+  #comment = "#>" makes it so results from a code chunk start with "#>"; default is "##"
+```
+
+In this problem set, you will investigate objects and data patterns. 
+
+# Step 1: Make changes to YAML header
+
+Recommend reading R Markdown: The Definitive Guide section 3.1 ([LINK HERE](https://bookdown.org/yihui/rmarkdown/html-document.html)) before answering these questions
+
+1. Add a table of contents to YAML header
+1. table of contents should have "depth" of 2
+1. table of contents should "float"
+1. add section numbering to headers
+
+# Step 2: Load Tidyverse and Data
+
+Load tidyverse package [code already provided]
+```{r}
+library(tidyverse)
+```
+
+Load data frame object `df_school_all`; it is similar to the dataframe `df_school` used in lecture but has more varibles
+
+- Use `names()` to see all the variables contained within `df_school_all` [code already provided]
+- Use `table()` to tabulate the total number of visits each school received [code already provided]
+```{r}
+rm(list = ls()) # remove all objects before loading new dataset
+getwd()
+
+load(url("https://github.com/ksalazar3/HED696C_RClass/raw/master/data/recruiting/recruit_school_allvars.RData"))
+#glimpse(df_school_all)
+
+names(df_school_all)
+
+table(df_school_all$total_visits)
+```
+
+
+# Step 3: Investigating objects
+
+1. Answer the following questions about the object `df_school_all` by running the appropriate R commands within the code chunk and writing any substantive response required next to the question. The code and substantive response for the first question will be answered for you as an example.
+    + What "type" of object is `df_school_all`?
+        + __ANSWER [FREEBIE]: the object df_school_all is a list type__
+    + What is the "length" of the object `df_school_all`? What does this specific value of length refer to? 
+        + __ANSWER: the length of object `df_school_all` is `r length(df_school_all)`. This value refers to the number of variables__ 
+    + How many "rows" are in the object `df_school_all`? what does each row represent?  
+        + __ANSWER: the object `df_school_all` has `r nrow(df_school_all)` rows. Each row represents a high school__ 
+        
+        
+```{r}
+#type of df_school_all 
+typeof(df_school_all)
+
+#length of df_school_all 
+length(df_school_all)
+
+#num of rows in df_school_all
+nrow(df_school_all)
+```
+        
+        
+\newline  
+
+2. In the below code chunk, use the `str()` function to describe the contents of `df_school_all` and then answer the following questions in text above the code chunk.  
+    + What does each element of the object `df_school_all` represent?  
+        + __ANSWER: a variable__ 
+    
+    + Are the individual elements within `df_school_all` lists or vectors?  
+        + __ANSWER: vectors__ 
+    
+    + Are the individual elements within `df_school_all` named or un-named? what do these element names refer to?  (hint use `names()`)
+        + __ANSWER: the individual elements are named; the name of each element refers to a variable name__ 
+    
+    
+```{r}
+
+str(df_school_all)
+
+```
+
+\newline
+
+
+3. These questions refer to the variable `school_type` within the object `df_school_all`. Run the appropriate R commands in the chunk below and write substantive responses below each question.
+    +  What is the data "type" of `school_type`?
+        + __ANSWER: The variable `school_type` has data type equal to `r typeof(df_school_all$school_type)`__ 
+  
+    + What is the "length" of `school_type`? What does this specific value of length refer to?
+        + __ANSWER: The length of `school_type` is `r length(df_school_all$school_type)`. This value refers to the number of rows (or observations)__ 
+    
+
+          
+```{r}
+
+typeof(df_school_all$school_type)
+
+length(df_school_all$school_type)
+
+```
+
+
+
+# Step 4: Filter, select, arrange questions
+
+The data frame `df_school_all` has one observation for each high school (public and private). 
+
+  - The variables that begin with `visits_by_...` identify how many off-campus recruiting visits the high school received from a particular public university. For example, UC Berkeley has the ID `110635` so the variable `visits_by_110635` identifies how many visits the high school received from UC Berkeley. 
+  - The variable `total_visits` identifies the number of visits the high school received from all (16) public research universities in this data collection sample.
+
+\newline
+
+For the questions below, imagine that you have been asked by a major news outlet to identify which high schools receive the most total number of off-campus recruiting visits from public universities.
+
+- For all questions below, you can answer using one line of code or you can answer in several steps (e.g., first create new data frame, then print selected variables)
+- For questions that ask you to print the "top 10" observations, you can simply print the object and rely on the fact that the default option is to print 10 observations OR you can wrap the command in the `head()` function and explicitly tell R to print 10 observations
+- Before conducting analyses, we'll rename the variable `avgmedian_inc_2564` to give it a shorter name.
+
+
+1. Rename the variable `avgmedian_inc_2564` to `med_inc` and assign new variable name to the existing object `df_school_all`
+```{r}
+
+```
+
+
+2. The news outlet is interested in comparing the in-state and out-of-state high school visits for [The University of Alabama](https://nces.ed.gov/globallocator/col_info_popup.asp?ID=100751) (IPEDS ID = 100751) variable `visits_by_100751`. Compare the number of in-state public high schools to the number that received at least one visit from The University of Alabama.__      
+    - Note: You will need to use `filter` and the `count` function. The associated variables needed to filter by: `state_code`, `school_type`, and  `visits_by_100751`
+    - Use commas to separate variables for this questions (e.g. filter(dataframe, variable == something, variable == something))
+    - You can do this in one step by wrapping the `count` function around the `filter` function ; or you can do this in two steps by creating a new data frame first  
+```{r}
+
+```
+
+\newline
+
+3. How many public in-state high schools visited by The University of Alabama enroll at least 50% Latinx students **or** 50% Black students? 
+    - hint: use the variables `pct_hispanic` and `pct_black`.
+```{r}
+
+```
+
+
+4. Now count the out-of-state public high schools that received at least one visit by the university of Alabama without using commas to separate conditions in your filter.  
+    - hint: `&` or `%in%`
+```{r}
+
+```
+
+
+Once finished, knit to (HTML) and upload both .Rmd and HTML files
+
+*Remember to use this naming convention "lastname_module2_ps"*
+

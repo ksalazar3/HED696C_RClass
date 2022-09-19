@@ -1,0 +1,663 @@
+---
+title: "Module 3: Investigating objects via Base R" # potentially push to header
+subtitle:  "Managing and Manipulating Data Using R"
+author:  
+date: 
+classoption: dvipsnames  # for colors
+fontsize: 8pt
+urlcolor: blue
+output:
+  beamer_presentation:
+    keep_tex: true
+    toc: false
+    slide_level: 3
+    theme: default # AnnArbor # push to header?
+    #colortheme: "dolphin" # push to header?
+    #fonttheme: "structurebold"
+    highlight: tango # Supported styles include "default", "tango", "pygments", "kate", "monochrome", "espresso", "zenburn", and "haddock" (specify null to prevent syntax highlighting); push to header
+    df_print: tibble #default # tibble # push to header?    
+    latex_engine: xelatex #  Available engines are pdflatex [default], xelatex, and lualatex; The main reasons you may want to use xelatex or lualatex are: (1) They support Unicode better; (2) It is easier to make use of system fonts.
+    includes:
+      in_header: ../beamer_header.tex
+      #after_body: table-of-contents.txt 
+---
+
+```{r, echo=FALSE, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", highlight = TRUE)
+#knitr::opts_chunk$set(collapse = TRUE, comment = "#>", highlight = TRUE)
+  #comment = "#>" makes it so results from a code chunk start with "#>"; default is "##"
+```
+
+```{r, echo=FALSE, include=FALSE}
+#DO NOT WORRY ABOUT THIS
+if(!file.exists('transform-logical.png')){
+  download.file(url = 'https://raw.githubusercontent.com/ozanj/rclass/master/lectures/lecture2/transform-logical.png', 
+                destfile = 'transform-logical.png',
+                mode = 'wb')
+}
+```
+
+
+```{r echo=FALSE}
+#DO NOT WORRY ABOUT THIS
+if(!file.exists("fp1.JPG")) {
+  download.file(url ="https://github.com/ozanj/rclass/raw/master/lectures/lecture2/fp1.JPG",
+                destfile = 'fp1.JPG',
+                mode = 'wb')
+}
+```
+
+```{r echo=FALSE}
+#DO NOT WORRY ABOUT THIS
+if(!file.exists("fp2.JPG")) {
+  download.file(url ="https://github.com/ozanj/rclass/raw/master/lectures/lecture2/fp2.JPG",
+                destfile = 'fp2.JPG',
+                mode = 'wb')
+}
+# Introduction
+```
+
+# Logistics
+
+### Download Module 3 Rmd and knit!
+
+- From the class website, download themodule3.Rmd and module3.R files; move the files from the downloads folder to you `HED696C_Rclass/Modules/Module3` subfolder
+- Open R Studio via `HED696C_Rclass.rproj` 
+- Once in R Studio, go to File >> Open File...>> Navigate to and click on `Module3.Rmd`
+-  Try to knit `Module3.Rmd` to pdf 
+
+### What we will do today
+
+\tableofcontents
+```{r, eval=FALSE, echo=FALSE}
+#Use this if you want TOC to show level 2 headings
+\tableofcontents
+#Use this if you don't want TOC to show level 2 headings
+\tableofcontents[subsectionstyle=hide/hide/hide]
+```
+
+
+### Tips for R Success: Cumulative Learning...
+
+- The tasks we will be working on in class and in assignments going forward will require you to use skills/functions you have learned over the past several weeks (not only material from the current module/week)
+- Working with new data and new variables... 
+- Investigate the object!
+  - `length()`
+  - `typeof()`
+  - `str()`
+  - `names()`
+  - `nrow()`
+  - `ncol()`
+  - `count()`
+- Check for missing observations
+  - `table(, useNA="always")`
+  - `is.na()`
+  - `count(is.na())`
+- Print!
+  - `View()`
+  - `head()`
+
+### Libraries we will use today
+
+"Load" the package we will use today (output omitted)
+```{r, message=FALSE}
+library(tidyverse)
+```
+If package not yet installed, then must install before you load. Install in "console" rather than .Rmd file
+
+- Generic syntax: `install.packages("package_name")`
+- Install "tidyverse": `install.packages("tidyverse")`
+
+Note: when we load package, name of package is not in quotes; but when we install package, name of package is in quotes:
+
+- `install.packages("tidyverse")`
+- `library(tidyverse)`
+
+
+### Load .Rdata data frames we will use today
+
+Data on off-campus recruiting events by public universities
+
+- Data frame object `df_event`
+    - One observation per university, recruiting event
+- Data frame object `df_school`
+    - One observation per high school (visited and non-visited)
+
+```{r}
+rm(list = ls()) # remove all objects in current environment
+
+getwd()
+#load dataset with one obs per recruiting event
+load(url("https://github.com/ksalazar3/HED696C_RClass/raw/master/data/recruiting/recruit_event_somevars.RData"))
+
+#load dataset with one obs per high school
+load(url("https://github.com/ksalazar3/HED696C_RClass/raw/master/data/recruiting/recruit_school_somevars.RData"))
+
+```
+
+
+# Investigating data patterns via Tidyverse [some more practice]
+
+
+
+### Introduction to the `dplyr` library
+
+`dplyr`, a package within the `tidyverse` suite of packages, provide tools for manipulating data frames
+
+- Wickham describes functions within `dplyr` as a set of "verbs" that fall in the broader categories of __subsetting__, __sorting__, and __transforming__
+
+Today | Upcoming weeks
+------------- | -------------
+__Subsetting data__ | __Transforming data__
+- `select()` variables  | - `mutate()` creates new variables
+- `filter()` observations | - `summarize()` calculates across rows
+__Sorting data__ | - `group_by()` to calculate across rows within groups
+- `arrange()` | 
+
+All `dplyr` verbs (i.e., functions) work as follows
+
+1. first argument is a data frame
+1. subsequent arguments describe what to do with variables and observations in data frame
+    - refer to variable names without quotes
+1. result of the function is a new data frame
+
+
+
+### Logical operators for comparisons
+
+Symbol | Meaning
+-------|-------
+`==` | Equal to
+`!=` | Not equal to
+`>` | greater than
+`>=` | greater than or equal to
+`<` | less than
+`<=` | less than or equal to
+`&` | AND 
+`|` | OR
+`%in` | includes
+
+\medskip 
+
+!["Boolean" operations, x=left circle, y=right circle, from Wichkam (2018)](transform-logical.png){width=50%}
+
+
+### Some More Practice with Tidyverse
+
+
+Use the data from `df_event`, which has one observation for each off-campus recruiting event a university attends
+
+1. Investigate the dataframe `df_event`, including printing variable names (you'll need these to answer the rest of the questions)
+1. Count the number of events attended by the University of Pittsburgh (Pitt). Universities have unique ID numbers contained in the variable `univ_id.` Pitt's unique ID is 215293.   
+1. Count the number of recruiting events by Pitt at public or private high schools  
+1. Count the number of recruiting events by Pitt at public or private high schools located in the state of PA  
+1. Count the number of recruiting events by Pitt at public high schools not located in PA where median income is less than 100,000  
+1. Count the number of recruiting events by Pitt at public high schools not located in PA where median income is greater than or  equal to 100,000  
+1. Count the number of out-of-state recruiting events by Pitt at private high schools or public high schools with median income of at least 100,000  
+
+
+### Solution 
+
+1. Investigate the dataframe `df_event`, including printing variable names (you'll need these to answer the rest of the questions)
+
+```{r}
+typeof(df_event)
+str(df_event)
+
+nrow(df_event)
+ncol(df_event)
+
+names(df_event)
+```
+
+
+### Solution  
+2. Count the number of events attended by the University of Pittsburgh (Pitt) `univ_id == 215293`
+```{r}
+typeof(df_event$univ_id)
+table(df_event$univ_id, useNA = "always")
+
+count(filter(df_event, univ_id == 215293))
+```
+
+### Solution
+
+3. Count the number of recruiting events by Pitt at public or private high schools 
+```{r }
+str(df_event$event_type)
+typeof(df_event$event_type)
+table(df_event$event_type, useNA = "always")
+
+
+count(filter(df_event, univ_id == 215293, event_type == "private hs" | 
+               event_type == "public hs"))
+```
+
+### Solution
+4. Count the number of recruiting events by Pitt at public or private high schools located in the state of PA
+```{r}
+str(df_event$event_state)
+typeof(df_event$event_state)
+table(df_event$event_state, useNA = "always")
+
+count(filter(df_event, univ_id == 215293, event_type == "private hs" |
+               event_type == "public hs", event_state == "PA"))
+```
+
+
+### Solution
+
+5. Count the number of recruiting events by Pitt at public high schools not located in PA where median income is less than 100,000
+```{r}
+str(df_event$med_inc)
+typeof(df_event$med_inc)
+
+count(filter(df_event, univ_id == 215293, event_type == "public hs",
+             event_state != "PA", med_inc < 100000))
+```
+
+### Solution
+6. Count the number of recruiting events by Pitt at public high schools not located in PA where median income is greater than or  equal to 100,000
+
+```{r}
+count(filter(df_event, univ_id == 215293, event_type == "public hs",
+             event_state != "PA", med_inc >= 100000))
+```
+
+7. Count the number of out-of-state recruiting events by Pitt at private high schools or public high schools with median income of at least 100,000
+```{r}
+count(filter(df_event, univ_id == 215293, event_state != "PA", 
+             (event_type == "public hs" & med_inc >= 100000) |
+               event_type == "private hs"))
+```
+
+
+# Tidyverse vs. Base R
+
+### Why learn to "wrangle" data both via tidyverse and Base R?
+
+- __Base R__: "core" R commands for cleaning and manipulating data that are not part of any external package/library
+- __Tidyverse__ has become the leading way many people clean and manipulate data in R
+  - These packages make data wrangling simpler than "core" base R commands (most times)
+  - Tidyverse commands can be more more efficient (less lines of code, consolidate steps)
+
+\medskip
+- But you will inevitably run into edge cases where tidyverse commands don't work the way you expect them to and you'll need to use __base R__
+
+
+\medskip
+- It's good to have a basic foundation on both approaches and then decide which you prefer for most data tasks!
+
+  - This class will primarily use tidyverse approach 
+  - Future data science seminar will provide examples of edge cases where base R is necessary
+ 
+
+
+
+# Investigating data patterns using Base R
+
+### Tidyverse  vs. base R  functions
+
+tidyverse | base R | operation
+-------|-------|-------
+`select()` |  `[ ]`+ `c()` __OR__ `subset()` | "extract" variables
+`filter()` | `[ ]`+ `$` __OR__ `subset()` | "extract" observations
+`arrange()` | `order()` | sorting data
+
+
+
+## Subsetting using subsetting operators 
+
+### Subsetting to Extract Elements 
+
+Subsetting is the R word for accessing object elements. 
+
+\medskip
+Subsetting features can be used to select/exclude elements (i.e., variables and observations)
+
+- there are three subsetting operators: `[]`, `$` , `[[]]` 
+- these operators function differently based on vector types (e.g, atomic vectors, lists, data frames)
+
+### Subsetting Atomic Vectors via operators
+
+Six ways to subset an atomic vector using `[]`
+\medskip
+
+1. Using positive integers to return elements at specified positions
+
+```{r}
+x <- c(1.1, 2.2, 3.3, 4.4, 5.5)
+x[c(3, 1)]
+```
+
+2. Using negative integers to exclude elements at specified positions
+```{r}
+x[-c(3,1)] 
+```
+
+3. Using logicals to return elements where corresponding logical is `TRUE`
+```{r}
+x[x>3] #3
+```
+
+### Subsetting Atomic Vectors via operators
+
+Six ways to subset an atomic vector using `[]` continued...
+\medskip
+
+4. Empty `[]` returns original vector (useful for dataframes)
+```{r}
+x[] #4
+```
+5. Zero vector (useful for testing data)
+```{r}
+x[0]
+```
+6. Returning character elements with matching names
+```{r}
+y<- setNames(x, letters[1:5]) #6
+y[c("a", "b", "d" )] #6
+```
+
+
+### Subsetting Lists and Matrices via operators
+
+Subsetting lists (arrays and matrices too) via `[]` operator works the same as subsetting an atomic vector
+
+- `[]` simplifies output to the lowest possible dimensionality (i.e.,if you subset a (2D) matrix it will return a 1D vector with however many elements you subset)
+
+```{r}
+x <- list(1,2,"apple")
+y <- x[c(3, 1)]
+typeof(y)
+
+a <- matrix(1:9, nrow = 3)
+a #this is a 3X3 matrix
+
+b <- a[c(1,5 )]
+b #returns an integer vector with two elements
+```
+
+
+### Subsetting Single Elements from Vectors, Lists, and Matrices via operators
+Two other subsetting operators are used for extracting single elements, since subsetting lists with `[]` returns a smaller list
+
+- `[[]]`, `$` 
+-  `$` is shorthand operator equivalent to `x[["y"]]` and is used to access variables in a dataframe (will show this in upcoming slides)
+
+\medskip
+Example from Hadley: If x is a train carrying objects, then `x[[5]]` is the object in car 5 and `x[4:6]` is a smaller train made up of cars 4, 5, & 6.
+
+```{r}
+x <- list(1:3, "a", 4:6)
+
+y <- x[1] #this returns a list
+typeof(y)
+
+z <- x[[1]] #this is not a list
+typeof(z)
+```
+
+
+### Subsetting Data Frames to extract columns (variables) based on positionality
+
+Selecting columns from a data frame by subsetting with `[]` and a single index based on column positionality 
+```{r}
+df_event[1:4]
+```
+
+### Subsetting Data Frames to extract columns (variables) and rows (observations) based on positionality
+
+Selecting rows and columns from a data frame by subsetting with `[]` and a double index based on row/column positionality 
+```{r}
+#this returns the first 5 rows and first 3 columns
+df_event[1:5, 1:3]
+```
+
+```{r results="hide"}
+#this returns the first 5 rows and all columns [output omitted]
+df_event[1:5, ]
+```
+
+### Subsetting Data Frames to extract columns (variables) based on names
+
+Selecting columns from a data frame by subsetting with `[]` and list of column names 
+```{r}
+df_event[c("instnm", "univ_id", "event_state")] 
+```
+
+### Subsetting Data Frames with [] and $ 
+
+- Show all obs where the high school received 1 visit from UC Berkeley (110635) and all columns [output omitted]
+```{r results="hide"}
+x <- df_school[df_school$visits_by_110635 == 1, ]
+```
+
+- Show all obs where the high school received 1 visit from UC Berkeley (110635) and the first three columns [output omitted]
+```{r results="hide"}
+df_school[df_school$visits_by_110635 == 1, 1:3]
+```
+
+- Show all obs where high schools received 1 visit by Bama (100751) and Berkeley (110635)
+```{r results="hide"}
+df_school[df_school$visits_by_110635 == 1 & df_school$visits_by_100751 == 1, ]
+```
+
+### Subsetting Data Frames with [] and $ 
+
+- Show all public high schools with at least 50% Latinx (hispanic in data) student enrollment 
+
+```{r}
+#public high schools with at least 50% Latinx student enrollment 
+df_CA<- df_school[df_school$school_type == "public" 
+                  & df_school$pct_hispanic >= 50 
+                  & df_school$state_code == "CA", ]
+
+head(df_CA, n=3)
+nrow(df_CA)
+```
+
+
+### Subsetting Data Frames with [] and $, NA Observations
+
+- When extracting observations via subsetting operators, resulting dataframe will include rows where condition is `TRUE`; __as well as__ `NA` values. 
+
+- To remove missing values, ask for values that only evaluate to `TRUE` explicitly via  `which()`
+
+- Task: Show all public high schools with at least $50k median household incomes 
+
+__tidyverse__
+```{r, results="hide"}
+df_tv <- filter(df_event, event_type == "public hs" & med_inc>=50000)
+nrow(df_tv) #9,941 obs
+
+```
+
+__base R without `which()`__
+```{r, results="hide"}
+df_b1 <- df_event[df_event$event_type == "public hs" & df_event$med_inc>=50000, ]
+nrow(df_b1) #10,016 obs
+view(df_b1) #NAs sorted at the end of column
+```
+
+
+__base R with `which()`__
+```{r, results="hide"}
+df_b2 <- df_event[which(df_event$event_type == "public hs" & df_event$med_inc>=50000), ]
+nrow(df_b2) #9,941 obs, same as tidyverse way
+```
+
+
+## Subsetting using the subset function
+
+### Subset function
+
+The `subset()` is a base R function and easiest way to "filter" observations 
+
+- can be combined with `select()` base R function to select variables
+- can be combined with `count()` for quick comparisons or assignment to create new objects
+
+```{r}
+?subset
+```
+
+\medskip
+
+Syntax: __subset(x, subset, select, drop = FALSE)__
+
+- x is object to be subsetted
+- subset is the logical expression(s) indicating elements (rows) to keep
+- select indicates columns to select from data frame (if argument is not used default will keep all columns)
+- drop takes `TRUE` or `FALSE` if you want to preserve the original dimensions (only need to worry about dataframes when your subset output is a single column)
+
+
+### Subset function, examples 
+
+- Show all public high schools that are at least 50% Latinx (hispanic in data) student enrollment in California compared to number of schools that received visit by UC Berkeley
+
+```{r}
+#public high schools with at least 50% Latinx student enrollment 
+count(subset(df_school, school_type == "public" & pct_hispanic >= 50 
+             & state_code == "CA"))
+
+count(subset(df_school, school_type == "public" & pct_hispanic >= 50 
+             & state_code == "CA" & visits_by_110635 >= 1))
+
+```
+
+
+Can also use the %in% operator...
+- Show visits by Bama in multiple states
+```{r}
+count(subset(df_school, visits_by_100751 >= 1 & state_code %in% c("MA","ME","VT")))
+```
+
+
+### Subset function, examples 
+
+- Create new df with all public high schools that are at least 50% Latinx student enrollment in California __AND__ only keep variables `name` and `address` 
+
+```{r}
+#public high schools with at least 50% Latinx student enrollment 
+df_CA2 <- subset(df_school, school_type == "public" & pct_hispanic >= 50 
+             & state_code == "CA", select = c(name, address))
+head(df_CA2)
+nrow(df_CA2)
+```
+
+
+## Sorting data 
+
+### Base R `sort()` for vectors 
+
+
+`sort()` is a base R function that sorts vectors
+
+- Syntax: `sort(x, decreasing=FALSE, ...)`; where x is object being sorted
+- By default it sorts in ascending order (low to high)
+- Need to set decreasing argument to `TRUE` to sort from high to low
+
+```{r}
+?sort()
+x<- c(31, 5, 8, 2, 25)
+sort(x)
+sort(x, decreasing = TRUE)
+```
+
+
+### Base R `order()` for dataframes
+
+`order()` is a base R function that sorts vectors
+
+- Syntax: `order(..., na.last = TRUE, decreasing = FALSE)`
+- where `...` are variable(s) to sort by
+- By default it sorts in ascending order (low to high)
+- Need to set decreasing argument to `TRUE` to sort from high to low
+
+
+Descending argument only works when we want either one (and only) variable descending or all variables descending (when sorting by multiple vars)
+
+- use `-` when you want to indicate which variables are descending while using the default ascending sorting
+```{r results="hide"}
+df_event[order(df_event$event_date), ] 
+df_event[order(df_event$event_date, df_event$total_12), ]
+
+#sort descending via argument
+df_event[order(df_event$event_date, decreasing = TRUE), ] 
+df_event[order(df_event$event_date, df_event$total_12, decreasing = TRUE), ] 
+
+#sorting by both ascending and descending variables
+df_event[order(df_event$event_date, -df_event$total_12), ]
+```
+
+
+# Tidyverse vs base R examples [resource for you]
+
+### Extracting columns (variables)
+
+-Create a new dataframe by extracting the columns `instnm`, `event_date`, `event_type` from df_event. Use the `names()` function to show what columns/variables are in the newly created dataframe.
+
+__tidyverse__
+```{r}
+df_event_tv <- select(df_event, instnm, event_date, event_type)
+names(df_event_tv)
+```
+
+__base R__ using subsetting operators
+```{r}
+df_event_br1 <- df_event[, c("instnm", "event_date", "event_type")]
+names(df_event_br1)
+```
+
+__base R__ using `subset()` function
+```{r}
+df_event_br2 <- subset(df_event, select=c(instnm, event_date, event_type))
+names(df_event_br2)
+```
+
+
+### Extracting observations 
+
+-Create a new dataframe from df_schools that includes out-of-state public high schools with 50%+ Latinx student enrollment that received at least one visit by the University of California Berkeley.
+
+__tidyverse__
+```{r}
+df_school_tv <- filter(df_school, state_code != "CA" 
+                       & school_type == "public" & 
+                         pct_hispanic >= 50 & visits_by_110635 >=1 )
+nrow(df_school_tv)
+```
+
+__base R__ using subsetting operators
+```{r}
+df_school_br1 <- df_school[which(df_school$state_code != "CA" 
+                  & df_school$school_type == "public" 
+                  & df_school$pct_hispanic >= 50 
+                  & df_school$visits_by_110635 >=1), ]
+nrow(df_school_br1)
+```
+
+__base R__ using `subset()` function
+```{r}
+df_school_br2 <- subset(df_school, state_code != "CA" & school_type == "public" 
+                        & pct_hispanic >= 50 
+                        & visits_by_110635 >=1 )
+nrow(df_school_br2)
+```
+
+
+
+### Sorting observations 
+
+-Create a new dataframe from df_events that sorts by ascending by `event_date`, ascending `event_state`, and descending `pop_total` .
+
+__tidyverse__
+```{r results="hide"}
+df_event_tv <- arrange(df_event, event_date, event_state, desc(pop_total))
+```
+
+__base R__ using  `order()` function
+```{r results="hide"}
+df_event_br1 <- df_event[order(df_event$event_date, df_event$event_state, 
+                               -df_event$pop_total), ]
+```

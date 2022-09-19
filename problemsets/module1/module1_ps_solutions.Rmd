@@ -37,7 +37,7 @@ In this problem set, you will practice "knitting," creating objects (i.e., atomi
 
 **Question 1: What are the two types of vectors in R? How are they different from one another?** 
 
-- ANSWER: TYPE YOUR ANSWER HERE
+- __ANSWER: The two types of vectors are _atomic vectors_ and _lists_. Atomic vectors are homogenours (i.e., all elements within the atomic vectors must be of the same type), whereas lists can be heterogenous (i.e., elements within lists can be different types).__
 
 
 \vspace{30pt}
@@ -50,7 +50,7 @@ In this problem set, you will practice "knitting," creating objects (i.e., atomi
   - `length()`
   - `typeof()`
   - `str()`
-- ANSWER: TYPE YOUR ANSWER HERE
+- ANSWER: __Objects `x1` and `x2` are similar in that they are both atomic vectors with 4 elements. However, `x1` is a logical type and object `x2` is a character type. Unlike object `x1`, object `x2` also has named elements.__
 
 ```{r}
 #object 1
@@ -75,7 +75,7 @@ str(x2)
 
 - I have already created two objects in the R chunk below: `x3` and `x4`
 - Run diagnostics of these objects in the R chunk below
-- ANSWER: TYPE YOUR ANSWER HERE
+- __ANSWER: Objects `x3` and `x4` are similar in that they are both vectors. However, `x3` is a list vectors (i.e., elements are different types) and `x4` is a character vector (i.e., all elements are characters). As `x3` is a list, it contains three named atomic vector (one is a double type and the other two are character types) with two elements each.__
 
 
 ```{r}
@@ -84,6 +84,16 @@ x3 <- list(var1=c(1,2), var2=c("public", "private"), var3=c("AZ", "CA"))
 length(x3)
 typeof(x3)
 str(x3)
+
+length(x3$var1)
+typeof(x3$var1)
+
+length(x3$var2)
+typeof(x3$var2)
+
+length(x3$var3)
+typeof(x3$var3)
+
 
 #object 2
 x4 <- c(1,2,"public", "private", "AZ", "CA")
@@ -102,7 +112,7 @@ str(x4)
 
 - I have already re-created the `x3` object in the R chunk below
 - Run diagnostics of the "var2" element in the `x3` object in the R chunk below
-- ANSWER: TYPE YOUR ANSWER HERE
+- ANSWER: __The `var2` element within the object `x3` is an atomic vector with a character type and has a length of 2. Yes, it has a hierarchical structre as the two elements within the vector are named as `var2`__
 
 ```{r}
 #object 1
