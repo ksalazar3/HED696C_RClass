@@ -137,6 +137,8 @@ For the questions below, imagine that you have been asked by a major news outlet
 1. Rename the variable `avgmedian_inc_2564` to `med_inc` and assign new variable name to the existing object `df_school_all`
 ```{r}
 
+df_school_all <- rename(df_school_all, med_inc = avgmedian_inc_2564)
+
 ```
 
 
@@ -146,6 +148,8 @@ For the questions below, imagine that you have been asked by a major news outlet
     - You can do this in one step by wrapping the `count` function around the `filter` function ; or you can do this in two steps by creating a new data frame first  
 ```{r}
 
+count(filter(df_school_all, visits_by_100751 >= 1, state_code == "AL", school_type== "public"))
+
 ```
 
 \newline
@@ -154,12 +158,18 @@ For the questions below, imagine that you have been asked by a major news outlet
     - hint: use the variables `pct_hispanic` and `pct_black`.
 ```{r}
 
+count(filter(df_school_all, school_type == "public", pct_black >= 50 | pct_hispanic >= 50,
+             state_code == "AL", visits_by_100751 >= 1))
+
 ```
 
 
 4. Now count the out-of-state public high schools that received at least one visit by the university of Alabama without using commas to separate conditions in your filter.  
     - hint: `&` or `%in%`
 ```{r}
+
+count(filter(df_school_all, visits_by_100751 >=1 & state_code != "AL" & school_type == "public"))
+
 
 ```
 
