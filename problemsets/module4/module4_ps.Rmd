@@ -1,5 +1,5 @@
 ---
-title: "Lecture 4 problem set"
+title: "Module 4 problem set"
 author: "INSERT YOUR NAME HERE"
 date: "INSERT DATE"
 urlcolor: blue
@@ -14,15 +14,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```{r, echo=FALSE, include=FALSE}
 knitr::opts_chunk$set(collapse = TRUE, comment = "#>", highlight = TRUE)
 ```
-
-# Required reading and instructions
-
-__Required reading__
-
-- Grolemund and Wickham 5.5 (Add new variables with `mutate()`)
-- Xie, Allaire, and Grolemund (XAG) section 3.3 (R Markdown, PDF document) [LINK HERE](https://bookdown.org/yihui/rmarkdown/pdf-document.html)
-
-__General instructions__: In this homework, you will specify `pdf_document` as the output format. 
 
 # Step 1: Make changes to YAML header
 
@@ -43,13 +34,13 @@ library(tidyverse)
 
 
 2. Load the data frame data frame `df_school_all`
-    - The URL for this data frame is: (https://github.com/ozanj/rclass/raw/master/data/recruiting/recruit_school_allvars.RData)
+    - The URL for this data frame is: (https://github.com/ksalazar3/HED696C_RClass/raw/master/data/recruiting/recruit_school_allvars.RData)
     - The data frame `df_school_all` has one observation for each high school (public and private). 
     - The variables that begin with `visits_by_...` identify how many off-campus recruiting visits the high school received from a particular public university. For example, UC Berkeley has the ID `110635` so the variable `visits_by_110635` identifies how many visits the high school received from UC Berkeley. 
     - The variable `total_visits` identifies the number of visits the high school received from all (16) public research universities in this data collection sample.
     
 ```{r}
-load(url("https://github.com/ozanj/rclass/raw/master/data/recruiting/recruit_school_allvars.RData"))
+load(url("https://github.com/ksalazar3/HED696C_RClass/raw/master/data/recruiting/recruit_school_allvars.RData"))
 ```
 
 
@@ -155,7 +146,7 @@ The objective of this set of questions is to create a three-category variable th
   
 1. Load the data frame `wwlist` which has information on prospects purchased by Western Washington University 
 ```{r}
-load(url("https://github.com/ozanj/rclass/raw/master/data/prospect_list/wwlist_merged.RData")) 
+load(url("https://github.com/ksalazar3/HED696C_RClass/raw/master/data/prospect_list/wwlist_merged.RData")) 
 ```
 
 
@@ -203,10 +194,9 @@ load(url("https://github.com/ozanj/rclass/raw/master/data/prospect_list/wwlist_m
 
 # **THIS IS A BONUS QUESTION**
 
-BONUS QUESTION: Complete questions 4 and 5 in Step 3 using base R syntax (without the tidyverse `mutate()` function). To create frequency counts, you can still use the `count()` function __after__ you've created the new variables via base R (see slides 62 & 64 on Lecture 4 presentation)
+BONUS QUESTION: Complete questions 4 and 5 in Step 3 using base R syntax (without the tidyverse `mutate()` function). To create frequency counts, you can still use the `count()` function __after__ you've created the new variables via base R (see slides 62-67 on Module 4 presentation)
 
 
-Once finished, knit to (pdf) and upload both .Rmd and PDF files to class website under the week 3 tab  
-*Remeber to use this naming convention "lastname_firstname_ps3"*
+Once finished, knit to (pdf) and upload both .Rmd and PDF files 
 
 
