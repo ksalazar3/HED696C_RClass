@@ -196,7 +196,9 @@ __Task__: Using object `wwlist`, print data for "first-gen" prospects (`firstgen
 #investigate the "first-gen" var so we know what to filter for...
 str(wwlist$firstgen)
 typeof(wwlist$firstgen)
-table(wwlist$firstgen)
+table(wwlist$firstgen, useNA = "always")
+is.na(wwlist$firstgen)
+
 
 #Without pipes
 select(filter(wwlist, firstgen == "Y"), state, hs_city, sex)
@@ -216,7 +218,7 @@ Comparing the two approaches:
 
 Think about what object was "piped" into `select()` from `filter()`
 ```{r, results="hide"}
-wwlist %>% filter(firstgen == "Y") %>% str()
+wwlist_temp <-wwlist %>% filter(firstgen == "Y") 
 ```
 
 ### Aside: the `count()` function  [students work on their own]
@@ -258,12 +260,11 @@ wwlist %>% count()
 __This works__
 ```{r, results="hide"}
 wwlist %>% filter(firstgen == "Y") %>% 
-  select(state, hs_city, sex) %>%
-  count(sex)
+  select(state, hs_city, sex) %>% count(sex)
 ```
 __This works too__
 ```{r, results="hide"}
-wwlist %>% filter(firstgen == "Y",
+wwlist %>% filter(firstgen == "Y", 
                   state != "WA") %>% 
   select(state, hs_city, sex) %>%
   count(sex)
@@ -288,7 +289,7 @@ Investigate the `state` var so we know what to filter for...
 #investigate the "first-gen" var so we know what to filter for...
 str(wwlist$state)
 typeof(wwlist$state)
-table(wwlist$state)
+table(wwlist$state, useNA = "always")
 
 ```
 
@@ -297,12 +298,12 @@ table(wwlist$state)
 
 Without pipes
 ```{r}
-count(filter(wwlist, firstgen == "Y", state == "WA"))
+count(filter(wwlist, firstgen == "Y" & state == "WA"))
 ```
 
 With pipes
 ```{r}
-wwlist %>% filter(firstgen == "Y", state == "WA") %>% count()
+wwlist %>% filter(firstgen == "Y" & state == "WA") %>% count()
 ```
 
 ### Do task with and without pipes
@@ -601,7 +602,7 @@ __Example__: Create 0/1 indicator of whether got at least one visit from Berkele
 school_v2 %>% count(visits_by_berkeley)
 
 #option1: create and save variable; check new variable 
-school_v2<- school_v2 %>% 
+school_v2 <- school_v2 %>% 
   mutate(got_visit_berkeley = ifelse(visits_by_berkeley>0,1,0)) 
 
 school_v2 %>%
