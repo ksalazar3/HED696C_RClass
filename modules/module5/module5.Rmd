@@ -42,10 +42,9 @@ download.file(url = 'https://raw.githubusercontent.com/ozanj/rclass/master/lectu
 
 __Required reading for next week:__
 
-- Grolemund and Wickham 5.6 - 5.7 (grouped summaries and mutates)
-- Xie, Allaire, and Grolemund 4.1 (R Markdown, ioslides presentations) [LINK HERE](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html) and 4.3 (R Markdown, Beamer presentations) [LINK HERE](https://bookdown.org/yihui/rmarkdown/beamer-presentation.html)
-    - Why? Lectures for this class are `beamer_presentation` output type.
-    - `ioslides_presentation` are the most basic presentation output format for RMarkdown, so learning about `ioslides` will help you understand `beamer`
+- GW 15.1 - 15.2 (factors) [this is like 2-3 pages]
+- GW 20.6 - 20.7 (attributes and augmented vectors)
+- GW 10 (tibbles) [this is like 3-4 pages]
 - Any slides from lecture we don't cover
 
 <!-- __Explanation about `beamer_header.tex` in YAML header:__ -->
