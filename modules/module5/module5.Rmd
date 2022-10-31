@@ -257,8 +257,8 @@ df_event %>%
 3. **Bonus:** Group by "instnm" and "event_type", but this time filter for observations where "med_inc" is greater than 75000 and get a frequency count. 
 ```{r}
 df_event %>%
-  group_by(instnm, event_type) %>%
   filter(med_inc > 75000) %>%
+  group_by(instnm, event_type) %>%
   count()
 ```
 
@@ -324,6 +324,7 @@ __Example__: Count total number of events AND max value of median income
 ```{r, results="hide"}
 df_event %>% summarise(num_events=n(), 
                        max_inc=max(med_inc, na.rm = TRUE))
+
 df_event %>% summarise(num_events=n(), 
                        max_inc=max(med_inc, na.rm = TRUE)) %>% str()
 ```
@@ -439,6 +440,8 @@ df_event %>% group_by(instnm, event_type) %>%
 
 - Task: For recruiting events by UC Berkeley, count number of recruiting events by event_type
 ```{r, results="hide"}
+df_event %>% count(instnm)
+
 df_event %>% filter(univ_id == 110635) %>% 
   group_by(event_type) %>% summarise(num_events=n())
 ```
@@ -509,8 +512,7 @@ Application: How many missing/non-missing obs in variable [__very important__]
 event_berk %>% group_by(event_type) %>% 
   summarise(
     n_events = n(),
-    n_miss_inc = sum(is.na(med_inc)),
-    n_nonmiss_inc = sum(!is.na(med_inc)),
+    n_miss_fr_lunch = sum(is.na(fr_lunch)),
     n_nonmiss_fr_lunch = sum(!is.na(fr_lunch))
   )
 ```
@@ -626,7 +628,7 @@ sum(is.na(c(5,NA,4,NA)))
 
 
 
-__Task__: Using object `event_berk`, create object `gt50p_lat_bl` with the following measures for each combination of `event_type` and `event_inst`:
+__Task__: Using object `event_berk`, create a new object `gt50p_lat_bl` with the following measures for each combination of `event_type` and `event_inst`:
 
 - count of number of rows for each group
 - count of rows non-missing for both `pct_black_zip` and `pct_hispanic_zip`
