@@ -176,6 +176,9 @@ hsls_small %>% arrange(desc(stu_id)) %>%
 hsls_small %>%
   select(stu_id,x3univ1,x3sqstat,s3classes,s3clglvl) %>% var_label()
 
+hsls_small %>%
+  select(s3clglvl) %>% val_labels()
+
 #print observations with value labels rather than variable values
 hsls_small %>% arrange(desc(stu_id)) %>% 
   select(stu_id,x3univ1,x3sqstat,s3classes,s3clglvl) %>% as_factor()
@@ -479,6 +482,10 @@ __Task__
 ```{r, results="hide"}
 #first, investigate parental education [print in console]
 hsls_small %>% count(x2paredu) 
+hsls_small %>% count(x2paredu) %>% as_factor()
+hsls_small %>% select(x2paredu)  %>% val_labels()
+
+
 ```
 
 ```{r}
@@ -505,6 +512,9 @@ Always Investigate presence of missing/skip values
 ```{r, results="hide"}
 hsls_small %>% filter(x2paredu<0) %>% count(x2paredu)
 hsls_small %>% filter(x2txmtscor<0) %>% count(x2txmtscor)
+
+hsls_small %>% select(x2paredu) %>% val_labels()
+
 ```
 
 Replace `-8` with `NA` and re-calculate conditional stats
@@ -531,7 +541,7 @@ Can use same approach to calculate conditional mean by multiple `group_by()` var
 ### Student exercise solution  
 1. Calculate mean math test score (`x2txmtscor`), for each combination of parental education (`x2paredu`) and sex (`x2sex`)
 ```{r, results="hide"}
-#hsls_small %>% count(x2sex)
+hsls_small %>% count(x2sex)
 
 hsls_small %>%
   group_by(x2paredu,x2sex) %>%
@@ -605,8 +615,10 @@ hsls_small %>% select(x4x2sesq5) %>% count(x4x2sesq5)
 hsls_small %>% select(x4x2sesq5) %>% count(x4x2sesq5) %>% as_factor()
 
 #create analysis variable
-hsls_small_temp <- hsls_small %>% 
+hsls_small <- hsls_small %>% 
   mutate(sesq5=ifelse(x4x2sesq5==-8,NA,x4x2sesq5)) # approach 1
+
+
 hsls_small_temp <- hsls_small %>% 
   mutate(sesq5=ifelse(x4x2sesq5<0,NA,x4x2sesq5)) # approach 2
 

@@ -437,6 +437,12 @@ __Create institution-level GPA variable and save as a new object__
       mutate(gpa_trans=qualpts_trans/cred_trans) 
     
     nls_crs_trans
+    
+    institutional_gpa_df <- nls_crs %>% group_by(id, transnum) %>%
+summarise(cred_trans=sum(crsecredv3, na.rm=TRUE),
+          qualpts_trans=sum(qualpts, na.rm=TRUE))  %>% mutate(gpa_trans=qualpts_trans/cred_trans)
+    
+    
     #options(tibble.print_min=400)
 
 ```
