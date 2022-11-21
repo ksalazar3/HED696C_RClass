@@ -1,6 +1,6 @@
 ---
 title: "Module 8: Tidy data"
-subtitle:  "EDUC 263: Managing and Manipulating Data Using R"
+subtitle:  ""
 author:
 date: 
 urlcolor: blue
