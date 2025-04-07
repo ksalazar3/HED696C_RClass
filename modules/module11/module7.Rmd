@@ -1,0 +1,1058 @@
+---
+title: "Module 7: Working with Strings and Date/Time Variables" # potentially push to header
+subtitle:  "Managing and Manipulating Data Using R"
+author: 
+date: 
+classoption: dvipsnames  # for colors
+fontsize: 8pt
+urlcolor: blue
+output:
+  beamer_presentation:
+    keep_tex: true
+    toc: false
+    slide_level: 3
+    theme: default # AnnArbor # push to header?
+    #colortheme: "dolphin" # push to header?
+    #fonttheme: "structurebold"
+    highlight: tango # Supported styles include "default", "tango", "pygments", "kate", "monochrome", "espresso", "zenburn", and "haddock" (specify null to prevent syntax highlighting); push to header
+    df_print: tibble #default # tibble # push to header?    
+    latex_engine: xelatex #  Available engines are pdflatex [default], xelatex, and lualatex; The main reasons you may want to use xelatex or lualatex are: (1) They support Unicode better; (2) It is easier to make use of system fonts.
+    includes:
+      in_header: ../beamer_header.tex
+      #after_body: table-of-contents.txt 
+---
+
+```{r, echo=FALSE, include=FALSE}
+knitr::opts_chunk$set(collapse = TRUE, comment = "#>", highlight = TRUE)
+#knitr::opts_chunk$set(collapse = TRUE, comment = "#>", highlight = TRUE)
+  #comment = "#>" makes it so results from a code chunk start with "#>"; default is "##"
+```
+
+
+# Introduction
+
+
+### What we will do today
+
+\tableofcontents
+
+```{r, eval=FALSE, echo=FALSE}
+#Use this if you want TOC to show level 2 headings
+\tableofcontents
+#Use this if you don't want TOC to show level 2 headings
+\tableofcontents[subsectionstyle=hide/hide/hide]
+```
+
+
+### Load the packages we will use today (output omitted) 
+
+- __you must run this code chunk after installing these packages__
+```{r warning=FALSE, message=FALSE}
+library(tidyverse)
+library(stringr)
+library(lubridate)
+library(nycflights13)
+library(haven)
+library(labelled)
+
+```
+__If package not yet installed__, then must install before you load. Install in "console" rather than .Rmd file
+
+- Generic syntax: `install.packages("package_name")`
+- Install "tidyverse": `install.packages("stringr")`
+
+Note: when we load package, name of package is not in quotes; but when we install package, name of package is in quotes:
+
+- `install.packages("tidyverse")`
+- `library(tidyverse)`
+
+### Load data we will use today
+
+- Western Washington University student list data
+```{r}
+load(url("https://github.com/ksalazar3/HED696C_Rclass/raw/master/data/prospect_list/wwlist_merged.RData"))
+```
+
+
+# Working with Strings
+
+## String basics
+
+### What are strings?
+String refers to a "data type" used in programming to represent text rather than numbers (although it can include numbers)
+
+- Strings have `character`types
+```{r}
+string1<- "Apple"
+typeof(string1) #type is charater
+```
+
+
+- Create strings using `" "`
+```{r}
+string2 <- "This is a string"
+```
+
+- If string contains a quotation, use `' " " '`
+```{r}
+string3 <- 'example of a "quote" within a string'
+```
+
+- To print a string, use `writeLines()`
+```{r}
+print(string3) #will print using \ 
+writeLines(string3)
+```
+
+### Common uses of strings
+
+Basic uses: 
+
+- Names of files and directories
+```{r, results='hide'}
+acs_tract <- read_csv("https://raw.githubusercontent.com/ksalazar3/HED696C_Rclass/master/data/acs/tracts.csv")
+```
+
+- Names of elements in data objects
+```{r}
+num_vec <- 1:5
+names(num_vec) <- c('uno', 'dos', 'tres', 'cuatro', 'cinco')
+num_vec
+```
+
+### Common uses of strings
+
+- Text elements displayed in plots, graphs, maps
+```{r}
+plot(iris$Petal.Length, iris$Petal.Width, main = 'Title', sub = 'Subtitle', 
+     xlab = 'x-axis label', ylab = 'y-axis label', col = 'red')
+```
+
+
+### String basics
+
+We will use the `stringr` library for working with strings, rather than Base R
+
+  - `stringr` functions have intuitive names and all begin with `str_`
+  - Base R functions for working with strings can be inconsistent (avoid using them)
+
+__Basic functions:__
+
+- String length using `str_length()`
+```{r}
+#example 1
+string2 <- "This is a string"
+str_length(string2)
+
+#example 2
+str_length(c("a", "strings are fun", NA))
+```
+
+### Combining strings
+
+- Combining strings using `str_c()`
+```{r}
+#example 1
+x_var <- "x"
+y_var <- "y"
+
+str_c(x_var, y_var)
+
+#example 2
+str_c("x", "y")
+```
+
+- Use `sep` argument to control how strings are seperated when combined
+```{r}
+str_c("x", "y", sep= ", ")
+```
+
+- `NA` are still contagious, if you want a string "NA" rather than `NA` use `str_replace_na()`
+```{r}
+street_dir<- c("East", "West", NA)
+str_c("Direction: ", street_dir)
+str_c("Direction: ", str_replace_na(street_dir))
+```
+
+
+
+### Subsetting strings
+
+-Extract parts of a string using `str_sub()`, which uses `start` and `end` arguments to extract the position of the substring wanted
+```{r}
+fruits<- c("Apple", "Banana", "Orange")
+
+#first three elements
+str_sub(fruits, 1, 3) #end argument in inclusive
+
+#last three elements
+str_sub(fruits, -3, -1) #neg nums count backwards from end
+
+```
+
+
+-  __Task: extract 6-digit zip code from `zip9` in `wwlist`__
+```{r, results="hide"}
+wwlist %>% mutate(
+  zip=str_sub(zip9, 1, 5)
+)
+```
+
+
+### Lower-case and Upper-case functions
+
+- Changing strings to lower or upper case
+```{r}
+str_to_lower("HELLO")
+str_to_upper("hello")
+```
+
+
+- __Task: lower-case `hs_name` in `wwlist`__
+```{r}
+wwlist %>% select(receive_date, hs_name) %>%
+  mutate(
+  hs_name_lwr=str_to_lower(hs_name),
+)
+```
+
+
+### Student Exercises
+
+1. Combine  `school_type` and `school_category` in the `wwlist` dataframe to create one school type + category varibale. Be sure to seperate type and category using a comma AND deal with contagious NAs by using string "NA" if `school_type` and/or `school_category` are `NA`. 
+
+
+1. The last four digits of `zip9` indicate the delivery route within the 5-digit zip code area. Create a new `route` variable that extracts the last four digits from `zip9`. 
+
+
+### Student Excercises (Solutions)
+
+1. Combine  `school_type` and `school_category` in the `wwlist` dataframe to create one school type + category varibale. Be sure to seperate type and category using a comma AND deal with contagious NAs by using string "NA" if `school_type` and/or `school_category` are `NA`. 
+
+```{r}
+wwlist %>% select(school_type, school_category) %>%
+  mutate(
+    type_cat= str_c(str_replace_na(school_type), str_replace_na(school_category), sep= ", ")
+  )
+```
+
+
+### Student Excercises (Solutions)
+
+1. The last four digits of `zip9` indicate the delivery route within the 5-digit zip code area. Create a new `route` variable that extracts the last four digits from `zip9`. 
+
+```{r}
+wwlist %>% select(zip9) %>%
+  mutate(
+  route=str_sub(zip9, -4, -1)
+)
+```
+
+
+### Why are string manipulations useful?
+
+Basic examples: 
+
+- Dealing with identification numbers (leading or trailing zeros)
+```{r}
+typeof(acs_tract$fips_county_code)
+
+acs_tract <- acs_tract %>% 
+  mutate(char_county=
+  str_pad(as.character(fips_county_code), side = "left" ,3, pad="0"))
+  
+```
+
+- Complex reshaping (tidying) of data [We will learn this next week!!!]
+
+  - Problem: multiple variables crammed into the column names
+    - new_ prefix = new cases
+    - sp/rel/sp/ep describe how the case was diagnosed
+    - m/f gives the gender
+    - digits are age ranges
+  
+```{r, eval=FALSE, echo=FALSE}
+# explore WHO data
+# tuberculosis cases broken down by year, country, age, gender, and diagnosis method
+#View(who)
+#names(who)
+```
+
+```{r, results="hide"}
+who %>% pivot_longer(
+  cols = new_sp_m014:newrel_f65,
+  names_to = c("diagnosis", "gender", "age"), 
+  names_pattern = "new_?(.*)_(.)(.*)", 
+  values_to = "count"
+)
+```
+
+
+### Why are string manipulations useful?
+
+Advanced examples:
+
+- Web-scraping 
+  - Find and scrape all linked pages of recruiters assigned by states: (https://gobama.ua.edu/staff/)
+  - Parsing raw HTML to convert it into tabular data 
+  
+  
+- Natural Language Processing 
+  - Analyzing university president speeches for promotion of interdisciplinary research (IDR)
+  - Predict sentiment of promotion of IDR
+
+
+
+# Working with Dates and Times
+
+### Working with date/time variables
+
+Working with dates and times in data management seems simpler than it really is!
+
+- Does every year have 365 days?
+- Does every day have 24 hours?
+- Does every minute have 60 seconds?
+
+These details matter for:
+
+- Calculating changes over time
+- Analyzing longitudinal data
+- Predicting the occurance/timing of events 
+
+There are three ways you're likely to create a date/time variable:
+
+- From a string (most common)
+- From date and time individual components
+- From an existing date/time object
+
+
+## Creating Date/Times
+
+### Creating Date/Times from strings
+
+The most common way you're likely to create Date/Time variables is from primary/secondary data where dates and times are recorded and/or stores as strings.
+
+For Dates: 
+
+- Use `lubridate` "helpers" to identify the order of year/month/day
+```{r}
+ymd("2017/01/31")
+
+mdy("January 31st, 2017")
+
+dmy("31-01-2017")
+
+ymd(20170131)
+```
+
+For Dates: 
+
+- Use `lubridate` "helpers" to identify the order of year/month/day __AND__ hours/minutes/seconds
+```{r}
+ymd_hms("2017-01-31 20:11:59")
+
+mdy_hm("01/31/2017 08:01")
+```
+
+
+
+
+### Creating Date/Times from individual variables
+
+What if your dates and times are recorded across multiple columns/variables?
+
+EX: NYC flights data
+```{r}
+flights %>% 
+  select(year, month, day, hour, minute)
+```
+
+- Create a date variable using `make_date()` 
+```{r}
+flights1<- flights %>%
+  select(year, month, day) %>%
+  mutate(
+    depart= make_date(year, month, day)
+    
+  )
+
+typeof(flights1$depart)
+class(flights1$depart)
+```
+
+- Create a date variable using `make_datetime()` 
+
+```{r}
+flights1<- flights %>%
+  select(year, month, day, hour, minute) %>%
+  mutate(
+    depart= make_datetime(year, month, day, hour, minute )
+    
+  )
+
+typeof(flights1$depart)
+class(flights1$depart)
+```
+
+## Using Date/Time Variables
+
+### Time spans
+
+Arithmatic with dates works differently than with any numeric type! 
+
+There are three date/time classes that represent time spans:
+
+- Durations: represent the duration of time to an exact number of seconds
+- Periods: represent the period of time such as weeks/months/years
+- Intervals: represent a starting and end point in time 
+
+
+__Durations__
+
+When you subtract two dates, the result is a `difftime` object
+
+- A `difftime` object records time span as seconds (not intuitive)
+- Use `as.duration` to make the difftime object more intuitive (but records time span in seconds) 
+```{r}
+# How old is Karina?
+k_age <- today() - ymd(19890321)
+k_age
+
+typeof(k_age)
+class(k_age)
+
+as.duration(k_age)
+```
+
+- Durations uses "constructers"
+```{r}
+dseconds(30)
+dminutes(10)
+dweeks(3)
+dyears(1)
+```
+
+
+Because durations are recorded in seconds, this can sometimes create some odd results
+```{r}
+one_pm <- ymd_hms("2016-03-12 13:00:00", tz = "America/New_York")
+
+one_pm # 1pm
+one_pm + ddays(1) #2pm (DST)
+```
+
+
+
+### Time spans
+
+__Periods__
+
+Periods don't record time spans in exact seconds and are more intuitive to the way we think about time!
+
+```{r}
+one_pm <- ymd_hms("2016-03-12 13:00:00", tz = "America/New_York")
+
+one_pm # 1pm
+one_pm + days(1) #1pm 
+
+one_pm + years(1)
+```
+
+# Mini Lesson on Exploratory Data Analysis (EDA)
+
+### New Data: High School Longitudinal Study (HSLS) 
+
+Use `read_dta()` function from `haven` to import Stata dataset into R
+```{r, results="hide"}
+hsls <- read_dta(file="https://github.com/ksalazar3/HED696C_RClass/raw/master/data/hsls/hsls_stu_small.dta")
+```
+
+Let's examine the data [you __must__ run this code chunk]
+```{r, results="hide"}
+hsls %>% names()
+hsls %>% names() %>% str()
+hsls %>% names() %>% tolower() %>% str()
+
+names(hsls) <- tolower(names(hsls)) # convert names to lowercase
+names(hsls)
+
+str(hsls) # ugh
+
+str(hsls$s3classes)
+attributes(hsls$s3classes)
+typeof(hsls$s3classes)
+class(hsls$s3classes)
+```
+
+Download the HSLS Codebook: https://nces.ed.gov/pubs2014/2014361_AppendixI.pdf
+
+
+### What is exploratory data analysis (EDA)?
+
+The [Towards Data Science](https://towardsdatascience.com/exploratory-data-analysis-8fc1cb20fd15) website has a nice definition of EDA:
+
+> "Exploratory Data Analysis refers to the critical process of performing initial investigations on data so as to discover patterns, to spot anomalies, to test hypothesis, and to check assumptions with the help of summary statistics" 
+
+__This course focuses on "data management":__
+
+- Investigating and cleaning data for the purpose of creating analysis variables
+- Basically, everything that happens __before__ you conduct analyses
+
+__I think about "exploratory data analysis for data quality"__
+
+- Investigating values and patterns of variables from "input data"
+- Identifying and cleaning errors or values that need to be changed
+- Creating analysis variables
+- Checking values of analysis variables agains values of input variables
+
+### How we will teach exploratory data analysis
+
+Will teach exploratory data analysis (EDA) in two sub-sections:
+
+1. Introduce "Tools of EDA": 
+    - Demonstrate code to investigate variables and relatioship between variables
+    - Most of these tools are just the application of programming skills you have already learned
+1. Provide "Guidelines for EDA"
+    - Less about coding, more about practices you should follow and mentality necessary to ensure high data quality
+
+
+## Tools for EDA
+
+
+### Tools of EDA
+
+__To do EDA for data quality, must master the following tools:__
+
+- \medskip __Select, sort, filter, and print__ in order to see data patterns, anomolies
+    - Select and sort particular values of particular variables
+    - Print particular values of particular variables
+- __One-way descriptive analyses__ (i.e,. focus on one variable)
+    - Descriptive analyses for continuous variables
+    - Descriptive analyses for discreet/categorical variables
+- __Two-way descriptive analyses__ (relationship between two variables)
+    - Categorical by categorical
+    - Categorical by continuous
+    - Continuous by continuous
+
+Whenever using any of these tools, __pay close attention to missing values and how they are coded__
+
+- Often, the "input" variables don't code missing values as `NA` 
+- Especially when working with survey data, missing values coded as a negative number (e.g., `-9`,`-8`,`-4`) with different negative values representing different reasons for data being missing
+- Sometimes missing values coded as very high positive numbers
+- Therefore, important to investigate input vars prior to creating analysis vars
+
+### Tools of EDA
+
+First, Let's create a smaller version of the HSLS:09 dataset
+```{r}
+#hsls %>% var_label()
+hsls_small <- hsls %>%
+  select(stu_id,x3univ1,x3sqstat,x4univ1,x4sqstat,s3classes,
+         s3work,s3focus,s3clgft,s3workft,s3clgid,s3clgcntrl,
+         s3clglvl,s3clgsel,s3clgstate,s3proglevel,x4evrappclg,
+         x4evratndclg,x4atndclg16fb,x4ps1sector,x4ps1level,
+         x4ps1ctrl,x4ps1select,x4refsector,x4reflevel,x4refctrl,
+         x4refselect, x2sex,x2race,x2paredu,x2txmtscor,x4x2ses,x4x2sesq5)
+```
+
+```{r, results="hide"}
+names(hsls_small)
+hsls_small %>% var_label()
+```
+
+
+### Tools of EDA: select, sort, filter, and print
+
+We've already know `select()`, `arrange()`, `filter()` 
+
+\medskip Select, sort, and print specific vars
+```{r, results="hide"}
+#sort and print
+hsls_small %>% arrange(desc(stu_id)) %>% 
+  select(stu_id,x3univ1,x3sqstat,s3classes,s3clglvl)
+
+#investigate variable attributes
+hsls_small %>% arrange(desc(stu_id)) %>% 
+  select(stu_id,x3univ1,x3sqstat,s3classes,s3clglvl) %>% str()
+
+#investigate variable attributes
+hsls_small %>%
+  select(stu_id,x3univ1,x3sqstat,s3classes,s3clglvl) %>% var_label()
+
+hsls_small %>%
+  select(s3clglvl) %>% val_labels()
+
+#print observations with value labels rather than variable values
+hsls_small %>% arrange(desc(stu_id)) %>% 
+  select(stu_id,x3univ1,x3sqstat,s3classes,s3clglvl) %>% as_factor()
+```
+Sometimes helpful to increase the number of observations printed
+```{r, results="hide"}
+class(hsls_small) #it's a tibble, which is the "tidyverse" version of a data frame
+options(tibble.print_min=50) 
+# execute this in console
+hsls_small %>% arrange(desc(stu_id)) %>%
+  select(stu_id,x3univ1,x3sqstat,s3classes,s3clglvl)
+options(tibble.print_min=10) # set default printing back to 10 lines
+```
+
+### One-way descriptive stats for continuous vars, Tidyverse approach
+
+Use `summarise_at()`, a variation of `summarise()`, to make descriptive stats
+
+- `.args=list(na.rm=TRUE)`= a named list of additional arguments to be added to all function calls
+
+__Task__:
+
+- calculate descriptive stats for `x2txmtscor`, math test score
+```{r, warning=FALSE}
+#?summarise_at 
+hsls_small %>% select(x2txmtscor) %>% var_label() 
+hsls_small %>% #old way, still works
+  summarise_at(
+    .vars = vars(x2txmtscor),
+    .funs = funs(mean, sd, min, max, .args=list(na.rm=TRUE))
+  )
+
+hsls_small %>%  #this also works
+  summarise(across(c(x2txmtscor), 
+  list(mean= ~mean(.x), stdv= ~sd(.x), min= ~min(.x), max= ~max(.x))))
+```
+
+### One-way descriptive stats for continuous vars, Tidyverse approach
+
+Can calculate descriptive stats for more than one variable at a time
+
+__Task__:
+
+- calculate descriptive stats for `x2txmtscor`, math test score, and `x4x2ses`, socioeconomic index score
+
+
+```{r, warning=FALSE}
+hsls_small %>% select(x2txmtscor,x4x2ses) %>% var_label()
+
+hsls_small %>% #still works
+  summarise_at(
+    .vars = vars(x2txmtscor,x4x2ses),
+    .funs = funs(mean, sd, min, max, .args=list(na.rm=TRUE))
+  )
+
+hsls_small %>%  #this also works
+  summarise(across(c(x2txmtscor, x4x2ses), 
+  list(mean= ~mean(.x), stdv= ~sd(.x), min= ~min(.x), max= ~max(.x))))
+```
+
+### One-way descriptive stats for continuous vars, Tidyverse approach
+
+"Input vars" in survey data often have negative values for missing/skips
+```{r, results="hide"}
+hsls_small %>% filter(x2txmtscor<0) %>% count(x2txmtscor)
+```
+
+R includes those negative values when calculating stats; you don't want this
+
+- Solution: create version of variable that replaces negative values with `NA`
+```{r, warning=FALSE}
+hsls_small %>% mutate(x2txmtscor_na=ifelse(x2txmtscor<0,NA,x2txmtscor)) %>%
+  summarise_at(
+    .vars = vars(x2txmtscor_na),
+    .funs = funs(mean, sd, min, max, .args=list(na.rm=TRUE))
+  )
+```
+What if you didn't include `.args=list(na.rm=TRUE)`?
+```{r, warning=FALSE}
+hsls_small %>% mutate(x2txmtscor_na=ifelse(x2txmtscor<0,NA,x2txmtscor)) %>%
+  summarise_at(
+    .vars = vars(x2txmtscor_na),
+    .funs = funs(mean, sd, min, max))
+```
+
+
+### One-way descriptive stats for continuous vars, Tidyverse approach
+
+How to identify these missing/skip values if you don't have a codebook?
+
+- `count()` combined with `filter()` helpful for finding extreme values of continuous vars, which are often associated with missing or skip
+
+```{r}
+#variable x2txmtscor
+hsls_small %>% filter(x2txmtscor<0) %>% 
+  count(x2txmtscor)
+
+#variable s3clglvl
+hsls_small %>% select(s3clglvl) %>% var_label()
+
+hsls_small %>% filter(s3clglvl<0) %>%
+  count(s3clglvl)
+```
+
+
+### One-way descriptive stats student exercise
+
+1. Using the object `hsls`, identify variable type, variable class, and check the variable values and value labels of `x4ps1start`
+    - variable `x4ps1start` identifies month and year student first started postsecondary education
+    - **Note**: This variable is a bit counterintuitive.
+        - e.g., the value `201105` refers to May 2011
+2. Get a frequency count of the variable `x4ps1start`  
+3. Get a frequency count of the variable, but this time only observations that have negative values __hint__: use filter()  
+4. Create a new version of the variable `x4ps1start_na` that replaces negative values with NAs and use `summarise_at()` to get the min and max value.  
+
+
+
+### One-way descriptive stats student exercise solutions
+\medskip
+
+1. Using the object `hsls`, identify variable type, variable class, and check the variable vakyes and value labels of `x4ps1start`
+```{r}
+typeof(hsls$x4ps1start)
+class(hsls$x4ps1start)
+
+hsls %>% select(x4ps1start) %>% var_label()
+
+hsls %>% select(x4ps1start) %>% val_labels()
+```
+
+### One-way descriptive stats student exercise solutions  
+2. Get a frequency count of the variable `x4ps1start` 
+```{r}
+hsls %>%
+  count(x4ps1start)
+```
+
+### One-way descriptive stats student exercise solutions
+3. Get a frequency count of the variable, but this time only observations that have negative values __hint__: use filter()  
+```{r}
+hsls %>% 
+  filter(x4ps1start<0) %>% 
+  count(x4ps1start)
+```
+
+### One-way descriptive stats student exercise solutions
+4. Create a new version `x4ps1start_na` of the variable `x4ps1start` that replaces negative values with NAs and use `summarise_at()` to get the min and max value.
+```{r warning=FALSE, message=FALSE}
+hsls %>% mutate(x4ps1start_na=ifelse(x4ps1start<0,NA,x4ps1start)) %>%
+  summarise_at(
+    .vars = vars(x4ps1start_na),
+    .funs = funs(min, max, .args=list(na.rm=TRUE))
+  )
+```
+
+### One-way descriptive stats for discrete/categorical vars, Tidyverse approach
+
+Use `count()` to investigate values of discrete or categorical variables
+
+For variables where `class==labelled`
+```{r, results="hide"}
+class(hsls_small$s3classes)
+attributes(hsls_small$s3classes)
+#show counts of variable values
+hsls_small %>% count(s3classes) #print in console to show both
+#show counts of value labels
+hsls_small %>% count(s3classes) %>% as_factor()
+```
+
+- I like `count()` because the default setting is to show `NA` values too!
+```{r, results="hide"}
+hsls_small %>% mutate(s3classes_na=ifelse(s3classes<0,NA,s3classes)) %>% 
+  count(s3classes_na)
+```
+
+
+
+### Relationship between variables, categorical by categorical
+
+Two-way frequency table, called "cross tabulation", important for data quality
+
+- When you create categorical analysis var from single categorical "input" var  
+    - Two-way tables show us whether we did this correctly  
+- Two-way tables helpful for understanding skip patterns in surveys
+
+__key to syntax__
+
+- `df_name %>% group_by(var1) %>% count(var2)` **OR**
+- `df_name %>% count(var1,var2)`
+- play around with which variable is `var1` and which variable is `var2`
+
+
+### Relationship between variables, categorical by categorical
+
+
+__Task__: Create a two-way table between `s3classes` and `s3clglvl`
+
+- Investigate variables
+```{r, results="hide"}
+hsls_small %>% select(s3classes,s3clglvl) %>% var_label()
+hsls_small %>% select(s3classes,s3clglvl) %>% val_labels()
+```
+
+- Create two-way table
+```{r, results = "hide"}
+hsls_small %>% group_by(s3classes) %>% count(s3clglvl) # show values
+hsls_small %>% count(s3classes,s3clglvl)
+#hsls_small %>% group_by(s3classes) %>% count(s3clglvl) %>% as_factor() # show value labels
+```
+- Are these objects the same?
+```{r}
+hsls_small %>% group_by(s3classes) %>% count(s3clglvl) %>% glimpse()
+hsls_small %>% count(s3classes,s3clglvl) %>% glimpse()
+```
+
+### Relationship between variables, categorical by categorical
+
+Two-way frequency table, also called "cross tabulation"
+
+<!-- What if one of the variables has `NAs`? -->
+
+<!-- - Table created by `group_by()` and `count()` shows `NAs`! -->
+
+__Task__: 
+
+- Create a version of `s3classes` called `s3classes_na` that changes negative values to `NA`
+- Create a two-way table between `s3classes_na` and `s3clglvl`
+```{r, results="hide"}
+hsls_small %>% 
+  mutate(s3classes_na=ifelse(s3classes<0,NA,s3classes)) %>%
+  group_by(s3classes_na) %>% count(s3clglvl)
+
+hsls_small %>% 
+  mutate(s3classes_na=ifelse(s3classes<0,NA,s3classes)) %>%
+  count(s3classes_na, s3clglvl)
+
+
+#example where we create some NA obs in the second variable
+hsls_small %>% 
+  mutate(s3classes_na=ifelse(s3classes<0,NA,s3classes),
+         s3clglvl_na=ifelse(s3clglvl==-7,NA,s3clglvl)) %>%
+  group_by(s3classes_na) %>% count(s3clglvl_na)
+
+
+hsls_small %>% 
+  mutate(s3classes_na=ifelse(s3classes<0,NA,s3classes),
+         s3clglvl_na=ifelse(s3clglvl==-7,NA,s3clglvl)) %>%
+  count(s3classes_na, s3clglvl_na)
+
+```
+
+### Relationship between variables, categorical by continuous
+
+Investigating relationship between multiple variables is a little tougher when at least one of the variables is continuous
+
+__Conditional mean__ (like regression with continuous Y and one categorical X):
+
+- Shows average values of continous variables within groups
+- Groups are defined by your categorical variable(s)
+
+__key to syntax__
+
+- `group_by(categorical_var) %>% summarise_at(.vars = vars(continuous_var)`
+
+### Relationship between variables, categorical by continuous
+
+__Task__
+
+- Calculate mean math score, `x2txmtscor`, for each value of parental education, `x2paredu`
+
+```{r, results="hide" }
+#first, investigate parental education [print in console]
+hsls_small %>% count(x2paredu) 
+hsls_small %>% count(x2paredu) %>% as_factor()
+hsls_small %>% select(x2paredu)  %>% val_labels()
+
+
+```
+
+```{r warning=FALSE, message=FALSE}
+# using dplyr to get average math score by parental education level [print in console]
+hsls_small %>% group_by(x2paredu) %>%
+    summarise_at(.vars = vars(x2txmtscor),
+                 .funs = funs(mean, .args = list(na.rm = TRUE))) 
+```
+
+### Relationship between variables, categorical by continuous
+
+__Task__
+
+- Calculate mean math score, `x2txmtscor`, for each value of `x2paredu`
+
+For checking data quality, helpful to calculate other stats besides mean
+```{r, warning=FALSE, message=FALSE}
+hsls_small %>% group_by(x2paredu) %>% #[print in console]
+    summarise_at(.vars = vars(x2txmtscor),
+                 .funs = funs(mean, min, max, .args = list(na.rm = TRUE)))
+
+```
+Always Investigate presence of missing/skip values
+```{r, results="hide"}
+hsls_small %>% filter(x2paredu<0) %>% count(x2paredu)
+hsls_small %>% filter(x2txmtscor<0) %>% count(x2txmtscor)
+
+hsls_small %>% select(x2paredu) %>% val_labels()
+
+```
+
+Replace `-8` with `NA` and re-calculate conditional stats
+```{r, results="hide", warning=FALSE, message=FALSE}
+hsls_small %>% 
+  mutate(x2paredu_na=ifelse(x2paredu<0,NA,x2paredu),
+         x2txmtscor_na=ifelse(x2txmtscor<0,NA,x2txmtscor)) %>% 
+  group_by(x2paredu_na) %>%
+  summarise_at(.vars = vars(x2txmtscor_na),
+               .funs = funs(mean, min, max, .args = list(na.rm = TRUE))) %>%
+  as_factor()
+
+hsls_small %>% count(s3classes,s3clglvl) %>% as_factor
+```
+### Student exercise
+
+Can use same approach to calculate conditional mean by multiple `group_by()` variables
+
+- Just add additional variables within `group_by()`
+
+1. Calculate mean math test score (`x2txmtscor`), for each combination of parental education (`x2paredu`) and sex (`x2sex`).  
+
+
+### Student exercise solution  
+1. Calculate mean math test score (`x2txmtscor`), for each combination of parental education (`x2paredu`) and sex (`x2sex`)
+```{r, results="hide", warning=FALSE, message=FALSE}
+hsls_small %>% count(x2sex)
+
+hsls_small %>%
+  group_by(x2paredu,x2sex) %>%
+  summarise_at(.vars = vars(x2txmtscor),
+               .funs = funs(mean, .args = list(na.rm = TRUE))) %>%
+  as_factor()
+```
+
+## Guidelines for EDA
+
+### Guidelines for "EDA for data quality"
+
+Assme that your goal in "EDA for data quality" is to investigate "input" data sources and create "analysis variables"
+
+- Usually, your analysis dataset will incorporate multiple sources of input data, including data you collect (primary data) and/or data collected by others (secondary data)
+
+While this is not a linear process, these are the broad steps I follow 
+
+1. Understand how input data sources were created
+    - e.g., when working with survey data, have survey questionnaire and codebooks on hand
+1. For each input data source, identify the "unit of analysis" and which combination of variables uniquely identify observations
+1. Investigate patterns in input variables
+1. Create analysis variable from input variable(s)
+1. Verify that analysis variable is created correctly through descriptive statistics that compare values of input variable(s) against values of the analysis variable
+
+__Always be aware of missing values__
+
+- They will not always be coded as `NA` in input variables
+
+### "Unit of analysis" and which variables uniquely identify observations
+
+"Unit of analysis" refers to "what does each observation represent" in an input data source
+
+- If each obs represents a student, you have "student level data"
+- If each obs represents a student-course, you have "student-course level data"
+- If each obs represents a school, you have "school-level data"
+- If each obs represents a school-year, you have "school-year level data"
+
+How to identify unit of analysis
+
+- data documentation
+- investigating the data set
+
+We will go over syntax for identifying unit of analysis in subsequent weeks
+
+### Rules for variable creation
+
+Rules I follow for variable creation
+
+1. \medskip Never modify "input variable"; instead create new variable based on input variable(s)
+    - Always keep input variables used to create new variables
+1. Investigate input variable(s) and relationship between input variables
+1. Developing a plan for creation of analysis variable
+    - e.g., for each possible value of input variables, what should value of analysis variable be?
+1. Write code to create analysis variable
+1. Run descriptive checks to verify new variables are constructed correctly
+    - Can "comment out" these checks, but don't delete them
+1. Document new variables with notes and labels
+
+### Rules for variable creation
+
+__Task__: 
+
+- Create analysis for variable ses qunitile called `sesq5` based on `x4x2sesq5` that converts negative values to `NAs`
+
+```{r, results="hide"}
+#investigate input variable
+hsls_small %>% select(x4x2sesq5) %>% var_label()
+hsls_small %>% select(x4x2sesq5) %>% val_labels()
+hsls_small %>% select(x4x2sesq5) %>% count(x4x2sesq5)
+hsls_small %>% select(x4x2sesq5) %>% count(x4x2sesq5) %>% as_factor()
+
+#create analysis variable
+hsls_small <- hsls_small %>% 
+  mutate(sesq5=ifelse(x4x2sesq5==-8,NA,x4x2sesq5)) # approach 1
+
+
+hsls_small_temp <- hsls_small %>% 
+  mutate(sesq5=ifelse(x4x2sesq5<0,NA,x4x2sesq5)) # approach 2
+
+#verify
+hsls_small_temp %>% group_by(x4x2sesq5) %>% count(sesq5)
+```
+
+
+## Skip patterns in survey data
+
+### What are skip patterns
+
+Pretty easy to create an analysis variable based on a single input variable
+
+Harder to create analysis variables based on multiple input variables
+
+- When working with survey data, even seemingly simple analysis variables require multiple input variables due to "skip patterns"
+
+What are "skip patterns"? 
+
+- Response on a particular survey item determines whether respondent answers some set of subsequent questions
+- What are some examples of this?
+
+Key to working with skip patterns
+
+- Have the survey questionnaire on hand
+- Sometimes it appears that analysis variable requires only one input variable, but really depends on several input variables because of skip patterns
+    - Don't just blindly turn "missing" and "skips" from survey data to `NAs` in your analysis variable
+    - Rather, trace why these "missing" and "skips" appear and decide how they should be coded in your analysis variable
+
+
+# Problem Set 7 
+
+### Overview of problem set due next week
+
+__Assignment__: 
+
+- create GPA from postsecondary transcript student-course level data
+
+__Data source__: [National Longitudinal Study of 1972 (NLS72)](https://nces.ed.gov/surveys/nls72/)
+
+- Follows 12th graders from 1972
+    - Base year: 1972
+    - Follow-up surveys in:  1973, 1974, 1976, 1979, 1986
+    - Postsecondary transcripts collected in 1984
+
+__Why use such an old survey for this assignment?__
+
+- NLS72 predates data privacy agreements; transcript data publicly available
+
+__What we do to make assignment more manageable__
+
+- last week's problem set created the input var: numgrade
+- we give you some hints/guidelines
+- but you are responsible for developing plan to create GPA vars and for executing plan (rather than us giving you step-by-step questions)
+
+__Why this assignment?__
+
+1. Give you more practice investigating data, cleaning data, creating variables that require processing across rows
+1. Real world example of "simple" task with complex data management needs
+
+
+
+

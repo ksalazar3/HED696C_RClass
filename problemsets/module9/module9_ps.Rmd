@@ -1,0 +1,15 @@
+---
+title: "Module 9 Problem Set"
+author: 
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Final Project Ideas
+
+Please describe some initial ideas for your final project. Include any relevant links if you will be completing an online tutorial.
+
+
