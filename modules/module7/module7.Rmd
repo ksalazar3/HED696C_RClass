@@ -224,13 +224,17 @@ __Task__:
 
 - calculate descriptive stats for `x2txmtscor`, math test score
 ```{r, warning=FALSE}
-#?summarise_at
-hsls_small %>% select(x2txmtscor) %>% var_label()
-hsls_small %>% 
+#?summarise_at 
+hsls_small %>% select(x2txmtscor) %>% var_label() 
+hsls_small %>% #old way, still works
   summarise_at(
     .vars = vars(x2txmtscor),
     .funs = funs(mean, sd, min, max, .args=list(na.rm=TRUE))
   )
+
+hsls_small %>%  #this also works
+  summarise(across(c(x2txmtscor), 
+  list(mean= ~mean(.x), stdv= ~sd(.x), min= ~min(.x), max= ~max(.x))))
 ```
 
 ### One-way descriptive stats for continuous vars, Tidyverse approach
@@ -242,14 +246,18 @@ __Task__:
 - calculate descriptive stats for `x2txmtscor`, math test score, and `x4x2ses`, socioeconomic index score
 
 
-```{r}
+```{r, warning=FALSE}
 hsls_small %>% select(x2txmtscor,x4x2ses) %>% var_label()
 
-hsls_small %>% 
+hsls_small %>% #still works
   summarise_at(
     .vars = vars(x2txmtscor,x4x2ses),
     .funs = funs(mean, sd, min, max, .args=list(na.rm=TRUE))
   )
+
+hsls_small %>%  #this also works
+  summarise(across(c(x2txmtscor, x4x2ses), 
+  list(mean= ~mean(.x), stdv= ~sd(.x), min= ~min(.x), max= ~max(.x))))
 ```
 
 ### One-way descriptive stats for continuous vars, Tidyverse approach
@@ -262,7 +270,7 @@ hsls_small %>% filter(x2txmtscor<0) %>% count(x2txmtscor)
 R includes those negative values when calculating stats; you don't want this
 
 - Solution: create version of variable that replaces negative values with `NA`
-```{r}
+```{r, warning=FALSE}
 hsls_small %>% mutate(x2txmtscor_na=ifelse(x2txmtscor<0,NA,x2txmtscor)) %>%
   summarise_at(
     .vars = vars(x2txmtscor_na),
@@ -270,7 +278,7 @@ hsls_small %>% mutate(x2txmtscor_na=ifelse(x2txmtscor<0,NA,x2txmtscor)) %>%
   )
 ```
 What if you didn't include `.args=list(na.rm=TRUE)`?
-```{r}
+```{r, warning=FALSE}
 hsls_small %>% mutate(x2txmtscor_na=ifelse(x2txmtscor<0,NA,x2txmtscor)) %>%
   summarise_at(
     .vars = vars(x2txmtscor_na),

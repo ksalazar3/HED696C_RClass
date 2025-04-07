@@ -37,18 +37,6 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", highlight = TRUE)
 - Once in R Studio, go to File >> Open File...>> Navigate to and click on `module4.Rmd`
 -  Try to knit `module4.Rmd` to pdf 
 
-### Asynchronous Option
-
-- __If you're interested in completing the class asynchronously, email me for approval__
-- Synchronous lectures would proceed as usual every Monday evening...
-  - Slides posted before class at ~4:00pm
-  - Lecture is recorded; available on D2L within an hour of class ending
-- Asynchronous Option:
-  - Students would be responsible for using slides and synchronous lecture recording to get through weekly module material on their own time
-  - If weekly lecture includes a group-coding exercise, asynchronous students would need to complete on their own and submit an R script for completion/participation credit
-  - Students would still need to complete problem set by 4:15pm deadline on the following Monday
-  - Students would need to complete reading for the next class session...
-
 ### What we will do today
 
 \tableofcontents
@@ -68,15 +56,7 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", highlight = TRUE)
 ```{r, message=FALSE}
 library(tidyverse)
 ```
-If package not yet installed, then must install before you load. Install in "console" rather than .Rmd file
 
-- Generic syntax: `install.packages("package_name")`
-- Install "tidyverse": `install.packages("tidyverse")`
-
-Note: when we load package, name of package is not in quotes; but when we install package, name of package is in quotes:
-
-- `install.packages("tidyverse")`
-- `library(tidyverse)`
 
 
 
@@ -93,7 +73,7 @@ The "Student list" business
 - This common recruitment tool reinforces bias in admissions practices
   - Acquired these data via Freedom of Information Act (FOIA); our team's data management skills were key to the success of this project!
   - [Washington Post](https://www.washingtonpost.com/education/2022/09/21/college-recruitment-student-lists-bias/)
-  - [The Institute for College Access and Success](https://ticas.org/student-success/series-of-reports-find-common-recruiting-practice-perpetuate-bias-but-crucial-for-college-access-of-underrepresented-students/)
+  - [Washington Monthly](https://washingtonmonthly.com/2024/10/29/the-student-recruitment-industrial-complex/)
 
 \medskip 
 
@@ -105,8 +85,6 @@ load(url("https://github.com/ksalazar3/HED696C_RClass/raw/master/data/prospect_l
 Object `wwlist`
 
 - De-identified prospective student list purchased by Western Washington University from College Board
-- We collected these data using FOIA requests; out team's data management skills were key to the success of this project! 
-
 
 
 
@@ -190,7 +168,7 @@ wwlist %>% str() # with pipe
 
 ### Do task with and without pipes
 
-__Task__: Using object `wwlist`, print data for "first-gen" prospects (`firstgen`) for the following selected variables: `state`, `hs_city`, `sex` [output omitted]
+__Task__: Using object `wwlist`, print data for "first-gen" prospects (`firstgen`) for the following selected variables: `state`, `hs_city`, `sex` [output omitted, run each line to see output]
 
 ```{r, results='hide'}
 #investigate the "first-gen" var so we know what to filter for...
@@ -216,12 +194,8 @@ Comparing the two approaches:
 - In "pipes" approach the left-to-right order of code matches how we think about/word the task
     - First, we start with an object __*and then*__ (`%>%`) we use `filter()` to isolate first-gen students __*and then*__ (`%>%`) we select which  variables to print
 
-Think about what object was "piped" into `select()` from `filter()`
-```{r, results="hide"}
-wwlist_temp <-wwlist %>% filter(firstgen == "Y") 
-```
 
-### Aside: the `count()` function  [students work on their own]
+### Aside: the `count()` function 
 
 \medskip `count()` function from `dplyr` package counts the number of obs by group
 ```{r, eval=FALSE, echo=FALSE}
@@ -386,7 +360,7 @@ __Sorting data__ | - `group_by()` to calculate across rows within groups
 
 __Today__
 
-- we'll use `mutate()` to create new variables based on calculations across columns within a row
+- we'll use `mutate()` to create new variables based on calculations across columns
 
 __Next week__
 
@@ -401,7 +375,7 @@ names(df_school_all)
 ```
 ### Create new data frame based on `df_school_all`
 
-Let's create new version of this data frame, called `school_v2`, which we'll use to introduce how to create new variables
+Let's create new version of this data frame, called `school_v2`, which we'll use to introduce how to create new variables; rename institution vars for universities
 ```{r, results='hide'}
 school_v2 <- df_school_all %>% 
   select(-contains("inst_")) %>% # remove vars that start with "inst_"
@@ -445,6 +419,7 @@ __Task__:
 
 - Using data frame `school_v2` create new variable that measures the pct of students on free/reduced lunch (output omitted)
   - % of students on FRL = (number of students on FRL/total number of students)*100
+  - Sidenote: YOU need to tell R order of operations by using parantheses
 - In order to "save" or "keep" this new variable to use at some later point, you need to use the assignment operator
   - You can save/keep the variable by __adding it__ to the original object; overwriting the original object _when you only use the mutate() function_ will simply add the variable to the original df with all other variables
 ```{r, results='hide'}
@@ -497,11 +472,10 @@ names(school_v2)
 
 __`mutate()` with assignment__
 ```{r, results="hide"}
-school_v2_temp <- school_v2 %>% 
+school_v2 <- school_v2 %>% 
   mutate(pct_fr_lunch = (num_fr_lunch/total_students)*100) 
 
-names(school_v2_temp)
-rm(school_v2_temp)
+names(school_v2)
 
 ```
 
@@ -529,9 +503,12 @@ school_v2 %>%
 
 1. Using the object `school_v2`, select the following variables (`num_prof_math`, `num_took_math`, `num_prof_read`, `num_took_read`) and create a measure of percent proficient in math `pct_prof_math` and percent proficient in reading `pct_prof_read`.  
 
-2. Now using the code for question 1, filter schools where at least 50% of students are proficient in math **&** reading.  
+- `num_took_math` and `num_took_read` are variables with the number of students that took math and reading tests, respectively 
+- `num_prof_math` and `num_prof_read` are variables with the number of students that took tests and scored at proficient levels for math and reading, respectively 
 
-3. If you have time, count the number of schools from question 2.
+2. Now add to the same code for question 1 by filtering schools where at least 50% of students are proficient in math **&** reading.  
+
+3. Finish the code in question 2 by counting the number of schools from question 2.
 
 
 ### Solutions for exercise using mutate()
@@ -556,7 +533,7 @@ school_v2 %>%
 ```
 
 ### Solutions for exercise using mutate()
-3. If you have time, count the number of schools from question 2.
+3. Count the number of schools from question 2.
 ```{r}
 school_v2 %>%
   select(num_prof_math, num_took_math, num_prof_read, num_took_read) %>%
@@ -634,12 +611,12 @@ Usually a good idea to investigate "input" variables __before__ creating analysi
 ```{r, results="hide"}
 str(school_v2$med_inc) # investigate variable type
 school_v2 %>% count(med_inc) # frequency count, but this isn't very helpful
+                             # because variable is continuous
 
-#create variable and check variable all in one step [but don't overwrite original df]
-school_v2 %>% filter(is.na(med_inc)) %>% count(med_inc) 
 # shows number of obs w/ missing med_inc
+school_v2 %>% filter(is.na(med_inc)) %>% count(med_inc) 
 ```
-Create variable
+Create variable and check variable all in one step [but never overwrite original df when using `count()`]
 ```{r}
 school_v2 %>% select(med_inc) %>% 
   mutate(inc_gt_100k= ifelse(med_inc>100000,1,0)) %>%
@@ -785,7 +762,7 @@ wwlist_temp %>% count(school_catv2)
 wwlist %>% count(school_category)
 rm(wwlist_temp)
 ```
-### Using `recode()` within `mutate()` [do in pairs/groups]
+### Using `recode()` within `mutate()` 
 
 __Task__: Create `school_catv2` based on `school_category` with these categories:
 
@@ -1012,7 +989,7 @@ school_v2_temp %>% count(state_type)
 
 
 
-# Base R appraoch to creating new variables 
+# Base R appraoch to creating new variables [Not Required/Optional Reading]
 
 
 ### Base R approach to creating new variables

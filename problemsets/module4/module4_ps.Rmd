@@ -136,7 +136,7 @@ df_school_all %>% count(school_type) # frequency count of school_type
 
 
 
-# Step 4: creating variables using `mutate()` + `case_when()`
+# Step 4: creating variables using `mutate()` and `case_when()`
 
 For this set of questions, you will work with the data frame `wwlist` which has one observation for each prospective student purchased by Western Washington University from the College Board. 
 

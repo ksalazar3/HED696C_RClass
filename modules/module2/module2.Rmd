@@ -58,17 +58,17 @@ if(!file.exists("fp2.JPG")) {
 
 # Introduction
 
-### As you wait for class to begin... {-}
+### What you need for this module...
 
-- Download the module2 Rmd and R script lecture files from the class website [https://ksalazar3.github.io/HED696C_RClass/](https://ksalazar3.github.io/HED696C_RClass/)
-- Move the files to "HED696C_RClass/modules/module2"
-- Open RStudio via the `HED696C_Rclass.rproj`
+- Download the module2 Rmd and R script lecture files 
+- Move the files to "rclass/modules/module2"
+- Open RStudio via the ".rproj" file we created in class
 - Once in R Studio go to File > Open File > navigate to and open the module2.Rmd
-- Try knitting the module1.Rmd file (it will open an HTML document)
+- Try knitting the module2.Rmd file (it will open an HTML document)
 
-### What we will do today... {-}
+### What we will do in this module... {-}
 
-- Introduction to R Markdown
+- More introduction to R Markdown
 - More R Basics
   - Using functions
 - Investigating Objects
@@ -86,12 +86,12 @@ if(!file.exists("fp2.JPG")) {
 ```{r, message=FALSE}
 library(tidyverse)
 ```
-If package not yet installed, then must install before you load. Install in "console" rather than .Rmd file
+If package not yet installed, then you need to install before you load. Install in "console" rather than .Rmd file
 
 - Generic syntax: `install.packages("package_name")`
 - Install "tidyverse": `install.packages("tidyverse")`
 
-Note: when we load package, name of package is not in quotes; but when we install package, name of package is in quotes:
+Note: when we load a package, the name of package is not in quotes; but when we install a package, name of package is in quotes:
 
 - `install.packages("tidyverse")`
 - `library(tidyverse)`
@@ -204,8 +204,8 @@ Common/important output types:
 Resources
 
 - Cheat sheets and quick reference:
-    - [Cheat Sheet](https://www.rstudio.com/wp-content/uploads/2015/02/rmarkdown-cheatsheet.pdf)
-    - [Quick Reference](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf) [I prefer the quick reference]
+    - [Cheat Sheet](https://github.com/rstudio/cheatsheets/blob/main/rmarkdown-2.0.pdf)
+    - [Quick Reference](https://www.utstat.utoronto.ca/reid/sta2201s/rmarkdown-reference.pdf) [I prefer the quick reference]
 - Chapters/books
     - [Chapter 27](http://r4ds.had.co.nz/r-markdown.html) of "R for Data Science"  book
     - [R Markdown: The Definative Guide](https://bookdown.org/yihui/rmarkdown/) book [I prefer this book]
@@ -233,7 +233,7 @@ How you will learn R Markdown
 2. __process__ the input.
 3. __return__ (A) a new object or (B) a visualizatoin (e.g., plot)
 
-For example, `sum()` function calcualtes sum of elements in a vector
+For example, `sum()` function calculates or _sums_ the elements in a vector
 
 1. __input__. takes in a vector of elements (numeric or logical)
 2. __processing__. Calculates the sum of elements
@@ -650,8 +650,6 @@ Complete the following tasks using the `df_school` data frame
 1. Use `table()` to print the number of missing observations (`NA`) for the variable `school_type`
 
 
-__After you're done, take a 10 min break__
-
 
 
 # Investigating data patterns with tidyverse
@@ -779,7 +777,7 @@ df_school_berkeley <- filter(df_school,visits_by_110635 == 1)
 
 ```
 
-Note that resulting object is list, consisting of obs where condition `TRUE`
+Note that resulting object is a list, consisting of obs where condition `TRUE`
 ```{r}
 nrow(df_school)
 nrow(df_school_berkeley)
@@ -841,7 +839,7 @@ Symbol | Meaning
 
 ### Filters and comparisons, Demonstration {-}
 
-Schools visited by Bama (100751) and/or Berkeley (110635)
+Schools visited by Alabama (100751) and/or Berkeley (110635)
 
 ```{r results="hide"}
 #universities visit some schools more than once
@@ -894,7 +892,9 @@ count(filter(df_school, visits_by_126614 >= 1, state_code != "CO"))
 ```
 ### Filters and comparisons, %in% operator {-}
 
-What if you wanted to count the number of schools visited by Bama (100751) in a group of states (MA, VT, ME)?
+What if you wanted to count the number of schools visited by Alabama (100751) in a group of states (MA, VT, ME)?
+
+We could use the `|` "or" operator
 ```{r}
 count(filter(df_school,visits_by_100751 >= 1, state_code == "MA" |
                state_code == "VT" | state_code == "ME"))
@@ -1024,14 +1024,3 @@ Complete the following tasks using the `df_school` data frame
 1. Use `arrange` to replace (you must use the assignment operator) the object called `df_school_berkeley` in a descending order for the percent of enrolled students that identify as White (hint:`pct_white`)
 1. Use `head` to print the top 5 public high schools visited by UC Berkeley with the largest percent of enrolled students that identify as White 
 
-
-### Next Class Session {-}
-
-- Module 2 Problem Set due on 9/19/2022
-  - Rmd file is on course website; you'll need to download it and move it to the "HED696C_RClass/problemsets/module2" folder
-  - Knit the file to HTML before you begin!
-- Reading for 9/19/2022
-  - [Wickham, Advanced R](https://adv-r.hadley.nz/) 
-    - Sections 4.1-4.4
-  - [Teach youself R in 24 Hours](https://arizona-primo.hosted.exlibrisgroup.com/permalink/f/1h28lag/TN_cdi_safari_books_v2_9780134288819) 
-    - Hour 11, section on “Sorting” [about 3 pages]

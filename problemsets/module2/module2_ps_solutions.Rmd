@@ -1,13 +1,13 @@
 ---
 title: "Module 2 Problem Set"
 author: "INSERT YOUR NAME HERE"
-date: "INSERY DATE HERE"
+date: "INSERT DATE HERE"
 output: 
   html_document:
     toc: true
     toc_depth: 2
     toc_float: true
-    number_sections: true
+    number_sections: false
 ---
 
 ```{r setup, include=FALSE}
@@ -142,13 +142,25 @@ df_school_all <- rename(df_school_all, med_inc = avgmedian_inc_2564)
 ```
 
 
-2. The news outlet is interested in comparing the in-state and out-of-state high school visits for [The University of Alabama](https://nces.ed.gov/globallocator/col_info_popup.asp?ID=100751) (IPEDS ID = 100751) variable `visits_by_100751`. Compare the number of in-state public high schools to the number that received at least one visit from The University of Alabama.__      
+The news outlet is interested in comparing the in-state and out-of-state high school visits for [The University of Alabama](https://nces.ed.gov/globallocator/col_info_popup.asp?ID=100751) (IPEDS ID = 100751) variable `visits_by_100751`. 
+
+
+
+2. Compare the number of in-state public high schools to the number that received at least one visit from The University of Alabama.__      
     - Note: You will need to use `filter` and the `count` function. The associated variables needed to filter by: `state_code`, `school_type`, and  `visits_by_100751`
     - Use commas to separate variables for this questions (e.g. filter(dataframe, variable == something, variable == something))
     - You can do this in one step by wrapping the `count` function around the `filter` function ; or you can do this in two steps by creating a new data frame first  
 ```{r}
 
+df_al_school_all <- filter(df_school_all, state_code == "AL", school_type== "public")
+nrow(df_al_school_all)
+
+df_al_school_all <- filter(df_school_all, state_code == "AL", school_type== "public")
+nrow(df_al_school_all)
+
+count(filter(df_school_all, state_code == "AL", school_type== "public"))
 count(filter(df_school_all, visits_by_100751 >= 1, state_code == "AL", school_type== "public"))
+
 
 ```
 

@@ -5,23 +5,22 @@ output:
     keep_tex: true
     fig_caption: yes
     latex_engine: pdflatex
-    template: svm-r-markdown-template_ua.tex
+    template: svm-r-markdown-template2.tex
 geometry: margin=1in
 
 title: "HED 696C: Data Management and Manipulation in R"
 author: The University of Arizona
-date: "Fall 2022"
+date: "Spring 2025"
 
 instructor: "Karina Salazar"
-pronouns: "she/her/hers"
 email: "ksalazar@email.arizona.edu"
-officehours: Wed 2:00-4:00pm[; via Calendly](https://calendly.com/ksalazar_az/fall-2022-office-hours)
 office: "COE 313"
 
-web: "ksalazar3.github.io/HED696C_RClass"
-discuss: "d2l.arizona.edu"
-classroom: "COE 311"
-classhours: "M 4:15pm - 6:45pm"
+classroom: "COE 432/Zoom"
+classhours: "Mon 7:00 - 9:30pm"
+classmodality: "Hybrid"
+officehours: "Wed 1:00 - 4:00pm; [Calendly](https://calendly.com/ksalazar_az/new-academic-year-student-mtg)"
+
 
 ta: ""
 tapronouns: ""
@@ -133,13 +132,47 @@ Students will become proficient in data manipulation tasks through weekly “pro
 
 
 # Course Format & Modality
-This course is designed for the instructor and students to collectively contribute to the process of learning how to code in R. Weekly class sessions will largely be based on instructor-led lectures and in-class practice via group/buddy or individual coding (instructor will provide prompts/problem sets). 
 
-This course is designated as a hybrid "flex in-person: synchronous + zoom". These class sessions proceed as synchronous meetings, with some students in the classroom and some students attending via Zoom, with the instructor presenting content and facilitating in-class discussion. 
+Course structure consists of weekly asynchronous course materials and weekly synchronous meetings. Each week we will focus on a particular topic (e.g., creating variables; writing functions). For each weekly topic, students will complete a problem set. Problem sets will be completed in groups and focus on practical application of concepts/skills from the topic of the week.
 
-Hybrid formats, while accommodating to various needs and preferences, can be challenging. Particularly when we are group/buddy coding. Given our classroom technology, I will pair students for these in-class assignments to other students in the same modality (in-person with in-person, online with online). It may be that in some instances you are the only participant online or in-person. If that is the case, you will be responsible for completing the in-class activities on your own.
+__Asynchronous Course Materials__. Asynchronous course materials will focus on the topic for that week (e.g., processing across rows). Course materials will consist of three types of resources:
 
-After the first few weeks of class there may also be an option to incorporate an asynchronous component to the class where students complete the asynchronous lecture (short video recording, reading and executing code in lecture slides) and attend weekly 1-hour synchronous workshop classes to work in groups to complete lecture code and/or begin assignments. Instructor will discuss this further during our first class session and will poll students' preferences. 
+1. Detailed lecture slides (PDF or HTML) with sample code
+2. Pre-recorded video lecture of the instructor working through these slides
+3. The “.Rmd” file that created the PDF/HTML lecture slides.
+    - The .Rmd file will contain all “code chunks” and links to all data utilized in the lecture. Thus, students will “learn by doing” in that they will run R code on their own computer while they work through lecture materials on their own.
+
+
+__Synchronous Meetings__. Synchronous class meetings will range from 1-1.5 hours and will vary being in-person and Zoom. Attendance during the entire period is required.
+
+During synchronous class time, we will spend time collectively as a group going over lecture materials and/or working through lecture materials/problem sets in partner groups or on your own. The synchronous workshops are a great time to ask questions about course material or practical applications.
+
+
+# How Get The Most Out of This Class
+
+In just a few words, the keys to success in this class are: __start the material early, work through as much as you can, ask for help, and help others.__
+
+Some general tips:
+
+- Work through weekly asynchronous lecture materials as soon as you can
+The weekly asynchronous lecture materials (lecture PDF/HTML, lecture .Rmd file with code, video lecture) are the core of this course. Lecture materials are designed for you to run the code on your computer as you work through the lecture. Therefore, treat each lecture as an active learning experience/coding workshop rather than passively reading slides.
+- Start the weekly problem set early so that have time to seek help on questions you are struggling with during the synchronous meetings
+- If you can’t figure something out, ask for help!
+  - Discuss with your problem set group
+  - Ask a question on D2L
+  - Come to office hours
+- Be supportive of your classmates; let’s create a classroom environment where we all help each other succeed!
+
+
+
+
+<!-- This course is designed for the instructor and students to collectively contribute to the process of learning how to code in R. Weekly class sessions will largely be based on instructor-led lectures and in-class practice via group/buddy or individual coding (instructor will provide prompts/problem sets).  -->
+
+<!-- This course is designated as a hybrid "flex in-person: synchronous + zoom". These class sessions proceed as synchronous meetings, with some students in the classroom and some students attending via Zoom, with the instructor presenting content and facilitating in-class discussion.  -->
+
+<!-- Hybrid formats, while accommodating to various needs and preferences, can be challenging. Particularly when we are group/buddy coding. Given our classroom technology, I will pair students for these in-class assignments to other students in the same modality (in-person with in-person, online with online). It may be that in some instances you are the only participant online or in-person. If that is the case, you will be responsible for completing the in-class activities on your own. -->
+
+<!-- After the first few weeks of class there may also be an option to incorporate an asynchronous component to the class where students complete the asynchronous lecture (short video recording, reading and executing code in lecture slides) and attend weekly 1-hour synchronous workshop classes to work in groups to complete lecture code and/or begin assignments. Instructor will discuss this further during our first class session and will poll students' preferences.  -->
 
 # Course Readings
 
@@ -158,22 +191,21 @@ Please install the following software on your laptop
 
 - R
 - RStudio
-- TinyTex
 
 ## Hardware
 
 - Please bring in laptop with above software installed each week
 
-# Course Website and Resources
+<!-- # Course Website and Resources -->
 
-Course Website can be found [TBD](). We will use this website to download course materials such as lecture slides in pdf and .Rmd formats, data, weekly problem sets, and other class resources.  
+<!-- Course Website can be found [TBD](). We will use this website to download course materials such as lecture slides in pdf and .Rmd formats, data, weekly problem sets, and other class resources.   -->
 
-We will only use D2L when necessary to submit assignments or to post discussion questions.
+<!-- We will only use D2L when necessary to submit assignments or to post discussion questions. -->
 
 
 # Discussion and Homework Questions
 
-We are using D2L as our class discussion forum where students can ask homework questions/comments to share with the instructor and the entire class. If you're stuck on a homework question or are experiencing problems with R more generally odds are others are too. Posting questions and concerns on D2L is the easiest way for us to all benefit from each others knowledge. When asking questions on D2L, please include as many details to replicate the "error." Always indicate the homework assignment and question number that's causing you issues, insert your code and provide screenshots to your posts. 
+We are using D2L as our class discussion forum where students can ask homework questions/comments to share with the instructor and the entire class. If you're stuck on a homework question or are experiencing problems with R more generally odds are others are too. Posting questions and concerns on D2L is the easiest way for us to all benefit from each others knowledge. When asking questions on D2L, please include as many details to replicate the "error." Always indicate the lecture component or homework assignment question that's causing you issues, insert your code and provide screenshots to your posts. 
 
 I strongly encourage all questions related to course content to be posted on the D2L discussion forum for each week. I will do my best to reply to all posts within 24 hours. I also encourage you all to share your thoughts/answers on posts by your classmates. Writing out explanations to student questions will improve your own knowledge and will benefit your classmates. Sharing different ways to get at the "right" answer will be beneficial for all. 
 
@@ -181,37 +213,33 @@ I strongly encourage all questions related to course content to be posted on the
 
 Your final grade will be based on the following components:
 
--	Weekly problem sets (60 percent of total grade)
--	Final Project (25 percent of total grade)
--	Attendance and participation (15 percent of total grade)
+-	Weekly problem sets (75% of total grade)
+-	Final Project (10% of total grade)
+-	Attendance and participation (15% of total grade)
 
-## Weekly problem sets  (60 percent of total grade)
+## Weekly Problem Sets  (75% of total grade)
 
-Problem sets are due by 4:15PM each Monday (right before the class meeting).  Late submissions will not receive points because we will discuss solutions during class.  The lowest grade across all problem sets will be dropped from the calculation of your final grade.  
+Problem sets are due by 11:59PM each Wednesday (two days after synchronous classes).  The lowest grade across all problem sets will be dropped from the calculation of your final grade.  
 
-In general, each problem set will give you practice using the skills and concepts introduced during the previous lecture.  For example, after the lecture on joining (merging) datasets, the problem set for that week will require that students complete several different tasks involving merging data.  Additionally, the weekly problem sets will require you to use data manipulation skills you learned in previous weeks.  
+In general, each problem set will give you practice using the skills and concepts introduced in the asynchronous lecture and build off skills learned in previous weeks.  Students can work on problem sets in partners or individually. However, each student will submit their own assignment. You are encouraged to share ideas and get help from your classmates. However, it is important that you understand how to complete the problem set on your own, rather than copying the solution developed by group members.
 
-Students can work on problem sets with classmates and I highly encourage you to do so.  However, each student will submit their own assignment. You are encouraged to share ideas and get help from your classmates. However, it is important that you understand how to complete the problem set on your own, rather than copying the solution developed by group members.
-
-A general strategy I recommend for completing the problem sets is as follows: (1) attempt the problem set on your own; (2) talk/meet with classmates to work through the problem set, with a particular focus on areas group members find challenging.  
+A general strategy I recommend for completing the problem sets is as follows: (1) look over/ attempt the problem set on your own before synchronous meetings; (2) talk/meet with classmates to work through the problem set, with a particular focus on areas group members find challenging.  
 
 
-## Final Project (25 percent of total grade)
+## Final Project (10% of total grade)
 
-Final Project (20%), Class Presentation (5%)
+Final Project (5%), Class Presentation (5%)
 
-Students will complete a final project that incorporates many of the skills learned throughout the semester on a "real world" research task. The final project can be completed via three different options: 1) The final project can be fulfilled by completing and/or making progress on a research data task you are currently working on for your thesis/dissertation or for your job; 2) You can complete a guided online tutorial/workshop on a data related topic or task (e.g., building maps, machine learning, connecting to API's) but it must use R (i.e., I won't accept SPSS or Stata workshops); 3) I will also provide a final assignment to fulfill the requirement, which will be similar in format to weekly problem sets but will not provide as detailed "guidance" in how to complete the project. 
+Students will complete a final project that incorporates some of the skills learned throughout the semester on a "real world" research task. The final project can be completed via two different options: 1) The final project can be fulfilled by completing and/or making progress on a research data task you are currently working on for your thesis/dissertation or for your job; or 2) You can complete a guided online tutorial/workshop on a data related topic or task (e.g., building maps, machine learning, connecting to API's) but it must use R (i.e., I won't accept SPSS or Stata workshops). 
 
-If you are *not* fulfilling the requirement via the instructor created final assignment, then you will need to receive approval on your final project idea by November 14, 2022. I highly recommend you begin thinking about the project early in the semester and meet with me individually to discuss.
+We will discuss details of the final assignment in class in advance of the due date, including instructor provided examples and approved tutorials for Option #2. The final project is due on May 13, 2025. 
 
-We will discuss details of the final assignment in class on October 24, 2022, including instructor provided examples and approved tutorials for Option #2. After November 21, 2022, class lectures will continue to introduce new topics but no weekly problem sets will be assigned. You are expected to use that time working on the final project that is due on December 13, 2022. 
-
-Students will also create and give a 10-15 minute presentation for their final projects Presentations will be scheduled for the last day of class: December 5, 2022.
+Students will also give a 10-15 minute presentation for their final projects to share with the class new skills learned. Presentations will be scheduled for the last day of class.
 
 
-## Attendance and Participation (15 percent of total grade)
+## Attendance and Participation (15% of total grade)
 
-Students are expected to participate in weekly class sessions synchronously (via Zoom or in-person). This is a lecture and activity based class. It requires your *active* participation. Please come to each class session prepared to discuss the readings, ask questions, and practice coding. However, I understand there is still much uncertainty and complexity in the semester ahead of us. If you cannot attend class sessions for professional, personal, or health reasons, please just let me know ahead of time (if possible). 
+Students are expected to participate in weekly synchronously class sessions. These sessions will be a lecture and activity based meetings. It requires your *active* participation. Please come to each class session prepared to discuss the asynchronous material, ask questions, and practice coding. If you cannot attend asynchronous sessions for professional, personal, or health reasons, please just let me know ahead of time (if possible). 
   
 
 # Course Policies  
@@ -229,15 +257,13 @@ Students are expected to participate in weekly class sessions synchronously (via
 
 <!-- Campus Health is testing for COVID-19.  Please call (520) 621-9202 before you visit in person.  -->
 
-## Class Recordings
+<!-- ## Class Recordings -->
 
-Class sessions will be recorded to provide an "asynchronous" option for students that may need to miss some class sessions. Recordings are also a helpful resource for students that are able attend weekly class sessions but need to return to a topic to complete the weekly problem set. Class sessions will be recorded and accessed via D2L only. Students may not modify content or re-use content for any purpose other than personal educational reasons. Per university policy and FERPA, all recordings are subject to government and university regulations. Therefore, students accessing unauthorized recordings or using them in a manner inconsistent with UA values and educational policies are subject to suspension or civil action.
+<!-- Class sessions will be recorded to provide an "asynchronous" option for students that may need to miss some class sessions. Recordings are also a helpful resource for students that are able attend weekly class sessions but need to return to a topic to complete the weekly problem set. Class sessions will be recorded and accessed via D2L only. Students may not modify content or re-use content for any purpose other than personal educational reasons. Per university policy and FERPA, all recordings are subject to government and university regulations. Therefore, students accessing unauthorized recordings or using them in a manner inconsistent with UA values and educational policies are subject to suspension or civil action. -->
 
-## Classroom environment
+## Classroom Environment
 
-We all have a responsibility to ensure that every member of the class feels valued, safe, and included. 
-
-With respect to the course material, learning coding/programming and the essential skills of data manipulation is hard! This stuff feels overwhelming to me all the time. So it is important that we all create an environment where students feel comfortable asking questions and talking about what they did not understand. 
+We all have a responsibility to ensure that every member of the class feels valued, safe, and included. With respect to the course material, learning coding/programming and the essential skills of data manipulation is hard! This stuff feels overwhelming to me all the time. So it is important that we all create an environment where students feel comfortable asking questions and talking about what they did not understand. 
 
 With respect to creating an inclusive environment, be mindful that what you say affects other people. So express your thoughts in a way that doesn't make people feel excluded.
 
@@ -264,6 +290,12 @@ Violations of the UA Code of Academic Integrity are serious offenses.  As your i
 Students should review the UA Code of Academic Integrity which can be found at: https://deanofstudents.arizona.edu/policies/code-academic-integrity
 
 
+## Artificial Intelligence
+
+This course will likely vary considerably from other courses in regards to the use of AI tools. 
+
+In principle, you are encouraged to use AI tools to help you with the coding components of this course. This includes using AI-generated code, or code that is based on or derived from AI-generated code, as long as this use is properly documented in the comments of your R script: you need to include the prompt and the significant parts of the response. This course is helping you learn the foundational skills needed to manage and manipulate data in real research settings. One of those skills is learning how to seek out help/resources to complete specific tasks and to debug code. Coders create online communities and open-source programming resources specifically for these reasons. AI tools can provide those same resources such as giving immediate code suggestions, debug code, and help with troubleshooting. 
+
 # Course Schedule
 
 Students in the course are likely to have varying levels of experience with R. Because it is difficult to anticipate our pace as a class, the following schedule should be treated as a guide. Topics will likely carry-over into the following week(s). We may also end up cutting later topics if, as a class, we need additional time to cover a previous topic thoroughly. For this reason, readings will be assigned on a week-to-week basis. 
@@ -271,18 +303,25 @@ Students in the course are likely to have varying levels of experience with R. B
 _Work and course requirements are subject to change at the discretion of the instructor with proper notice to the students._
 
 
-## Week 1, 8/22/2022: Course introduction; Getting started with R
+## 1/20/2025: _MLK Holiday, No Class_ 
 
 
-## Week 2, 8/29/2022: Objects in R 
+## Week 1, 1/27/2025: Course introduction; Getting started with R
+- To get everyone started with R, our first class session will meet in-person the full 2.5 hour class session 
+
+
+## Week 2, 2/3/2025: Investigating Data Patterns in R 
+- Synchronous meeting: In-Person
 <!-- - Reading:  -->
 <!--     - Wickham and Grolemund 2018 (W&G) 1; W&G 2; W&G 4; W&G 20.1 - 20.3 -->
 <!-- - Problem set #1 Due -->
 
-## Week 3, 9/5/2022: No Class, Labor Day
+## Week 3, 2/10/2025: Investigating Data Patterns in R cont...
+- Synchronous meeting: Zoom
 
 
-## Week 4, 9/12/2022: Introduction to using tidyverse to investigate data patterns
+## Week 4, 2/17/2025: Introduction to Tidyverse: Pipes, dplyr, and Variable Creation
+- Synchronous meeting: Zoom
 
 <!-- - Reading:  -->
 <!--     - W&G 5.1 - 5.4 -->
@@ -290,14 +329,16 @@ _Work and course requirements are subject to change at the discretion of the ins
 <!--     - Spend 15 minutes studying the "R Markdown Reference Guide" [LINK HERE](https://www.rstudio.com/wp-content/uploads/2015/03/rmarkdown-reference.pdf) -->
 <!-- - Problem set #2: Due -->
 
-## Week 5, 9/19/2022: Introduction to using "base R" to investigate data patterns
+## Week 5, 2/24/2025: Tidyverse, Processing Across Rows
+- Synchronous meeting: In-Person
 
 <!-- - Problem set due (before class): Yes -->
 <!-- - Reading (after class):  -->
 <!--     - Wickham, H. (2014). _Advanced R_.  Retrieved from https://adv-r.hadley.nz/: 4.1-4.3 -->
 <!--     - Nicholls, A., Pugh, R., & Gott, A. (2015). _Sams Teach Yourself R in 24 Hours_. (pg. 236-237) [on D2L] -->
 
-## Week 6, 9/26/2022: Pipes and variable creation
+## Week 6, 3/3/2025: Attributes and Data Class
+- Synchronous meeting: Zoom
 
 <!-- - Problem set due (before class): Yes -->
 <!-- - Reading (after class):  -->
@@ -305,14 +346,20 @@ _Work and course requirements are subject to change at the discretion of the ins
 <!--     - XAG 3.3 (R Markdown, creating PDF documents) [LINK HERE](https://bookdown.org/yihui/rmarkdown/pdf-document.html) -->
 <!--         - note: sections 3.3.5 through 3.3.8 will feel somewhat cryptic and are not required for this course; so just do the best you can with those -->
 
-## Week 7, 10/3/2022:  Pipes and variable creation cont.
+## 3/10/2025: Spring Break
+- No Class
+
+
+## Week 7, 3/17/2025:  Strings and Dates
+- Synchronous meeting: Zoom
 
 <!-- - Problem set due (before class): Yes -->
 <!-- - Reading (after class):  -->
 <!--     - W&G 5.6 - 5.7 (grouped summaries and mutates) -->
 <!--     - XAG 4.1 (R Markdown, ioslides presentations) [LINK HERE](https://bookdown.org/yihui/rmarkdown/ioslides-presentation.html) and 4.3 (R Markdown, Beamer presentations) [LINK HERE](https://bookdown.org/yihui/rmarkdown/beamer-presentation.html) -->
 
-## Week 8, 10/10/2022:  Optional Day
+## Week 8, 3/24/2025:  Visualizations with ggplot2
+- Synchronous meeting: Zoom
 
 <!-- - Problem set due (before class): Yes -->
 <!-- - Reading (after class):  -->
@@ -322,19 +369,21 @@ _Work and course requirements are subject to change at the discretion of the ins
 <!--     - [OPTIONAL] W&G 10 (tibbles) -->
 
 
-## Week 9, 10/17/2022:  Processing across rows
+## Week 9, 3/31/2025:  Tidy Data
+- Synchronous meeting: In-Person
 
 <!-- - Problem set due (before class): Yes -->
 <!-- - Reading (after class): Guidelines for EDA Document -->
 
 
-## Week 10, 10/24/2022:  Augmented vectors, Survey data, and exploratory data analysis 
-- Discuss Final Projects 
+## Week 10, 4/7/2025:  Joining Data
+- Synchronous meeting: In-Person
 <!-- - Problem set due (before class): Yes -->
 <!-- - Reading (after class): W&G 11 -->
 <!-- - No Problem Set for this Lecture -->
 
-## Week 11, 10/31/2022:  Guidelines for investigating, cleaning, and creating variables
+## Week 11, 4/14/2025:  Data Quality
+- Synchronous meeting: Zoom
 
 <!-- - Problem set due (before class): No -->
 <!-- - Reading (after class): -->
@@ -343,34 +392,38 @@ _Work and course requirements are subject to change at the discretion of the ins
 <!--         - This is the journal article that introduced the data concepts covered in W&G chapter 12 and created the packages related to tidying data -->
 <!--         - Link to article here: [LINK](https://www.jstatsoft.org/article/view/v059i10) -->
 
-## Week 12, 11/7/2022:  Tidy Data
+## Week 12, 4/21/2025:  Introduction to Data Science Techniques; Review Final Projects
+- Synchronous meeting: Zoom
 
 <!-- - Problem set due (before class): Yes -->
 <!-- - Reading (after class): W&G 13 -->
 
 
-## Week 13, 11/14/2022:  Joining Multiple Datasets
-- Final Project Option Selection Due
-- If selecting Option 1 (own research project) & Option 2 (online tutorial/workshop), instructor approval prior to selection is needed
+## Week 13, 4/28/2025:  Accessing object elements; Using BibDesk as Citation Manager
+- Synchronous meeting: Zoom
+
 
 <!-- - Problem set due (before class): Yes -->
 <!-- - Reading (after class): W&G 19 -->
 
 
-## Week 14, 11/21/2022: Working with Strings and Date/Time Variables
+## Week 14, 5/5/205: Final Projects
+- Synchronous meeting: In-Person
+- Students Present on their Final Projects
+- Final Project due by 11:59pm 12/13/2025
 
 <!-- - Problem set due (before class): No -->
 <!-- - Reading (after class): W&G 20.4 - 20.5; 21.1 - 21.3; W&G 19 -->
 <!-- - No Problem Set for this Lecture -->
 
 
-## Week 15, 11/28/2022: Accessing object elements; Using BibDesk as Citation Manager
+<!-- ## Week 15, 11/28/2022: Accessing object elements; Using BibDesk as Citation Manager -->
 
-- Introduction to looping and Functions lecture optional (on your own)
+<!-- - Introduction to looping and Functions lecture optional (on your own) -->
 
 
-## Week 16, 12/5/2022: Last Day of Class
-- Students Present on their Final Projects
-- Final Project due by 11:59pm 12/13/2022
+<!-- ## Week 16, 12/5/2022: Last Day of Class -->
+<!-- - Students Present on their Final Projects -->
+<!-- - Final Project due by 11:59pm 12/13/2022 -->
 
 

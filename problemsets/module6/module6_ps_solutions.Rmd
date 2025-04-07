@@ -52,7 +52,8 @@ nls_crs<- read_dta(file="https://github.com/ksalazar3/HED696C_RClass/raw/master/
 
 1. Use `typeof`, `class`, `str`, and `attributes` functions to investigate the following variables: crsgrada, crsgradb, gradtype, crsecred.
 
-```{r}
+```{r, results='hide'}
+#Base R
 typeof(nls_crs$crsgrada)
 class(nls_crs$crsgrada)
 attributes(nls_crs$crsgrada)
@@ -68,6 +69,25 @@ attributes(nls_crs$gradtype)
 typeof(nls_crs$crsecred)
 class(nls_crs$crsecred)
 attributes(nls_crs$crsecred)
+
+
+#Tidyverse
+nls_crs %>% select(crsgrada) %>% typeof()
+nls_crs %>% select(crsgrada) %>% class()
+nls_crs %>% select(crsgrada) %>% attributes()
+
+nls_crs %>% select(crsgradb) %>% typeof()
+nls_crs %>% select(crsgradb) %>% class()
+nls_crs %>% select(crsgradb) %>% attributes()
+
+nls_crs %>% select(gradtype) %>% typeof()
+nls_crs %>% select(gradtype) %>% class()
+nls_crs %>% select(gradtype) %>% attributes()
+
+nls_crs %>% select(crsecred) %>% typeof()
+nls_crs %>% select(crsecred) %>% class()
+nls_crs %>% select(crsecred) %>% attributes()
+
 ```
 
 
@@ -77,14 +97,15 @@ attributes(nls_crs$crsecred)
 1. `crsgrada` is the variable for letter course grades. Create a factor version of the `crsgrada` variable. Hint: knowing what class the variable is currently and investigating the variable using `count()` will be helpful to creating the new factor version. Retain the new factor version variable in the nls_crs dataframe using the variable name `crsgrad_fac`. Check that this new variable is a factor class. 
 ```{r}
 nls_crs %>% count(crsgrada)
+class(nls_crs$crsgrada)
 
-nls_crs <- nls_crs %>% mutate(crsgrada_fac = factor(crsgrada))
+nls_crs <- nls_crs %>% 
+  mutate(crsgrada_fac = factor(crsgrada))
 
 #alternative code from Karina
 #nls_crs$crsgrada_fac <- factor(nls_crs$crsgrada, levels = c("99", "A", "A-","A+", "AU", "B", "B-", "B+","C", "C-", "C+", "CR", "D", "D-", "D+","E", "F", "I", "NO", "P", "S", "U", "W", "WF", "WP"))
 
 
-typeof(nls_crs$crsgrada_fac)
 nls_crs %>% count(crsgrada_fac)
 class(nls_crs$crsgrada_fac)
 attributes(nls_crs$crsgrada_fac)
@@ -119,6 +140,8 @@ nls_crs <- nls_crs %>%
   )
 
 nls_crs %>% count(numgrade)
+nls_crs %>% count(numgrade, crsgrada_fac)
+
 ```
 
 
@@ -152,7 +175,11 @@ nls_crs<- nls_crs %>%
 
 ```{r}
 nls_crs <- nls_crs%>% 
-  mutate(crsecredv2= ifelse(crsecred>=900, NA, crsecred))
+  mutate(crsecredv2= ifelse(crsecred>=999, NA, crsecred))
+
+# you can check the new var against the old var
+nls_crs %>% count(crsecredv2, crsecred)
+
 ```
 
 
@@ -170,7 +197,36 @@ nls_crs <- nls_crs %>%
         gradtype==2 & (!is.na(crsecredv2)) ~ crsgradb_v2
       )
     )
-nls_crs %>% select(numgrade_v2) %>% summarize_all(.fun = list(mean,sd), na.rm = TRUE)
+
+# Just some quality checks....
+
+# Method 1: Check the Mean of New Variable
+
+  #Karina's Old School Way but still tidyverse
+  nls_crs %>% select(numgrade_v2) %>% 
+    summarize_all(.fun = list(mean,sd), na.rm = TRUE)
+
+  #Tidyverse Way
+  nls_crs %>% 
+    summarise(mean=mean(numgrade_v2, na.rm = TRUE)) #matched Brent's answer
+
+  #Base R
+  mean(nls_crs$numgrade_v2, na.rm = TRUE)
+  
+  
+# Method 2: Row by Row Checks
+  nls_crs %>% filter(gradtype==2) %>% 
+    select(gradtype, crsecredv2, crsgrada_fac, crsgradb_v2, numgrade_v2) %>%
+    print(n=10)
+  
+  nls_crs %>% filter(gradtype==1) %>% 
+    select(gradtype, crsecredv2, crsgrada_fac, crsgradb_v2, numgrade_v2) %>%
+    print(n=10)
+  
+  nls_crs %>% filter(gradtype==9) %>% 
+    select(gradtype, crsecredv2, crsgrada_fac, crsgradb_v2, numgrade_v2) %>%
+    print(n=10) #all obs with missing gradtype(==9) are missing in numgrade_v2 [correct!]
+  
 ```
   
 7. Use 'set_variable_labels' function to set the following variable labels to the new variables: 'numgrade', 'crsgradb_v2', 'crsecredv2' and 'numgrade_v2'. 
@@ -199,7 +255,8 @@ nls_crs <- nls_crs %>%
                                    "no greater than 3" = 0))
 class(nls_crs$numgrade_v3)
 
-nls_crs$numgrade_v3 <-as.factor(nls_crs$numgrade_v3)
+nls_crs <- nls_crs %>%
+  mutate(numgrade_v3 = factor(numgrade_v3))
 class(nls_crs$numgrade_v3)
 ```
 

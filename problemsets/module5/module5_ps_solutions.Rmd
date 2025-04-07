@@ -101,7 +101,9 @@ wwlist <- wwlist %>% filter(!is.na(state))
 wwlist <- wwlist %>% mutate(in_state = if_else(state=="WA",1,0))
 
 #Investigate values of in_state
-str(wwlist$in_state)
+str(wwlist$in_state) #Base R
+wwlist %>% select(in_state) %>% str() #tidyverse
+
 wwlist %>% count(in_state)
 wwlist %>% filter(is.na(in_state)) %>% count()
 ```

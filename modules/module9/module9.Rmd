@@ -38,7 +38,7 @@ download.file(url = 'https://raw.githubusercontent.com/ozanj/rclass/master/lectu
 ```{r, echo=FALSE, include=FALSE}
 #DO NOT WORRY ABOUT THIS
 if(!file.exists('tidyverse.png')){
-  download.file(url = 'https://github.com/ksalazar3/HED696C_Rclass/raw/master/lectures/lecture10/tidyverse.png', 
+  download.file(url = 'https://github.com/ksalazar3/HED696C_Rclass/raw/master/modules/module9/tidyverse.png', 
                 destfile = 'tidyverse.png',
                 mode = 'wb')
 }
@@ -47,7 +47,7 @@ if(!file.exists('tidyverse.png')){
 ```{r, echo=FALSE, include=FALSE}
 #DO NOT WORRY ABOUT THIS
 if(!file.exists('mrc_table1.png')){
-  download.file(url = 'https://github.com/ksalazar3/HED696C_Rclass/raw/master/lectures/lecture10/mrc_table1.png', 
+  download.file(url = 'https://raw.githubusercontent.com/ksalazar3/HED696C_Rclass/master/modules/module9/tidyverse.png', 
                 destfile = 'mrc_table1.png',
                 mode = 'wb')
 }
@@ -56,7 +56,7 @@ if(!file.exists('mrc_table1.png')){
 ```{r, echo=FALSE, include=FALSE}
 #DO NOT WORRY ABOUT THIS
 if(!file.exists('ic2017_ay.png')){
-  download.file(url = 'https://github.com/ksalazar3/HED696C_Rclass/raw/master/lectures/lecture10/ic2017_ay.png', 
+  download.file(url = 'https://github.com/ksalazar3/HED696C_Rclass/raw/master/modules/module9/ic2017_ay.png', 
                 destfile = 'ic2017_ay.png',
                 mode = 'wb')
 }
@@ -65,7 +65,7 @@ if(!file.exists('ic2017_ay.png')){
 ```{r, echo=FALSE, include=FALSE}
 #DO NOT WORRY ABOUT THIS
 if(!file.exists('rclass_folder.png')){
-  download.file(url = 'https://github.com/ksalazar3/HED696C_Rclass/raw/master/lectures/lecture10/rclass_folder.png', 
+  download.file(url = 'https://raw.githubusercontent.com/ksalazar3/HED696C_Rclass/master/modules/module9/ic2017_ay.png', 
                 destfile = 'rclass_folder.png',
                 mode = 'wb')
 }
@@ -74,7 +74,7 @@ if(!file.exists('rclass_folder.png')){
 ```{r, echo=FALSE, include=FALSE}
 #DO NOT WORRY ABOUT THIS
 if(!file.exists('rclass_folder_contents.png')){
-  download.file(url = 'https://github.com/ksalazar3/HED696C_Rclass/raw/master/lectures/lecture10/rclass_folder_contents.png', 
+  download.file(url = 'https://github.com/ksalazar3/HED696C_Rclass/raw/master/modules/module9/rclass_folder_contents.png', 
                 destfile = 'rclass_folder_contents.png',
                 mode = 'wb')
 }
@@ -136,9 +136,8 @@ In lecture 1 we downloaded the rclass folder structure.
 
 I will not be providing links to data in this lecture. Please download and save data to the corresponding folders.  
 
-- First make sure to save __module10.Rmd__ in your lectures folder  
-    - If you do not have class folder structure, you can download it [here](https://github.com/ksalazar3/HED696C_Rclass/raw/master/rclass.zip)
-- Download and unzip data folder we are using for this lecture [here](https://github.com/ksalazar3/HED696C_Rclass/raw/master/lectures/lecture10/lecture10_data.zip) 
+- First make sure to save __module9.Rmd__ in your lectures folder  
+- Download data zip file on D2l and unzip data sets we are using for this lecture 
 - Save individual data files in the corresponding data folder  
     - `ipeds_hd_2017_small.csv` should go in the __ic__ folder inside the ipeds folder  
     - `peps300.xlsx` should go in the __fsa__ folder  
@@ -146,19 +145,19 @@ I will not be providing links to data in this lecture. Please download and save 
 
 ### Working directory  
 
-Your working directory will change depending on if you are using an R script or R markdown.
+Your working directory will change depending if you are using an R script or R markdown file.
 
 - **R script**  
     - The default working directory is your computer's home directory 
     - You only need to set your working directory `setwd()` in an r script once.  
 - **R markdown**  
-    - The default working directory is where the current r markdown file you are using is saved.  
+    - The default working directory is where the r markdown file you are using is stored  
     - If you set your working directory in a code chunk, it will be reset to the default directory after the code chunk is finished running.  
     - To avoid setting your working directory every time you read in data, you can read in data using a link to the data file or use the relative file path to save time.  
 - **R project**  
     - The default working directory is in the R project location  
     - If you are working with an R script in an R project, the working directory is the R project main folder (ex. HED696C_Rclass)  
-    - If you are working with an R markdown file in an R project, the working directory will be wherever the R markdown file is saved inside the R project.  
+    - If you are working with an R markdown file in an R project, the working directory will be wherever the R markdown file is stored inside the R project.  
         - For example, you have an R markdown file saved inside the lectures folder in an R project "HED696C_Rclass", your working directory may look like this ("/Users/pm/Desktop/HED696C_Rclass/lectures")
 
 ```{r}

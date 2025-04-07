@@ -75,7 +75,7 @@ str(x2)
 
 - I have already created two objects in the R chunk below: `x3` and `x4`
 - Run diagnostics of these objects in the R chunk below
-- __ANSWER: Objects `x3` and `x4` are similar in that they are both vectors. However, `x3` is a list vectors (i.e., elements are different types) and `x4` is a character vector (i.e., all elements are characters). As `x3` is a list, it contains three named atomic vector (one is a double type and the other two are character types) with two elements each.__
+- __ANSWER: Objects `x3` and `x4` are similar in that they are both vectors. However, `x3` is a list vectors (i.e., elements are different types) and `x4` is an atomic vector (i.e., all elements are characters). As `x3` is a list, it contains three named atomic vector (one is a double type and the other two are character types) with two elements each.__
 
 
 ```{r}
@@ -112,11 +112,14 @@ str(x4)
 
 - I have already re-created the `x3` object in the R chunk below
 - Run diagnostics of the "var2" element in the `x3` object in the R chunk below
-- ANSWER: __The `var2` element within the object `x3` is an atomic vector with a character type and has a length of 2. Yes, it has a hierarchical structre as the two elements within the vector are named as `var2`__
+- ANSWER: __The `var2` element within the object `x3` is an atomic vector with a character type and has a length of 2. Yes, it has a hierarchical structure as the two elements within the vector are named as `var2`__
 
 ```{r}
 #object 1
 x3 <- list(var1=c(1,2), var2=c("public", "private"), var3=c("AZ", "CA"))
+str(x3)
+
+
 
 length(x3$var2)
 typeof(x3$var2)

@@ -18,11 +18,10 @@ In this problem set, you will load data from url, or absolute/relative filepath.
 
 ### Step 1:
 
-- Go to your rclass folder and open your saved lecture1.2.Rmd file (hint: in lecture1 folder)  
-- Open the lecture1.2.Rmd file in RStudio  
-- At the top of the lecture1.2.Rmd file, before the "# R basics", type your first and last name (e.g. "Patricia Martin")  
-- Now select the "Knit" tab (icon with blue yarn ball) or scroll down and "Knit to PDF"  
-- The goal of this assignment is to make sure you are able to knit to a PDF without running into errors.  
+- Download the module1.Rmd file from D2L (under lecture materials for next week); place the file in your RClass folder >>> modules >>>  module 1
+- Open the module1.Rmd file in RStudio  
+- Now select the "Knit" tab (icon with blue yarn ball) or scroll down and "Knit to HTML"
+- The goal of this step is to make sure you are able to knit to a next week's asynchronous materials without running into errors.  
 
 
 ### Step 2:  

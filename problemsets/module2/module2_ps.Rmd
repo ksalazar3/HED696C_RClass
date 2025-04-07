@@ -19,7 +19,7 @@ In this problem set, you will investigate objects and data patterns.
 
 # Step 1: Make changes to YAML header
 
-Recommend reading R Markdown: The Definitive Guide section 3.1 ([LINK HERE](https://bookdown.org/yihui/rmarkdown/html-document.html)) before answering these questions
+See reading R Markdown: The Definitive Guide section 3.1 ([LINK HERE](https://bookdown.org/yihui/rmarkdown/html-document.html)) to help answering these questions
 
 1. Add a table of contents to YAML header
 1. table of contents should have "depth" of 2

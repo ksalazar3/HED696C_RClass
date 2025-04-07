@@ -42,22 +42,15 @@ knitr::opts_chunk$set(collapse = TRUE, comment = "#>", highlight = TRUE)
 
 ### Reading to do before next class
 
-- Work through slides we from Module 8 that we don't get to in class
-    - [REQUIRED] slides from section "Tidying data"
-    - [OPTIONAL] slides from section "Missing data"
-- [REQUIRED] R developer blog on Pivoting
-    - [LINK](https://tidyr.tidyverse.org/dev/articles/pivot.html#many-variables-in-column-names)
-- [Required] GW chapter 12 (tidy data)
-    - Lecture covers this material pretty closely
-    - Required 12.1-12.2 & 12.5-12.7
-    - Chapter functions for tidying data are limiting and outdated: `gather()` and `spread()`
+
+- [Required] GW chapter 5 (tidying data)
 
 
 ### Libraries we will use today 
 
-Functions we will use today: 
+Functions we will use today, install the tidyr package: 
 ```{r}
-#install.packages("tidyr")
+  #install.packages("tidyr")
 ```
 
 
@@ -323,7 +316,7 @@ In particular, when you confronted with a particular dataset, sometimes it can f
 
 ## Rules of tidy data (defining tidy data)
 
-Wickham chapter 12: "There are three interrelated rules which make a dataset tidy:
+Wickham chapter 5: "There are three interrelated rules which make a dataset tidy:
 
 1. Each __variable__ must have its own __column__
 1. Each __observation__ must have its own __row__
@@ -332,7 +325,7 @@ Wickham chapter 12: "There are three interrelated rules which make a dataset tid
 
 I Recommend writing these rules down on a separate sheet of paper
 
-"These three rules are interrelated because it’s impossible to only satisfy two of the three" (Wickham chapter 12)
+"These three rules are interrelated because it’s impossible to only satisfy two of the three" (Wickham chapter 5)
 
 <br>
 __Visual representation of the three rules of tidy data__:
@@ -426,8 +419,6 @@ For each of the following datasets -- `table1`, `table3`, `table4a`, and `table5
     - what _should_ each row represent?
 1. Does each value  have its own cell."
     - if not, how does the dataset violate this principle?
-
-We'll give you ~15 minutes for this
 
 <br>
 __ANSWERS TO STUDENT EXERCISE BELOW__:
@@ -550,7 +541,7 @@ str(table1$cases)
 <br>
 __Example__:
 
-- how would you calculate `rate` variable (`=cases/population*10000`) for `table1` (tidy) and `table2` (untidy)
+- how would you calculate a `rate` per 10,000 variable (`=cases/population*10000`) for `table1` (tidy) and `table2` (untidy)
 
 ```{r}
 table1
@@ -573,7 +564,7 @@ Prior to Wickham (2014) and the creation of the "tidyverse," the concepts of "ti
 
 Instead, researchers would "reshape" (verb) data from "long" (adjective) to "wide" (adjective) and vice-versa
 
-Think "wide" and "long" as alternative presentations of the exact same data.ß
+Think "wide" and "long" as alternative presentations of the exact same data.
 
 __"wide" data__ represented with fewer rows and more columns  
 __"long" data__ represented with more rows and fewer columns
@@ -1282,12 +1273,3 @@ __Takeaways about gathering and explicit/implicit missing values__
 
 Therefore, if you want to make implicit values explicit after gathering, then prior to gathering you should use `complete()` to make missing values explicit
 
-# Tidying data: separating and uniting [SKIP]
-
-```{r}
-table5
-```
-- "Separating" is for dealing with the problem in the `rate` column
-- "Uniting" is for dealing with the problem in the `century` and `year` columns
-
-Read about this in section 12.4 of Wickham text, but no homework questions on separating and uniting
